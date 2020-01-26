@@ -1,0 +1,501 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{9AB97EC8-7BAE-4D66-8FE0-5E6B876523CA}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>spacegame7</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <Linkage-sfml-audio>static</Linkage-sfml-audio>
+    <Linkage-sfml-network>static</Linkage-sfml-network>
+    <Linkage-sfml-window>static</Linkage-sfml-window>
+    <Linkage-sfml-system>static</Linkage-sfml-system>
+    <Linkage-sfml-graphics>static</Linkage-sfml-graphics>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <Linkage-sfml-audio>
+    </Linkage-sfml-audio>
+    <Linkage-sfml-network>
+    </Linkage-sfml-network>
+    <Linkage-sfml-window>
+    </Linkage-sfml-window>
+    <Linkage-sfml-system>
+    </Linkage-sfml-system>
+    <Linkage-sfml-graphics>
+    </Linkage-sfml-graphics>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <Linkage-sfml-audio>
+    </Linkage-sfml-audio>
+    <Linkage-sfml-network>
+    </Linkage-sfml-network>
+    <Linkage-sfml-window>
+    </Linkage-sfml-window>
+    <Linkage-sfml-system>
+    </Linkage-sfml-system>
+    <Linkage-sfml-graphics>
+    </Linkage-sfml-graphics>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalIncludeDirectories>imgui-1.53;imgui-sfml-v.1.0</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalIncludeDirectories>imgui-1.53;imgui-sfml-v.1.0</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4005</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <ProjectReference />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>imgui-1.53;imgui-sfml-v.1.0</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>imgui-1.53;imgui-sfml-v.1.0</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4005</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <ProjectReference />
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="AbilityRepertoirePanel.cxx" />
+    <ClCompile Include="AbilityToolbar.cxx" />
+    <ClCompile Include="ArenaStartPanel.cxx" />
+    <ClCompile Include="AsteroidProspectPanel.cxx" />
+    <ClCompile Include="CAIController.cxx" />
+    <ClCompile Include="CAsteroidField.cxx" />
+    <ClCompile Include="CAsteroidMineable.cxx" />
+    <ClCompile Include="CAstfield.cxx" />
+    <ClCompile Include="CAudioManager.cxx" />
+    <ClCompile Include="CBase.cxx" />
+    <ClCompile Include="CBaseCharacterEntity.cxx" />
+    <ClCompile Include="CBaseTransitionState.cxx" />
+    <ClCompile Include="CCharacterEntitiesSaver.cxx" />
+    <ClCompile Include="CCharacterEntityManager.cxx" />
+    <ClCompile Include="CChaseCamera.cxx" />
+    <ClCompile Include="CCommsManager.cxx" />
+    <ClCompile Include="CDestinedProjectile.cxx" />
+    <ClCompile Include="CEngineFlame.cxx" />
+    <ClCompile Include="CEntityInventory.cxx" />
+    <ClCompile Include="CEquipInstance.cxx" />
+    <ClCompile Include="CEquippedObject.cxx" />
+    <ClCompile Include="CGame.cxx" />
+    <ClCompile Include="CGameClock.cxx" />
+    <ClCompile Include="CGameDataManager.cxx" />
+    <ClCompile Include="CGameSettings.cxx" />
+    <ClCompile Include="CGameStateManager.cxx" />
+    <ClCompile Include="CGameWorld.cxx" />
+    <ClCompile Include="CharacterCreationPanel.cxx" />
+    <ClCompile Include="CharacterSheetPanel.cxx" />
+    <ClCompile Include="CInSpaceState.cxx" />
+    <ClCompile Include="CIntransientDataManager.cxx" />
+    <ClCompile Include="CLandedState.cxx" />
+    <ClCompile Include="CLandingBuoy.cxx" />
+    <ClCompile Include="CLootTableManager.cxx" />
+    <ClCompile Include="CLuaEngine.cxx" />
+    <ClCompile Include="CMainMenuState.cxx" />
+    <ClCompile Include="CMaterialBank.cxx" />
+    <ClCompile Include="CMaterialClass.cxx" />
+    <ClCompile Include="CMaterialsSaver.cxx" />
+    <ClCompile Include="CResourceMaterial.cxx" />
+    <ClCompile Include="CMatManager.cxx" />
+    <ClCompile Include="CNonPhysical.cxx" />
+    <ClCompile Include="CNonPlayerCharacterEntity.cxx" />
+    <ClCompile Include="CObject.cxx" />
+    <ClCompile Include="CParticle.cxx" />
+    <ClCompile Include="CParticleManager.cxx" />
+    <ClCompile Include="CPhantomObject.cxx" />
+    <ClCompile Include="CPlayerCharacterEntity.cxx" />
+    <ClCompile Include="CProjectile.cxx" />
+    <ClCompile Include="CSector.cxx" />
+    <ClCompile Include="CSectorJumpBuoy.cxx" />
+    <ClCompile Include="CSectorTransitionState.cxx" />
+    <ClCompile Include="CSFMLRenderPipeline.cxx" />
+    <ClCompile Include="CSFMLStaticTextureManager.cxx" />
+    <ClCompile Include="CShield.cxx" />
+    <ClCompile Include="CShip.cxx" />
+    <ClCompile Include="CSimpleCamera.cxx" />
+    <ClCompile Include="CSkill.cxx" />
+    <ClCompile Include="CSkillLine.cxx" />
+    <ClCompile Include="CSkillDataManager.cxx" />
+    <ClCompile Include="CSkillTree.cxx" />
+    <ClCompile Include="CSpellKineticBarrageStrong.cxx" />
+    <ClCompile Include="CSpellLaserBarrageStrong.cxx" />
+    <ClCompile Include="CSpellLaserBarrageWeak.cxx" />
+    <ClCompile Include="CSpellMagneticDrain.cxx" />
+    <ClCompile Include="CSpellManager.cxx" />
+    <ClCompile Include="CSpellKineticBarrageWeak.cxx" />
+    <ClCompile Include="CSpellMissileSwarmStrong.cxx" />
+    <ClCompile Include="CSpellMissileSwarmWeak.cxx" />
+    <ClCompile Include="CSpellNanobotStream.cxx" />
+    <ClCompile Include="CSpellNanobotSwarm.cxx" />
+    <ClCompile Include="CSpellNavComVirus.cxx" />
+    <ClCompile Include="CSpellPerfectDefense.cxx" />
+    <ClCompile Include="CSpellSignatureSpoof.cxx" />
+    <ClCompile Include="CStatBlock.cxx" />
+    <ClCompile Include="CStaticCamera.cxx" />
+    <ClCompile Include="CStaticObject.cxx" />
+    <ClCompile Include="CUniverse.cxx" />
+    <ClCompile Include="CWorldTransaction.cxx" />
+    <ClCompile Include="DebugConsole.cxx" />
+    <ClCompile Include="EquipTraderPanel.cxx" />
+    <ClCompile Include="IMaterial.cxx" />
+    <ClCompile Include="IMaterialClass.cxx" />
+    <ClCompile Include="JunkTraderPanel.cxx" />
+    <ClCompile Include="LoadGamePanel.cxx" />
+    <ClCompile Include="MaterialBankPanel.cxx" />
+    <ClCompile Include="MaterialExaminePanel.cxx" />
+    <ClCompile Include="PlayerDiedPanel.cxx" />
+    <ClCompile Include="SaveGamePanel.cxx" />
+    <ClCompile Include="SkillTreePanel.cxx" />
+    <ClCompile Include="Spells.cxx" />
+    <ClCompile Include="Util.cxx" />
+    <ClCompile Include="GLStarfield.cxx" />
+    <ClCompile Include="ILiving.cxx" />
+    <ClCompile Include="imgui-1.53\imgui.cpp" />
+    <ClCompile Include="imgui-1.53\imgui_demo.cpp" />
+    <ClCompile Include="imgui-1.53\imgui_draw.cpp" />
+    <ClCompile Include="imgui-sfml-v.1.0\imgui-SFML.cpp" />
+    <ClCompile Include="ini_parser.cpp" />
+    <ClCompile Include="InterfaceManager.cxx" />
+    <ClCompile Include="InventoryViewerPanel.cxx" />
+    <ClCompile Include="IWorldObject.cxx" />
+    <ClCompile Include="LuaCallbacks.cxx" />
+    <ClCompile Include="main.cxx" />
+    <ClCompile Include="SGEngine.cxx" />
+    <ClCompile Include="SGLib.cxx" />
+    <ClCompile Include="Starfield.cxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AbilityRepertoirePanel.hxx" />
+    <ClInclude Include="AbilityToolbar.hxx" />
+    <ClInclude Include="ArenaStartPanel.hxx" />
+    <ClInclude Include="AsteroidProspectPanel.hxx" />
+    <ClInclude Include="BaseEnterPanel.hxx" />
+    <ClInclude Include="BaseHubPanel.hxx" />
+    <ClInclude Include="CAIController.hxx" />
+    <ClInclude Include="CAsteroidField.hxx" />
+    <ClInclude Include="CAsteroidMineable.hxx" />
+    <ClInclude Include="CAstfield.hxx" />
+    <ClInclude Include="CAttitudeSet.hxx" />
+    <ClInclude Include="CAudioManager.hxx" />
+    <ClInclude Include="CBase.hxx" />
+    <ClInclude Include="CBaseCharacterEntity.hxx" />
+    <ClInclude Include="CBaseTransitionState.hxx" />
+    <ClInclude Include="CCharacterEntitiesSaver.hxx" />
+    <ClInclude Include="CCharacterEntityManager.hxx" />
+    <ClInclude Include="CChaseCamera.hxx" />
+    <ClInclude Include="CCommsManager.hxx" />
+    <ClInclude Include="CDestinedProjectile.hxx" />
+    <ClInclude Include="CEngineFlame.hxx" />
+    <ClInclude Include="CEntityInventory.hxx" />
+    <ClInclude Include="CEquipInstance.hxx" />
+    <ClInclude Include="CEquipInstanceFactory.hxx" />
+    <ClInclude Include="CEquippedObject.hxx" />
+    <ClInclude Include="CGame.hxx" />
+    <ClInclude Include="CGameClock.hxx" />
+    <ClInclude Include="CGameDataManager.hxx" />
+    <ClInclude Include="CGameStateManager.hxx" />
+    <ClInclude Include="CGameWorld.hxx" />
+    <ClInclude Include="Character.hxx" />
+    <ClInclude Include="CharacterCreationPanel.hxx" />
+    <ClInclude Include="CharacterSheetPanel.hxx" />
+    <ClInclude Include="CInSpaceState.hxx" />
+    <ClInclude Include="CIntransientDataManager.hxx" />
+    <ClInclude Include="CLandedState.hxx" />
+    <ClInclude Include="CLandingBuoy.hxx" />
+    <ClInclude Include="CLootTableManager.hxx" />
+    <ClInclude Include="CLuaEngine.hxx" />
+    <ClInclude Include="CMainMenuState.hxx" />
+    <ClInclude Include="CMaterialBank.hxx" />
+    <ClInclude Include="CMaterialClass.hxx" />
+    <ClInclude Include="CMaterialsSaver.hxx" />
+    <ClInclude Include="CResourceMaterial.hxx" />
+    <ClInclude Include="CMatManager.hxx" />
+    <ClInclude Include="CNonPhysical.hxx" />
+    <ClInclude Include="CNonPlayerCharacterEntity.hxx" />
+    <ClInclude Include="CNullInventory.hxx" />
+    <ClInclude Include="CParticle.hxx" />
+    <ClInclude Include="CParticleManager.hxx" />
+    <ClInclude Include="CPhantomObject.hxx" />
+    <ClInclude Include="CPlayerCharacterEntity.hxx" />
+    <ClInclude Include="CRandomNameGenerator.hxx" />
+    <ClInclude Include="CSectorJumpBuoy.hxx" />
+    <ClInclude Include="CSectorTransitionState.hxx" />
+    <ClInclude Include="CShield.hxx" />
+    <ClInclude Include="CSFMLStaticTextureManager.hxx" />
+    <ClInclude Include="CSkill.hxx" />
+    <ClInclude Include="CSkillLine.hxx" />
+    <ClInclude Include="CSkillDataManager.hxx" />
+    <ClInclude Include="CSkillTree.hxx" />
+    <ClInclude Include="CSpellKineticBarrageStrong.hxx" />
+    <ClInclude Include="CSpellLaserBarrageStrong.hxx" />
+    <ClInclude Include="CSpellLaserBarrageWeak.hxx" />
+    <ClInclude Include="CSpellMagneticDrain.hxx" />
+    <ClInclude Include="CSpellManager.hxx" />
+    <ClInclude Include="CSpellKineticBarrageWeak.hxx" />
+    <ClInclude Include="CSpellMissileSwarmStrong.hxx" />
+    <ClInclude Include="CSpellMissileSwarmWeak.hxx" />
+    <ClInclude Include="CSpellNanobotStream.hxx" />
+    <ClInclude Include="CSpellNanobotSwarm.hxx" />
+    <ClInclude Include="CSpellNavComVirus.hxx" />
+    <ClInclude Include="CSpellPerfectDefense.hxx" />
+    <ClInclude Include="CSpellSignatureSpoof.hxx" />
+    <ClInclude Include="CStatBlock.hxx" />
+    <ClInclude Include="CStaticObject.hxx" />
+    <ClInclude Include="CSector.hxx" />
+    <ClInclude Include="CStatusCoolantLeak.hxx" />
+    <ClInclude Include="CStatusEngineOffline.hxx" />
+    <ClInclude Include="CStatusHullBreach.hxx" />
+    <ClInclude Include="CStatusNanobotStream.hxx" />
+    <ClInclude Include="CStatusNanobotSwarm.hxx" />
+    <ClInclude Include="CStatusPerfectDefense.hxx" />
+    <ClInclude Include="CTransientStatusEffect.hxx" />
+    <ClInclude Include="CUniverse.hxx" />
+    <ClInclude Include="CWorldTransaction.hxx" />
+    <ClInclude Include="DebugConsole.hxx" />
+    <ClInclude Include="DebugPanel.hxx" />
+    <ClInclude Include="EquipTraderPanel.hxx" />
+    <ClInclude Include="Faction.hxx" />
+    <ClInclude Include="GLStarfield.hxx" />
+    <ClInclude Include="ICharacterEntity.hxx" />
+    <ClInclude Include="ICharacterEntityManager.hxx" />
+    <ClInclude Include="IEntityInventory.hxx" />
+    <ClInclude Include="CGameSettings.hxx" />
+    <ClInclude Include="IGameClock.hxx" />
+    <ClInclude Include="IGameState.hxx" />
+    <ClInclude Include="IInteractable.hxx" />
+    <ClInclude Include="IIntransientDataManager.hxx" />
+    <ClInclude Include="ILootTableManager.hxx" />
+    <ClInclude Include="IMaterial.hxx" />
+    <ClInclude Include="IMaterialBank.hxx" />
+    <ClInclude Include="IMaterialClass.hxx" />
+    <ClInclude Include="IMatManager.hxx" />
+    <ClInclude Include="InGameMenuPanel.hxx" />
+    <ClInclude Include="InventoryViewerPanel.hxx" />
+    <ClInclude Include="IRadarVisible.hxx" />
+    <ClInclude Include="CShip.hxx" />
+    <ClInclude Include="CStaticCamera.hxx" />
+    <ClInclude Include="imgui-1.53\imconfig.h" />
+    <ClInclude Include="imgui-1.53\imgui.h" />
+    <ClInclude Include="imgui-1.53\imgui_internal.h" />
+    <ClInclude Include="imgui-1.53\stb_rect_pack.h" />
+    <ClInclude Include="imgui-1.53\stb_textedit.h" />
+    <ClInclude Include="imgui-1.53\stb_truetype.h" />
+    <ClInclude Include="imgui-sfml-v.1.0\imconfig-SFML.h" />
+    <ClInclude Include="imgui-sfml-v.1.0\imgui-SFML.h" />
+    <ClInclude Include="ini_parser.h" />
+    <ClInclude Include="InterfaceManager.hxx" />
+    <ClInclude Include="ISaveable.hxx" />
+    <ClInclude Include="ISaver.hxx" />
+    <ClInclude Include="IScriptEngine.hxx" />
+    <ClInclude Include="ISectorMapRenderer.hxx" />
+    <ClInclude Include="ISpell.hxx" />
+    <ClInclude Include="ISpellManager.hxx" />
+    <ClInclude Include="IStaticTextureManager.hxx" />
+    <ClInclude Include="IStatusEffect.hxx" />
+    <ClInclude Include="ITransientStateStructure.hxx" />
+    <ClInclude Include="IUniverse.hxx" />
+    <ClInclude Include="JunkTraderPanel.hxx" />
+    <ClInclude Include="Listeners.hxx" />
+    <ClInclude Include="CObject.hxx" />
+    <ClInclude Include="CInstanceFactory.hxx" />
+    <ClInclude Include="CSFMLRenderPipeline.hxx" />
+    <ClInclude Include="CSimpleCamera.hxx" />
+    <ClInclude Include="Defs.hxx" />
+    <ClInclude Include="EngineProtos.hxx" />
+    <ClInclude Include="ICamera.hxx" />
+    <ClInclude Include="IEngine.hxx" />
+    <ClInclude Include="ILiving.hxx" />
+    <ClInclude Include="IPhysicalObject.hxx" />
+    <ClInclude Include="IRenderPipeline.hxx" />
+    <ClInclude Include="IWorld.hxx" />
+    <ClInclude Include="IWorldInstance.hxx" />
+    <ClInclude Include="IWorldObject.hxx" />
+    <ClInclude Include="LoadGamePanel.hxx" />
+    <ClInclude Include="Loadout.hxx" />
+    <ClInclude Include="LoadoutPanel.hxx" />
+    <ClInclude Include="LuaCallbacks.hxx" />
+    <ClInclude Include="CProjectile.hxx" />
+    <ClInclude Include="MainMenuPanel.hxx" />
+    <ClInclude Include="MaterialAttribute.hxx" />
+    <ClInclude Include="MaterialBankPanel.hxx" />
+    <ClInclude Include="MaterialExaminePanel.hxx" />
+    <ClInclude Include="MaterialType.hxx" />
+    <ClInclude Include="NotificationPanel.hxx" />
+    <ClInclude Include="Pilot.hxx" />
+    <ClInclude Include="PlayerDiedPanel.hxx" />
+    <ClInclude Include="RadarPanel.hxx" />
+    <ClInclude Include="SaveGamePanel.hxx" />
+    <ClInclude Include="SectorEnterPanel.hxx" />
+    <ClInclude Include="SettingsPanel.hxx" />
+    <ClInclude Include="SFMLIncludes.hxx" />
+    <ClInclude Include="SGEngine.hxx" />
+    <ClInclude Include="SGLib.hxx" />
+    <ClInclude Include="Archetype.hxx" />
+    <ClInclude Include="ShipStatusPanel.hxx" />
+    <ClInclude Include="SkillTreePanel.hxx" />
+    <ClInclude Include="Spells.hxx" />
+    <ClInclude Include="Starfield.hxx" />
+    <ClInclude Include="TargetPanel.hxx" />
+    <ClInclude Include="Util.hxx" />
+    <ClInclude Include="InterfacePanel.hxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\lua.redist.5.3.3\build\native\lua.redist.targets" Condition="Exists('..\packages\lua.redist.5.3.3\build\native\lua.redist.targets')" />
+    <Import Project="..\packages\lua.5.3.3\build\native\lua.targets" Condition="Exists('..\packages\lua.5.3.3\build\native\lua.targets')" />
+    <Import Project="..\packages\sfml-audio.redist.2.4.2.0\build\native\sfml-audio.redist.targets" Condition="Exists('..\packages\sfml-audio.redist.2.4.2.0\build\native\sfml-audio.redist.targets')" />
+    <Import Project="..\packages\sfml-graphics.redist.2.4.2.0\build\native\sfml-graphics.redist.targets" Condition="Exists('..\packages\sfml-graphics.redist.2.4.2.0\build\native\sfml-graphics.redist.targets')" />
+    <Import Project="..\packages\sfml-network.redist.2.4.2.0\build\native\sfml-network.redist.targets" Condition="Exists('..\packages\sfml-network.redist.2.4.2.0\build\native\sfml-network.redist.targets')" />
+    <Import Project="..\packages\sfml-system.redist.2.4.2.0\build\native\sfml-system.redist.targets" Condition="Exists('..\packages\sfml-system.redist.2.4.2.0\build\native\sfml-system.redist.targets')" />
+    <Import Project="..\packages\sfml-system.2.4.2.0\build\native\sfml-system.targets" Condition="Exists('..\packages\sfml-system.2.4.2.0\build\native\sfml-system.targets')" />
+    <Import Project="..\packages\sfml-audio.2.4.2.0\build\native\sfml-audio.targets" Condition="Exists('..\packages\sfml-audio.2.4.2.0\build\native\sfml-audio.targets')" />
+    <Import Project="..\packages\sfml-network.2.4.2.0\build\native\sfml-network.targets" Condition="Exists('..\packages\sfml-network.2.4.2.0\build\native\sfml-network.targets')" />
+    <Import Project="..\packages\sfml-window.redist.2.4.2.0\build\native\sfml-window.redist.targets" Condition="Exists('..\packages\sfml-window.redist.2.4.2.0\build\native\sfml-window.redist.targets')" />
+    <Import Project="..\packages\sfml-window.2.4.2.0\build\native\sfml-window.targets" Condition="Exists('..\packages\sfml-window.2.4.2.0\build\native\sfml-window.targets')" />
+    <Import Project="..\packages\sfml-graphics.2.4.2.0\build\native\sfml-graphics.targets" Condition="Exists('..\packages\sfml-graphics.2.4.2.0\build\native\sfml-graphics.targets')" />
+    <Import Project="..\packages\freetype.redist.2.8.0.1\build\native\freetype.redist.targets" Condition="Exists('..\packages\freetype.redist.2.8.0.1\build\native\freetype.redist.targets')" />
+  </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\lua.redist.5.3.3\build\native\lua.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\lua.redist.5.3.3\build\native\lua.redist.targets'))" />
+    <Error Condition="!Exists('..\packages\lua.5.3.3\build\native\lua.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\lua.5.3.3\build\native\lua.targets'))" />
+    <Error Condition="!Exists('..\packages\sfml-audio.redist.2.4.2.0\build\native\sfml-audio.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sfml-audio.redist.2.4.2.0\build\native\sfml-audio.redist.targets'))" />
+    <Error Condition="!Exists('..\packages\sfml-graphics.redist.2.4.2.0\build\native\sfml-graphics.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sfml-graphics.redist.2.4.2.0\build\native\sfml-graphics.redist.targets'))" />
+    <Error Condition="!Exists('..\packages\sfml-network.redist.2.4.2.0\build\native\sfml-network.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sfml-network.redist.2.4.2.0\build\native\sfml-network.redist.targets'))" />
+    <Error Condition="!Exists('..\packages\sfml-system.redist.2.4.2.0\build\native\sfml-system.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sfml-system.redist.2.4.2.0\build\native\sfml-system.redist.targets'))" />
+    <Error Condition="!Exists('..\packages\sfml-system.2.4.2.0\build\native\sfml-system.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sfml-system.2.4.2.0\build\native\sfml-system.targets'))" />
+    <Error Condition="!Exists('..\packages\sfml-audio.2.4.2.0\build\native\sfml-audio.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sfml-audio.2.4.2.0\build\native\sfml-audio.targets'))" />
+    <Error Condition="!Exists('..\packages\sfml-network.2.4.2.0\build\native\sfml-network.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sfml-network.2.4.2.0\build\native\sfml-network.targets'))" />
+    <Error Condition="!Exists('..\packages\sfml-window.redist.2.4.2.0\build\native\sfml-window.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sfml-window.redist.2.4.2.0\build\native\sfml-window.redist.targets'))" />
+    <Error Condition="!Exists('..\packages\sfml-window.2.4.2.0\build\native\sfml-window.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sfml-window.2.4.2.0\build\native\sfml-window.targets'))" />
+    <Error Condition="!Exists('..\packages\sfml-graphics.2.4.2.0\build\native\sfml-graphics.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sfml-graphics.2.4.2.0\build\native\sfml-graphics.targets'))" />
+    <Error Condition="!Exists('..\packages\freetype.redist.2.8.0.1\build\native\freetype.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\freetype.redist.2.8.0.1\build\native\freetype.redist.targets'))" />
+  </Target>
+</Project>

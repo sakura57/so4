@@ -1,0 +1,1 @@
+--Null random mission script, should be empty

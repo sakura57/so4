@@ -1,0 +1,8 @@
+tone, 400hz, then 300hz, then 500hz 0.05 dur each, adjust amplitude to match voice
+static effect- just do amplitude 35db after doing radio effect, about 0.2 s
+
+amplify 15db
+telepone equalize, high pass, low pass, each 1000hz 6db
+amplify 12.5db
+telephone equalize, high pass, low pass, each 1000hz 6db
+amplify last 0.1s of audio 30db for static effect

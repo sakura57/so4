@@ -1,0 +1,937 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{c38d3a00-1fd0-4211-8b65-4656b36fdfc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{ae3c04e6-1f75-49ab-b2cd-4e71be767378}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="INI Parser">
+      <UniqueIdentifier>{fe7f2564-bb5c-46d4-98f2-7ba98f95ac98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Market">
+      <UniqueIdentifier>{f07418f3-280d-4771-836a-aa053c507af7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\World">
+      <UniqueIdentifier>{f5ee815a-84ed-4301-87be-50c22cf3652c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Script">
+      <UniqueIdentifier>{e296e550-088d-4776-a521-d0729644da6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Interface">
+      <UniqueIdentifier>{dafa91ec-13b9-4502-99ff-77f7f1a307f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Particles">
+      <UniqueIdentifier>{0397fb40-829f-42e0-8b27-c93231b2b5c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\imgui">
+      <UniqueIdentifier>{ada51fe8-85d7-4538-8b3f-36fd45e769b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Definitions">
+      <UniqueIdentifier>{d4dcfdd0-4d27-4186-9078-d5d09385b83a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Audio">
+      <UniqueIdentifier>{e8e5358d-9a0a-4bfc-9fe5-2905e8071989}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameData">
+      <UniqueIdentifier>{e0d505f8-0c30-41e6-a6df-b2b09cd0457e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameState">
+      <UniqueIdentifier>{d27cd93b-2538-468f-af20-f196081e4152}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Intransient">
+      <UniqueIdentifier>{653d2b40-b272-421b-93ec-d66f891cf441}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Intransient\Inventory">
+      <UniqueIdentifier>{51daec8b-b5d2-4560-93a4-5adceaf7ca89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Intransient\CharacterEntity">
+      <UniqueIdentifier>{4b10106c-80b9-4961-9fd8-f6fe3b7cadf9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Settings">
+      <UniqueIdentifier>{b3f10185-3dc8-49b6-8178-9e1a888a0eec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Object">
+      <UniqueIdentifier>{6ba2eb07-3799-4754-bda9-7d40618dd593}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Object\Camera">
+      <UniqueIdentifier>{68212e54-af46-4f70-b4f4-c1a140d216bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Intransient\Sector">
+      <UniqueIdentifier>{a9467cad-a8ce-4d18-9250-befbde5e3216}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameData\Universe">
+      <UniqueIdentifier>{0b044418-3731-4048-9bbc-6d92d9f6f3bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Intransient\Spell">
+      <UniqueIdentifier>{25c9b3e4-8515-49ef-9a83-dd1ea25e2a10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Intransient\StatusEffect">
+      <UniqueIdentifier>{10349baa-37ed-4ed2-bbea-15ec759d2682}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Intransient\Spell\Spells">
+      <UniqueIdentifier>{a3e17fa4-fce2-4a89-8035-d6dc995548d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameData\Skills">
+      <UniqueIdentifier>{d3d02ffb-0c12-48f5-9285-c48dc855ac6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Material">
+      <UniqueIdentifier>{0477a4cf-2667-47d4-9156-1e680be181e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Intransient\MaterialBank">
+      <UniqueIdentifier>{a461a2d1-5837-4c51-aaf1-1c2247a3a7ca}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cxx">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="SGLib.cxx">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="SGEngine.cxx">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="CGame.cxx">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="CSFMLRenderPipeline.cxx">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="ini_parser.cpp">
+      <Filter>INI Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="CObject.cxx">
+      <Filter>Engine\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CEquippedObject.cxx">
+      <Filter>Engine\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CShip.cxx">
+      <Filter>Engine\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CChaseCamera.cxx">
+      <Filter>Engine\Object\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="CNonPhysical.cxx">
+      <Filter>Engine\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CSimpleCamera.cxx">
+      <Filter>Engine\Object\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="CGameWorld.cxx">
+      <Filter>Engine\World</Filter>
+    </ClCompile>
+    <ClCompile Include="CLuaEngine.cxx">
+      <Filter>Engine\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaCallbacks.cxx">
+      <Filter>Engine\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="CStaticCamera.cxx">
+      <Filter>Engine\Object\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="CProjectile.cxx">
+      <Filter>Engine\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CEquipInstance.cxx">
+      <Filter>Engine\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui-1.53\imgui.cpp">
+      <Filter>Engine\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui-1.53\imgui_demo.cpp">
+      <Filter>Engine\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui-1.53\imgui_draw.cpp">
+      <Filter>Engine\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui-sfml-v.1.0\imgui-SFML.cpp">
+      <Filter>Engine\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="InterfaceManager.cxx">
+      <Filter>Engine\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="CAudioManager.cxx">
+      <Filter>Engine\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="CEngineFlame.cxx">
+      <Filter>Engine\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CShield.cxx">
+      <Filter>Engine\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="ILiving.cxx">
+      <Filter>Engine\World</Filter>
+    </ClCompile>
+    <ClCompile Include="IWorldObject.cxx">
+      <Filter>Engine\World</Filter>
+    </ClCompile>
+    <ClCompile Include="Starfield.cxx">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="CParticle.cxx">
+      <Filter>Engine\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="CParticleManager.cxx">
+      <Filter>Engine\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="CGameDataManager.cxx">
+      <Filter>Engine\GameData</Filter>
+    </ClCompile>
+    <ClCompile Include="CAIController.cxx">
+      <Filter>Engine\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="GLStarfield.cxx">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="CGameStateManager.cxx">
+      <Filter>Engine\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="CMainMenuState.cxx">
+      <Filter>Engine\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="CInSpaceState.cxx">
+      <Filter>Engine\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="CCommsManager.cxx">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="CEntityInventory.cxx">
+      <Filter>Engine\Intransient\Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryViewerPanel.cxx">
+      <Filter>Engine\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="CGameSettings.cxx">
+      <Filter>Engine\Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="CPhantomObject.cxx">
+      <Filter>Engine\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Util.cxx">
+      <Filter>Engine\Definitions</Filter>
+    </ClCompile>
+    <ClCompile Include="CIntransientDataManager.cxx">
+      <Filter>Engine\Intransient</Filter>
+    </ClCompile>
+    <ClCompile Include="CLandedState.cxx">
+      <Filter>Engine\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="CSFMLStaticTextureManager.cxx">
+      <Filter>Engine\GameData</Filter>
+    </ClCompile>
+    <ClCompile Include="CStaticObject.cxx">
+      <Filter>Engine\World</Filter>
+    </ClCompile>
+    <ClCompile Include="CSectorTransitionState.cxx">
+      <Filter>Engine\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="CSector.cxx">
+      <Filter>Engine\GameData\Universe</Filter>
+    </ClCompile>
+    <ClCompile Include="CUniverse.cxx">
+      <Filter>Engine\GameData\Universe</Filter>
+    </ClCompile>
+    <ClCompile Include="CSectorJumpBuoy.cxx">
+      <Filter>Engine\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CLandingBuoy.cxx">
+      <Filter>Engine\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerCharacterEntity.cxx">
+      <Filter>Engine\Intransient\CharacterEntity</Filter>
+    </ClCompile>
+    <ClCompile Include="CLootTableManager.cxx">
+      <Filter>Engine\GameData</Filter>
+    </ClCompile>
+    <ClCompile Include="CBaseTransitionState.cxx">
+      <Filter>Engine\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="CBase.cxx">
+      <Filter>Engine\GameData\Universe</Filter>
+    </ClCompile>
+    <ClCompile Include="EquipTraderPanel.cxx">
+      <Filter>Engine\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="JunkTraderPanel.cxx">
+      <Filter>Engine\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="CSpellManager.cxx">
+      <Filter>Engine\Intransient\Spell</Filter>
+    </ClCompile>
+    <ClCompile Include="Spells.cxx">
+      <Filter>Engine\Intransient\Spell</Filter>
+    </ClCompile>
+    <ClCompile Include="CCharacterEntityManager.cxx">
+      <Filter>Engine\Intransient\CharacterEntity</Filter>
+    </ClCompile>
+    <ClCompile Include="CSpellNanobotStream.cxx">
+      <Filter>Engine\Intransient\Spell\Spells</Filter>
+    </ClCompile>
+    <ClCompile Include="CSpellNanobotSwarm.cxx">
+      <Filter>Engine\Intransient\Spell\Spells</Filter>
+    </ClCompile>
+    <ClCompile Include="CSpellNavComVirus.cxx">
+      <Filter>Engine\Intransient\Spell\Spells</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterSheetPanel.cxx">
+      <Filter>Engine\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="CSpellMagneticDrain.cxx">
+      <Filter>Engine\Intransient\Spell\Spells</Filter>
+    </ClCompile>
+    <ClCompile Include="AbilityRepertoirePanel.cxx">
+      <Filter>Engine\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="AbilityToolbar.cxx">
+      <Filter>Engine\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="CSpellSignatureSpoof.cxx">
+      <Filter>Engine\Intransient\Spell\Spells</Filter>
+    </ClCompile>
+    <ClCompile Include="CBaseCharacterEntity.cxx">
+      <Filter>Engine\Intransient\CharacterEntity</Filter>
+    </ClCompile>
+    <ClCompile Include="CNonPlayerCharacterEntity.cxx">
+      <Filter>Engine\Intransient\CharacterEntity</Filter>
+    </ClCompile>
+    <ClCompile Include="CWorldTransaction.cxx">
+      <Filter>Engine\World</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerDiedPanel.cxx">
+      <Filter>Engine\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterCreationPanel.cxx">
+      <Filter>Engine\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="CSpellPerfectDefense.cxx">
+      <Filter>Engine\Intransient\Spell\Spells</Filter>
+    </ClCompile>
+    <ClCompile Include="CDestinedProjectile.cxx">
+      <Filter>Engine\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CSpellKineticBarrageWeak.cxx">
+      <Filter>Engine\Intransient\Spell\Spells</Filter>
+    </ClCompile>
+    <ClCompile Include="CSpellKineticBarrageStrong.cxx">
+      <Filter>Engine\Intransient\Spell\Spells</Filter>
+    </ClCompile>
+    <ClCompile Include="CSpellLaserBarrageWeak.cxx">
+      <Filter>Engine\Intransient\Spell\Spells</Filter>
+    </ClCompile>
+    <ClCompile Include="CSpellLaserBarrageStrong.cxx">
+      <Filter>Engine\Intransient\Spell\Spells</Filter>
+    </ClCompile>
+    <ClCompile Include="CSpellMissileSwarmWeak.cxx">
+      <Filter>Engine\Intransient\Spell\Spells</Filter>
+    </ClCompile>
+    <ClCompile Include="CStatBlock.cxx">
+      <Filter>Engine\Intransient</Filter>
+    </ClCompile>
+    <ClCompile Include="CSpellMissileSwarmStrong.cxx">
+      <Filter>Engine\Intransient\Spell\Spells</Filter>
+    </ClCompile>
+    <ClCompile Include="CSkill.cxx">
+      <Filter>Engine\GameData\Skills</Filter>
+    </ClCompile>
+    <ClCompile Include="CSkillLine.cxx">
+      <Filter>Engine\GameData\Skills</Filter>
+    </ClCompile>
+    <ClCompile Include="CSkillTree.cxx">
+      <Filter>Engine\GameData\Skills</Filter>
+    </ClCompile>
+    <ClCompile Include="ArenaStartPanel.cxx">
+      <Filter>Engine\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="SkillTreePanel.cxx">
+      <Filter>Engine\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="CSkillDataManager.cxx">
+      <Filter>Engine\GameData\Skills</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadGamePanel.cxx">
+      <Filter>Engine\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="SaveGamePanel.cxx">
+      <Filter>Engine\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="CMatManager.cxx">
+      <Filter>Engine\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="IMaterial.cxx">
+      <Filter>Engine\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="IMaterialClass.cxx">
+      <Filter>Engine\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="CResourceMaterial.cxx">
+      <Filter>Engine\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="CMaterialClass.cxx">
+      <Filter>Engine\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="CGameClock.cxx">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugConsole.cxx">
+      <Filter>Engine\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="CAsteroidMineable.cxx">
+      <Filter>Engine\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CAsteroidField.cxx">
+      <Filter>Engine\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CAstfield.cxx">
+      <Filter>Engine\GameData\Universe</Filter>
+    </ClCompile>
+    <ClCompile Include="CMaterialBank.cxx">
+      <Filter>Engine\Intransient\MaterialBank</Filter>
+    </ClCompile>
+    <ClCompile Include="MaterialBankPanel.cxx">
+      <Filter>Engine\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="MaterialExaminePanel.cxx">
+      <Filter>Engine\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="CCharacterEntitiesSaver.cxx">
+      <Filter>Engine\Intransient\CharacterEntity</Filter>
+    </ClCompile>
+    <ClCompile Include="CMaterialsSaver.cxx">
+      <Filter>Engine\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="AsteroidProspectPanel.cxx">
+      <Filter>Engine\Interface</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="IEngine.hxx">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="SGLib.hxx">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="SGEngine.hxx">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="CInstanceFactory.hxx">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="CGame.hxx">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="IRenderPipeline.hxx">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="CSFMLRenderPipeline.hxx">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Listeners.hxx">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="ini_parser.h">
+      <Filter>INI Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="CObject.hxx">
+      <Filter>Engine\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CEquippedObject.hxx">
+      <Filter>Engine\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CShip.hxx">
+      <Filter>Engine\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CEquipInstance.hxx">
+      <Filter>Engine\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CChaseCamera.hxx">
+      <Filter>Engine\Object\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="CNonPhysical.hxx">
+      <Filter>Engine\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CSimpleCamera.hxx">
+      <Filter>Engine\Object\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="ICamera.hxx">
+      <Filter>Engine\Object\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="CGameWorld.hxx">
+      <Filter>Engine\World</Filter>
+    </ClInclude>
+    <ClInclude Include="Archetype.hxx">
+      <Filter>Engine\Market</Filter>
+    </ClInclude>
+    <ClInclude Include="CLuaEngine.hxx">
+      <Filter>Engine\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaCallbacks.hxx">
+      <Filter>Engine\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="IWorld.hxx">
+      <Filter>Engine\World</Filter>
+    </ClInclude>
+    <ClInclude Include="IScriptEngine.hxx">
+      <Filter>Engine\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="CStaticCamera.hxx">
+      <Filter>Engine\Object\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="CProjectile.hxx">
+      <Filter>Engine\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Loadout.hxx">
+      <Filter>Engine\Market</Filter>
+    </ClInclude>
+    <ClInclude Include="CEquipInstanceFactory.hxx">
+      <Filter>Engine\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="IWorldInstance.hxx">
+      <Filter>Engine\World</Filter>
+    </ClInclude>
+    <ClInclude Include="IWorldObject.hxx">
+      <Filter>Engine\World</Filter>
+    </ClInclude>
+    <ClInclude Include="IPhysicalObject.hxx">
+      <Filter>Engine\World</Filter>
+    </ClInclude>
+    <ClInclude Include="ILiving.hxx">
+      <Filter>Engine\World</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui-sfml-v.1.0\imconfig-SFML.h">
+      <Filter>Engine\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui-1.53\imconfig.h">
+      <Filter>Engine\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui-1.53\imgui.h">
+      <Filter>Engine\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui-1.53\imgui_internal.h">
+      <Filter>Engine\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui-1.53\stb_truetype.h">
+      <Filter>Engine\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui-1.53\stb_textedit.h">
+      <Filter>Engine\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui-1.53\stb_rect_pack.h">
+      <Filter>Engine\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui-sfml-v.1.0\imgui-SFML.h">
+      <Filter>Engine\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Defs.hxx">
+      <Filter>Engine\Definitions</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineProtos.hxx">
+      <Filter>Engine\Definitions</Filter>
+    </ClInclude>
+    <ClInclude Include="Util.hxx">
+      <Filter>Engine\Definitions</Filter>
+    </ClInclude>
+    <ClInclude Include="SFMLIncludes.hxx">
+      <Filter>Engine\Definitions</Filter>
+    </ClInclude>
+    <ClInclude Include="InterfacePanel.hxx">
+      <Filter>Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="InterfaceManager.hxx">
+      <Filter>Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadoutPanel.hxx">
+      <Filter>Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="RadarPanel.hxx">
+      <Filter>Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="IRadarVisible.hxx">
+      <Filter>Engine\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CAudioManager.hxx">
+      <Filter>Engine\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="CEngineFlame.hxx">
+      <Filter>Engine\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CShield.hxx">
+      <Filter>Engine\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CParticle.hxx">
+      <Filter>Engine\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="CParticleManager.hxx">
+      <Filter>Engine\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="Starfield.hxx">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="CGameDataManager.hxx">
+      <Filter>Engine\GameData</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.hxx">
+      <Filter>Engine\GameData</Filter>
+    </ClInclude>
+    <ClInclude Include="Faction.hxx">
+      <Filter>Engine\GameData</Filter>
+    </ClInclude>
+    <ClInclude Include="Pilot.hxx">
+      <Filter>Engine\GameData</Filter>
+    </ClInclude>
+    <ClInclude Include="CAIController.hxx">
+      <Filter>Engine\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="ShipStatusPanel.hxx">
+      <Filter>Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="CAttitudeSet.hxx">
+      <Filter>Engine\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetPanel.hxx">
+      <Filter>Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="GLStarfield.hxx">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="CRandomNameGenerator.hxx">
+      <Filter>Engine\GameData</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugPanel.hxx">
+      <Filter>Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="IGameState.hxx">
+      <Filter>Engine\GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="CGameStateManager.hxx">
+      <Filter>Engine\GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="CMainMenuState.hxx">
+      <Filter>Engine\GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="CInSpaceState.hxx">
+      <Filter>Engine\GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuPanel.hxx">
+      <Filter>Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="ITransientStateStructure.hxx">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="InGameMenuPanel.hxx">
+      <Filter>Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="IIntransientDataManager.hxx">
+      <Filter>Engine\Intransient</Filter>
+    </ClInclude>
+    <ClInclude Include="IEntityInventory.hxx">
+      <Filter>Engine\Intransient\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="ICharacterEntity.hxx">
+      <Filter>Engine\Intransient\CharacterEntity</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayerCharacterEntity.hxx">
+      <Filter>Engine\Intransient\CharacterEntity</Filter>
+    </ClInclude>
+    <ClInclude Include="CEntityInventory.hxx">
+      <Filter>Engine\Intransient\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="CNullInventory.hxx">
+      <Filter>Engine\Intransient\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryViewerPanel.hxx">
+      <Filter>Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="CGameSettings.hxx">
+      <Filter>Engine\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="SettingsPanel.hxx">
+      <Filter>Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="CCommsManager.hxx">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="CPhantomObject.hxx">
+      <Filter>Engine\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CIntransientDataManager.hxx">
+      <Filter>Engine\Intransient</Filter>
+    </ClInclude>
+    <ClInclude Include="CLandedState.hxx">
+      <Filter>Engine\GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="IStaticTextureManager.hxx">
+      <Filter>Engine\GameData</Filter>
+    </ClInclude>
+    <ClInclude Include="CSFMLStaticTextureManager.hxx">
+      <Filter>Engine\GameData</Filter>
+    </ClInclude>
+    <ClInclude Include="CStaticObject.hxx">
+      <Filter>Engine\World</Filter>
+    </ClInclude>
+    <ClInclude Include="CSectorTransitionState.hxx">
+      <Filter>Engine\GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="SectorEnterPanel.hxx">
+      <Filter>Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="IUniverse.hxx">
+      <Filter>Engine\GameData\Universe</Filter>
+    </ClInclude>
+    <ClInclude Include="CSector.hxx">
+      <Filter>Engine\GameData\Universe</Filter>
+    </ClInclude>
+    <ClInclude Include="CUniverse.hxx">
+      <Filter>Engine\GameData\Universe</Filter>
+    </ClInclude>
+    <ClInclude Include="CSectorJumpBuoy.hxx">
+      <Filter>Engine\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="IInteractable.hxx">
+      <Filter>Engine\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CLandingBuoy.hxx">
+      <Filter>Engine\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="NotificationPanel.hxx">
+      <Filter>Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="ILootTableManager.hxx">
+      <Filter>Engine\GameData</Filter>
+    </ClInclude>
+    <ClInclude Include="CLootTableManager.hxx">
+      <Filter>Engine\GameData</Filter>
+    </ClInclude>
+    <ClInclude Include="CBaseTransitionState.hxx">
+      <Filter>Engine\GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="CBase.hxx">
+      <Filter>Engine\GameData\Universe</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseEnterPanel.hxx">
+      <Filter>Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseHubPanel.hxx">
+      <Filter>Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="EquipTraderPanel.hxx">
+      <Filter>Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="JunkTraderPanel.hxx">
+      <Filter>Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="AbilityToolbar.hxx">
+      <Filter>Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="ISpell.hxx">
+      <Filter>Engine\Intransient\Spell</Filter>
+    </ClInclude>
+    <ClInclude Include="ISpellManager.hxx">
+      <Filter>Engine\Intransient\Spell</Filter>
+    </ClInclude>
+    <ClInclude Include="CSpellManager.hxx">
+      <Filter>Engine\Intransient\Spell</Filter>
+    </ClInclude>
+    <ClInclude Include="IStatusEffect.hxx">
+      <Filter>Engine\Intransient\StatusEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="CStatusHullBreach.hxx">
+      <Filter>Engine\Intransient\StatusEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="CTransientStatusEffect.hxx">
+      <Filter>Engine\Intransient\StatusEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="CStatusCoolantLeak.hxx">
+      <Filter>Engine\Intransient\StatusEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Spells.hxx">
+      <Filter>Engine\Intransient\Spell</Filter>
+    </ClInclude>
+    <ClInclude Include="CStatusEngineOffline.hxx">
+      <Filter>Engine\Intransient\StatusEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="CCharacterEntityManager.hxx">
+      <Filter>Engine\Intransient\CharacterEntity</Filter>
+    </ClInclude>
+    <ClInclude Include="ICharacterEntityManager.hxx">
+      <Filter>Engine\Intransient\CharacterEntity</Filter>
+    </ClInclude>
+    <ClInclude Include="CStatusNanobotStream.hxx">
+      <Filter>Engine\Intransient\StatusEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="CStatusNanobotSwarm.hxx">
+      <Filter>Engine\Intransient\StatusEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="CSpellNanobotStream.hxx">
+      <Filter>Engine\Intransient\Spell\Spells</Filter>
+    </ClInclude>
+    <ClInclude Include="CSpellNanobotSwarm.hxx">
+      <Filter>Engine\Intransient\Spell\Spells</Filter>
+    </ClInclude>
+    <ClInclude Include="CSpellNavComVirus.hxx">
+      <Filter>Engine\Intransient\Spell\Spells</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterSheetPanel.hxx">
+      <Filter>Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="CSpellMagneticDrain.hxx">
+      <Filter>Engine\Intransient\Spell\Spells</Filter>
+    </ClInclude>
+    <ClInclude Include="AbilityRepertoirePanel.hxx">
+      <Filter>Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="CSpellSignatureSpoof.hxx">
+      <Filter>Engine\Intransient\Spell\Spells</Filter>
+    </ClInclude>
+    <ClInclude Include="CBaseCharacterEntity.hxx">
+      <Filter>Engine\Intransient\CharacterEntity</Filter>
+    </ClInclude>
+    <ClInclude Include="CNonPlayerCharacterEntity.hxx">
+      <Filter>Engine\Intransient\CharacterEntity</Filter>
+    </ClInclude>
+    <ClInclude Include="CWorldTransaction.hxx">
+      <Filter>Engine\World</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerDiedPanel.hxx">
+      <Filter>Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterCreationPanel.hxx">
+      <Filter>Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="CSpellPerfectDefense.hxx">
+      <Filter>Engine\Intransient\Spell\Spells</Filter>
+    </ClInclude>
+    <ClInclude Include="CStatusPerfectDefense.hxx">
+      <Filter>Engine\Intransient\StatusEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="CDestinedProjectile.hxx">
+      <Filter>Engine\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CSpellKineticBarrageWeak.hxx">
+      <Filter>Engine\Intransient\Spell\Spells</Filter>
+    </ClInclude>
+    <ClInclude Include="CSpellKineticBarrageStrong.hxx">
+      <Filter>Engine\Intransient\Spell\Spells</Filter>
+    </ClInclude>
+    <ClInclude Include="CSpellLaserBarrageWeak.hxx">
+      <Filter>Engine\Intransient\Spell\Spells</Filter>
+    </ClInclude>
+    <ClInclude Include="CSpellLaserBarrageStrong.hxx">
+      <Filter>Engine\Intransient\Spell\Spells</Filter>
+    </ClInclude>
+    <ClInclude Include="CSpellMissileSwarmWeak.hxx">
+      <Filter>Engine\Intransient\Spell\Spells</Filter>
+    </ClInclude>
+    <ClInclude Include="CStatBlock.hxx">
+      <Filter>Engine\Intransient</Filter>
+    </ClInclude>
+    <ClInclude Include="CSpellMissileSwarmStrong.hxx">
+      <Filter>Engine\Intransient\Spell\Spells</Filter>
+    </ClInclude>
+    <ClInclude Include="CSkill.hxx">
+      <Filter>Engine\GameData\Skills</Filter>
+    </ClInclude>
+    <ClInclude Include="CSkillLine.hxx">
+      <Filter>Engine\GameData\Skills</Filter>
+    </ClInclude>
+    <ClInclude Include="CSkillTree.hxx">
+      <Filter>Engine\GameData\Skills</Filter>
+    </ClInclude>
+    <ClInclude Include="ArenaStartPanel.hxx">
+      <Filter>Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="SkillTreePanel.hxx">
+      <Filter>Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="CSkillDataManager.hxx">
+      <Filter>Engine\GameData\Skills</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadGamePanel.hxx">
+      <Filter>Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="SaveGamePanel.hxx">
+      <Filter>Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="CMatManager.hxx">
+      <Filter>Engine\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="IMatManager.hxx">
+      <Filter>Engine\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="IMaterial.hxx">
+      <Filter>Engine\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="MaterialType.hxx">
+      <Filter>Engine\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="IMaterialClass.hxx">
+      <Filter>Engine\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="CResourceMaterial.hxx">
+      <Filter>Engine\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="MaterialAttribute.hxx">
+      <Filter>Engine\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="CMaterialClass.hxx">
+      <Filter>Engine\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="IGameClock.hxx">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="CGameClock.hxx">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugConsole.hxx">
+      <Filter>Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="CAsteroidMineable.hxx">
+      <Filter>Engine\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CAsteroidField.hxx">
+      <Filter>Engine\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CAstfield.hxx">
+      <Filter>Engine\GameData\Universe</Filter>
+    </ClInclude>
+    <ClInclude Include="IMaterialBank.hxx">
+      <Filter>Engine\Intransient\MaterialBank</Filter>
+    </ClInclude>
+    <ClInclude Include="CMaterialBank.hxx">
+      <Filter>Engine\Intransient\MaterialBank</Filter>
+    </ClInclude>
+    <ClInclude Include="MaterialBankPanel.hxx">
+      <Filter>Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="MaterialExaminePanel.hxx">
+      <Filter>Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="ISaveable.hxx">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="ISaver.hxx">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="CCharacterEntitiesSaver.hxx">
+      <Filter>Engine\Intransient\CharacterEntity</Filter>
+    </ClInclude>
+    <ClInclude Include="CMaterialsSaver.hxx">
+      <Filter>Engine\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="AsteroidProspectPanel.hxx">
+      <Filter>Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="ISectorMapRenderer.hxx">
+      <Filter>Engine</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>
