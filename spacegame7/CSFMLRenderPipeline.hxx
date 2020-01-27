@@ -58,9 +58,14 @@ public:
 	//(e.g. if the active camera is destroyed while still active)
 	virtual void listen_notify(Notification const, IListenable *) final;
 
+	//get the sector map renderer (implementation dependent
+	//on graphics implementation)
+	virtual ISectorMapRenderer* get_sector_map_renderer(void) final;
+
 private:
 	std::mutex m_mFieldAccess;
 	ICamera *m_pActiveCamera;
+	ISectorMapRenderer* m_pSectorMapRenderer;
 	AppearanceId m_uiPastAllocatedAppearances;
 	std::vector<sf::Texture> m_vecTextures;
 	std::vector<sf::Sprite> m_vecSprites;

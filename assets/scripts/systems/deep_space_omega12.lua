@@ -1,3 +1,6 @@
+sgs_map_init(40000, 40000)
+sgs_map_finalize()
+
 local focus_x, focus_y, focus_z = 0.0, 0.0, 0.0
 local size_x, size_y = 2500.0, 2500.0
 local pop = 50

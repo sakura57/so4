@@ -231,6 +231,7 @@
     <ClCompile Include="CSectorJumpBuoy.cxx" />
     <ClCompile Include="CSectorTransitionState.cxx" />
     <ClCompile Include="CSFMLRenderPipeline.cxx" />
+    <ClCompile Include="CSFMLSectorMapRenderer.cxx" />
     <ClCompile Include="CSFMLStaticTextureManager.cxx" />
     <ClCompile Include="CShield.cxx" />
     <ClCompile Include="CShip.cxx" />
@@ -267,6 +268,7 @@
     <ClCompile Include="MaterialExaminePanel.cxx" />
     <ClCompile Include="PlayerDiedPanel.cxx" />
     <ClCompile Include="SaveGamePanel.cxx" />
+    <ClCompile Include="SectorMapPanel.cxx" />
     <ClCompile Include="SkillTreePanel.cxx" />
     <ClCompile Include="Spells.cxx" />
     <ClCompile Include="Util.cxx" />
@@ -342,6 +344,7 @@
     <ClInclude Include="CRandomNameGenerator.hxx" />
     <ClInclude Include="CSectorJumpBuoy.hxx" />
     <ClInclude Include="CSectorTransitionState.hxx" />
+    <ClInclude Include="CSFMLSectorMapRenderer.hxx" />
     <ClInclude Include="CShield.hxx" />
     <ClInclude Include="CSFMLStaticTextureManager.hxx" />
     <ClInclude Include="CSkill.hxx" />
@@ -448,6 +451,7 @@
     <ClInclude Include="RadarPanel.hxx" />
     <ClInclude Include="SaveGamePanel.hxx" />
     <ClInclude Include="SectorEnterPanel.hxx" />
+    <ClInclude Include="SectorMapPanel.hxx" />
     <ClInclude Include="SettingsPanel.hxx" />
     <ClInclude Include="SFMLIncludes.hxx" />
     <ClInclude Include="SGEngine.hxx" />

@@ -11,6 +11,7 @@
 #include "NotificationPanel.hxx"
 #include "AbilityToolbar.hxx"
 #include "AbilityRepertoirePanel.hxx"
+#include "SectorMapPanel.hxx"
 
 #include "CEntityInventory.hxx"
 #include "InventoryViewerPanel.hxx"
@@ -25,7 +26,7 @@
 #include <sstream>
 #include <gl/GLU.h>
 
-CInSpaceState::CInSpaceState(char const *startingScript, Vector2f const &vStartingPosition)
+CInSpaceState::CInSpaceState(char const *startingScript, SectorId sectorId, Vector2f const &vStartingPosition)
 	: m_glstarfield(8 * DEFAULT_WINDOW_WIDTH, 14 * DEFAULT_WINDOW_HEIGHT),
 	m_sfBgVerts(sf::TrianglesStrip, 5),
 	m_szStartingScript(startingScript),
@@ -37,7 +38,8 @@ CInSpaceState::CInSpaceState(char const *startingScript, Vector2f const &vStarti
 	m_flDeathScreenSpawned(false),
 	m_szPlayerName(SG::get_intransient_data_manager()->get_character_entity_manager()->get_player_character_entity()->get_name()),
 	m_bRmsnEnabledForThisSession(false),
-	m_szRmsnScript("")
+	m_szRmsnScript(""),
+	m_uiSectorId(sectorId)
 {
 	this->m_pEngine = SG::get_engine();
 	this->m_pRenderPipeline = SG::get_render_pipeline();
@@ -574,6 +576,12 @@ void CInSpaceState::state_process_event(sf::View &mainView, sf::RenderWindow &sf
 
 					this->create_material_viewer();
 				}
+				else if(sfEvent.key.code == sf::Keyboard::M)
+				{
+					this->m_pInterfaceManager->register_tangible_ui_event();
+
+					this->create_sector_map_panel();
+				}
 				else if(sfEvent.key.code == sf::Keyboard::LControl)
 				{
 					this->m_bTrackMode = !this->m_bTrackMode;
@@ -910,6 +918,11 @@ void CInSpaceState::create_ability_repertoire(void)
 	ICharacterEntity *pPlayerEntity = pIDM->get_character_entity_manager()->get_player_character_entity();
 
 	this->m_pInterfaceManager->add_panel(new AbilityRepertoirePanel(pPlayerEntity));
+}
+
+void CInSpaceState::create_sector_map_panel(void)
+{
+	this->m_pInterfaceManager->add_panel(new SectorMapPanel(this->m_uiSectorId));
 }
 
 void CInSpaceState::create_material_viewer(void)

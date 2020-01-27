@@ -1,5 +1,6 @@
 #include "CInstanceFactory.hxx"
 #include "CSFMLRenderPipeline.hxx"
+#include "CSFMLSectorMapRenderer.hxx"
 
 CSFMLRenderPipeline::CSFMLRenderPipeline()
 	:	m_pActiveCamera(nullptr),
@@ -13,11 +14,13 @@ CSFMLRenderPipeline::CSFMLRenderPipeline()
 	this->m_vecAppearanceValid[0] = true;
 	//this->m_blurShader.loadFromFile(CGameDataManager::get_full_data_file_path("shaders\\blur_object.vert").c_str(), CGameDataManager::get_full_data_file_path("shaders\\blur_object.frag").c_str());
 	//this->m_blurShader.setUniform("blur_radius", 0.05f);
+
+	this->m_pSectorMapRenderer = new CSFMLSectorMapRenderer;
 }
 
 CSFMLRenderPipeline::~CSFMLRenderPipeline()
 {
-	
+	delete this->m_pSectorMapRenderer;
 }
 
 void CSFMLRenderPipeline::load_image(IRenderPipeline::ImageOptions const &imageOpts, char const *szImageFile)
@@ -238,4 +241,11 @@ void CSFMLRenderPipeline::listen_notify(Notification const notification, IListen
 	default:
 		throw SGException("Received unexpected notification");
 	}
+}
+
+ISectorMapRenderer* CSFMLRenderPipeline::get_sector_map_renderer()
+{
+	std::lock_guard<std::mutex> lock(this->m_mFieldAccess);
+
+	return this->m_pSectorMapRenderer;
 }

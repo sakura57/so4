@@ -8,6 +8,8 @@
 #include "ICamera.hxx"
 #include "IWorldObject.hxx"
 
+#include "ISectorMapRenderer.hxx"
+
 /*
 	The render pipeline is responsible for
 	managing the window, graphics resources (images, sprites)
@@ -54,4 +56,8 @@ interface IRenderPipeline
 	//usually will return false if there is no active camera,
 	//in which case objects should not be rendered.
 	virtual bool can_render_objects(void) = 0;
+
+	//get the sector map renderer (implementation dependent
+	//on graphics implementation)
+	virtual ISectorMapRenderer* get_sector_map_renderer(void) = 0;
 };

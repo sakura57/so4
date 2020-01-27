@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Defs.hxx"
 #include "IGameState.hxx"
 #include "IEngine.hxx"
 #include "IRenderPipeline.hxx"
@@ -12,6 +13,7 @@
 #include "InterfaceManager.hxx"
 #include "CAudioManager.hxx"
 #include "GLStarfield.hxx"
+#include "CSector.hxx"
 
 enum class DeathCause : unsigned int
 {
@@ -23,7 +25,7 @@ enum class DeathCause : unsigned int
 class CInSpaceState : public IGameState
 {
 public:
-	CInSpaceState(char const *, Vector2f const &);
+	CInSpaceState(char const *, SectorId const, Vector2f const &);
 	~CInSpaceState();
 
 	virtual void state_initializing(void) final;
@@ -59,6 +61,7 @@ private:
 	void create_character_sheet(void);
 	void create_ability_repertoire(void);
 	void create_skill_tree_panel(void);
+	void create_sector_map_panel(void);
 	void pull_configuration_settings(void);
 
 	/*
@@ -138,4 +141,5 @@ private:
 	std::string m_szDeathString;
 	bool m_flDeathScreenSpawned;
 	bool m_bTrackMode;
+	SectorId m_uiSectorId;
 };

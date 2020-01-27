@@ -409,6 +409,12 @@
     <ClCompile Include="AsteroidProspectPanel.cxx">
       <Filter>Engine\Interface</Filter>
     </ClCompile>
+    <ClCompile Include="CSFMLSectorMapRenderer.cxx">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="SectorMapPanel.cxx">
+      <Filter>Engine\Interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IEngine.hxx">
@@ -929,6 +935,12 @@
     </ClInclude>
     <ClInclude Include="ISectorMapRenderer.hxx">
       <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="CSFMLSectorMapRenderer.hxx">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="SectorMapPanel.hxx">
+      <Filter>Engine\Interface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -88,7 +88,7 @@ public:
 		{
 			std::string szSectorScript = this->m_sector.get_script_path();
 
-			CInSpaceState* pNewState = new CInSpaceState(szSectorScript.c_str(), this->m_vStartingPosition);
+			CInSpaceState* pNewState = new CInSpaceState(szSectorScript.c_str(), this->m_iSectorId, this->m_vStartingPosition);
 
 			if(!this->m_szRmsnScript.empty())
 			{

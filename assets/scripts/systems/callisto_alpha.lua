@@ -1,3 +1,9 @@
+--Sector map section
+sgs_map_init(40000, 40000)
+sgs_map_add_square(0.0, 0.0, 255, 255, 0) --Spire
+sgs_map_add_circle(-10000.0, 4500.0, 0, 0, 255) --Callisto Beta buoy
+sgs_map_finalize()
+
 --Staticobjs section
 sgs_staticobj_create(17, 0.0, 0.0, -200.0, 0.0, 1350.0, 1800.0)
 

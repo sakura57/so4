@@ -1233,6 +1233,154 @@ extern "C"
 	}
 
 	/*
+	* Callback for map_add_square
+	*/
+	static int sgs::map_add_square(lua_State* L)
+	{
+		int n = lua_gettop(L);
+
+		if(n != 5)
+		{
+			lua_pushstring(L, "incorrect number of arguments");
+			lua_error(L);
+		}
+
+		if(!lua_isnumber(L, 1) || !lua_isnumber(L, 2) || !lua_isinteger(L, 3) || !lua_isinteger(L, 4) || !lua_isinteger(L, 5))
+		{
+			lua_pushstring(L, "incorrect arg types");
+			lua_error(L);
+		}
+
+		Vector2f vPosition = Vector2f((float)lua_tonumber(L, 1), (float)lua_tonumber(L, 2));
+		MapColor color{ lua_tointeger(L, 3), lua_tointeger(L, 4), lua_tointeger(L, 5) };
+
+		SG::get_render_pipeline()->get_sector_map_renderer()->add_map_object(MapObjectShape::SQUARE, vPosition, color);
+
+		return 0;
+	}
+
+	/*
+	* Callback for map_add_circle
+	*/
+	static int sgs::map_add_circle(lua_State* L)
+	{
+		int n = lua_gettop(L);
+
+		if(n != 5)
+		{
+			lua_pushstring(L, "incorrect number of arguments");
+			lua_error(L);
+		}
+
+		if(!lua_isnumber(L, 1) || !lua_isnumber(L, 2) || !lua_isinteger(L, 3) || !lua_isinteger(L, 4) || !lua_isinteger(L, 5))
+		{
+			lua_pushstring(L, "incorrect arg types");
+			lua_error(L);
+		}
+
+		Vector2f vPosition = Vector2f((float)lua_tonumber(L, 1), (float)lua_tonumber(L, 2));
+		MapColor color{ lua_tointeger(L, 3), lua_tointeger(L, 4), lua_tointeger(L, 5) };
+
+		SG::get_render_pipeline()->get_sector_map_renderer()->add_map_object(MapObjectShape::CIRCLE, vPosition, color);
+
+		return 0;
+	}
+
+	/*
+	* Callback for map_add_zone_circular
+	*/
+	static int sgs::map_add_zone_circular(lua_State* L)
+	{
+		int n = lua_gettop(L);
+
+		if(n != 6)
+		{
+			lua_pushstring(L, "incorrect number of arguments");
+			lua_error(L);
+		}
+
+		if(!lua_isnumber(L, 1) || !lua_isnumber(L, 2) || !lua_isnumber(L, 3) || !lua_isinteger(L, 4) || !lua_isinteger(L, 5) || !lua_isinteger(L, 6))
+		{
+			lua_pushstring(L, "incorrect arg types");
+			lua_error(L);
+		}
+
+		Vector2f vPosition = Vector2f((float)lua_tonumber(L, 1), (float)lua_tonumber(L, 2));
+		float flRadius = (float)lua_tonumber(L, 3);
+		MapColor color{ lua_tointeger(L, 4), lua_tointeger(L, 5), lua_tointeger(L, 6) };
+
+		SG::get_render_pipeline()->get_sector_map_renderer()->add_map_zone_circular(vPosition, flRadius, color);
+
+		return 0;
+	}
+
+	/*
+	* Callback for map_add_zone_rectangular
+	*/
+	static int sgs::map_add_zone_rectangular(lua_State* L)
+	{
+		int n = lua_gettop(L);
+
+		if(n != 7)
+		{
+			lua_pushstring(L, "incorrect number of arguments");
+			lua_error(L);
+		}
+
+		if(!lua_isnumber(L, 1) || !lua_isnumber(L, 2) || !lua_isnumber(L, 3) || !lua_isnumber(L, 4) || !lua_isinteger(L, 5) || !lua_isinteger(L, 6) || !lua_isinteger(L, 7))
+		{
+			lua_pushstring(L, "incorrect arg types");
+			lua_error(L);
+		}
+
+		Vector2f vPosition = Vector2f((float)lua_tonumber(L, 1), (float)lua_tonumber(L, 2));
+		Vector2f vDimensions = Vector2f((float)lua_tonumber(L, 3), (float)lua_tonumber(L, 4));
+		MapColor color{ lua_tointeger(L, 5), lua_tointeger(L, 6), lua_tointeger(L, 7) };
+
+		SG::get_render_pipeline()->get_sector_map_renderer()->add_map_zone_rectangular(vPosition, vDimensions, color);
+
+		return 0;
+	}
+
+	/*
+	* Callback for map_init
+	*/
+	static int sgs::map_init(lua_State* L)
+	{
+		int n = lua_gettop(L);
+
+		if(n != 2)
+		{
+			lua_pushstring(L, "incorrect number of arguments");
+			lua_error(L);
+		}
+
+		Vector2f vDimensions = Vector2f((float)lua_tonumber(L, 1), (float)lua_tonumber(L, 2));
+
+		SG::get_render_pipeline()->get_sector_map_renderer()->initialize_map(vDimensions);
+
+		return 0;
+	}
+
+	/*
+	* Callback for map_finalize
+	*/
+	static int sgs::map_finalize(lua_State* L)
+	{
+		int n = lua_gettop(L);
+
+		if(n != 0)
+		{
+			lua_pushstring(L, "incorrect number of arguments");
+			lua_error(L);
+		}
+
+		SG::get_render_pipeline()->get_sector_map_renderer()->finalize_map();
+
+		return 0;
+	}
+
+	/*
 	* Callback for waypoint_remove
 	*/
 	static int sgs::waypoint_remove(lua_State *L)
@@ -1457,6 +1605,12 @@ void sgs::register_callbacks(void)
 	pScriptEngine->register_callback("sgs_player_adjust_money", &sgs::player_adjust_money);
 	pScriptEngine->register_callback("sgs_player_get_money", &sgs::player_get_money);
 	pScriptEngine->register_callback("sgs_object_chill_directive", &sgs::object_chill_directive);
+	pScriptEngine->register_callback("sgs_map_init", &sgs::map_init);
+	pScriptEngine->register_callback("sgs_map_finalize", &sgs::map_finalize);
+	pScriptEngine->register_callback("sgs_map_add_square", &sgs::map_add_square);
+	pScriptEngine->register_callback("sgs_map_add_circle", &sgs::map_add_circle);
+	pScriptEngine->register_callback("sgs_map_add_zone_rectangular", &sgs::map_add_zone_rectangular);
+	pScriptEngine->register_callback("sgs_map_add_zone_circular", &sgs::map_add_zone_circular);
 }
 
 /*

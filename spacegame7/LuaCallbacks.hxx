@@ -50,6 +50,13 @@ extern "C"
 
 		static int player_adjust_money(lua_State*);
 		static int player_get_money(lua_State*);
+
+		static int map_init(lua_State*);
+		static int map_finalize(lua_State*);
+		static int map_add_square(lua_State*);
+		static int map_add_circle(lua_State*);
+		static int map_add_zone_circular(lua_State*);
+		static int map_add_zone_rectangular(lua_State*);
 	}
 }
 
