@@ -28,17 +28,25 @@ public:
 		ImGui::Text("Audio");
 		ImGui::Separator();
 		{
-			float soundVolume = sf::Listener::getGlobalVolume();
+			float soundVolume;
+
+			settings->get_setting<float>("sound_volume", soundVolume);
 
 			if(ImGui::SliderFloat("Sound Volume", &soundVolume, 0.0f, 100.0f, "%.0f"))
 			{
+				settings->set_setting<float>("sound_volume", soundVolume);
+
 				sf::Listener::setGlobalVolume(soundVolume);
 			}
 
-			static float musicVolume = 0.0f;
+			float musicVolume;
+
+			settings->get_setting<float>("music_volume", musicVolume);
 
 			if (ImGui::SliderFloat("Music Volume", &musicVolume, 0.0f, 100.0f, "%.0f"))
 			{
+				settings->set_setting<float>("music_volume", musicVolume);
+
 				//TODO: make music volume do something
 			}
 		}
