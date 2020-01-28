@@ -62,7 +62,10 @@ void CLandingBuoy::alive_tick(float const flDelta)
 
 		if(pInteractorShip)
 		{
-			CAIController::aim_at_point(pInteractorShip, Vector2f(100000.0f, 0.0f));
+			pInteractorShip->set_throttle(0.0f);
+			pInteractorShip->set_velocity(pInteractorShip->get_velocity() * 0.99f);
+
+			CAIController::aim_at_point(pInteractorShip, this->m_vPosition);
 		}
 
 		if(this->m_flLandCountdown < 0.0f)
