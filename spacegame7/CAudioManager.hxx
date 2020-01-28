@@ -18,9 +18,7 @@ class CAudioManager : public ITransientStateStructure
 {
 public:
 	CAudioManager()
-	{
-		sf::Listener::setGlobalVolume(80.0f);
-	};
+	{};
 	~CAudioManager()
 	{};
 
