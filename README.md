@@ -14,6 +14,18 @@ I've attempted to credit as many authors as I can. The credits list can be found
 
 IMPORTANT: If you notice that your work is included in this repository, and your name was not properly recorded in the credits file, don't hesitate to contact me so that I can credit you for your work.
 
+## Compiling
+
+SO4's project files work with VS2019. SO4 uses the VS2015 Platform Toolset (v140), which must be installed for the project to compile correctly. 
+
+After cloning the repository, open the solution in VS2019 and ensure the NuGet packages for SFML and Lua are downloaded. After this, you should be able to compile without issues.
+
+Once the game is compiled, copy settings.ini and imgui.ini from the root of the repository to the location the game was compiled to. This isn't strictly necessary, as the game will create default versions of these files for you, but it's still recommended since settings.ini includes comments, making it easier to read and edit by hand, and the default ImGUI window locations and sizes might end up a bit unwieldy and 
+
+## Contributing
+
+Anyone is welcome to contribute. The game is far from finished and there's a lot of work to be done, and it's been pretty slow-going doing it all myself. You can start by taking a look at the design document (dd.md) to get a feel for the vision of the game. Current tasks and bugs are all tracked as issues.
+
 ## License
 
-SO4 is published under the terms of the GNU GPLv2. This game is a product of several years of my time of off-and-on work, for my own fun. I have no intention to turn it into a commercial product, and as such it will be significantly more useful as an open-source project.
+SO4 is published under the terms of the GNU GPLv2. This game is a product of several years of my time of off-and-on work, for my own fun. I have no intention to turn it into a commercial product, and as such it will be significantly more useful to everybody as an open-source project.
