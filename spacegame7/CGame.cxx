@@ -49,6 +49,7 @@ CGame::CGame(void)
 	this->m_pLootTableManager = SG::get_loot_table_manager();
 	this->m_pMaterialManager = SG::get_material_manager();
 	this->m_pGameClock = SG::get_game_clock();
+	this->m_pDebugConsole = SG::get_debug_console();
 
 	//threads will continue until otherwise instructed to stop
 	this->m_bMainLoopContinue.store(true);

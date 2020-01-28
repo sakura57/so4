@@ -58,6 +58,7 @@ private:
 	ICharacterEntityManager *m_pCharEntityManager;
 	IMatManager* m_pMaterialManager;
 	IGameClock* m_pGameClock;
+	IDebugConsole* m_pDebugConsole;
 
 	sf::RenderWindow m_sfWindow;
 	std::mutex m_mWindowAccess;
