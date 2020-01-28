@@ -271,6 +271,14 @@ void CGameDataManager::load_settings_data(void)
 	settings->set_setting<unsigned int>("screen_height", CGameDataManager::read_ini_uint(".\\settings.ini", "Game", "screen_height", "720"));
 	settings->set_setting<unsigned int>("fullscreen", CGameDataManager::read_ini_uint(".\\settings.ini", "Game", "fullscreen", "0"));
 
+	//load sound volume
+	float flSoundVolume = CGameDataManager::read_ini_uint(".\\settings.ini", "Game", "sound_volume", "80.0");
+	sf::Listener::setGlobalVolume(flSoundVolume);
+	settings->set_setting<float>("sound_volume", flSoundVolume);
+
+	settings->set_setting<float>("music_volume", CGameDataManager::read_ini_uint(".\\settings.ini", "Game", "music_volume", "0.0"));
+	//TODO: music volume still doesn't do anything
+
 	uiValueBufferLen = LOADER_MAX_VALUE_BUFFER_SIZE;
 	strcpy_s(szValueBuffer, LOADER_MAX_VALUE_BUFFER_SIZE, "");
 	CGameDataManager::read_ini_string(".\\settings.ini", "Game", "data_directory", ".\\data", szValueBuffer, uiValueBufferLen);
@@ -319,6 +327,20 @@ void CGameDataManager::save_settings_data(void)
 		std::string s = Conversion::uint_to_string(ui);
 
 		ReadWriteIniKeyValueStringA("Game", "fullscreen", const_cast<char *>(s.c_str()), ".\\settings.ini", true);
+	}
+
+	float fl;
+	if(settings->get_setting<float>("sound_volume", fl))
+	{
+		std::string s = Conversion::float_to_string(fl);
+
+		ReadWriteIniKeyValueStringA("Game", "sound_volume", const_cast<char*>(s.c_str()), ".\\settings.ini", true);
+	}
+	if(settings->get_setting<float>("music_volume", fl))
+	{
+		std::string s = Conversion::float_to_string(fl);
+
+		ReadWriteIniKeyValueStringA("Game", "music_volume", const_cast<char*>(s.c_str()), ".\\settings.ini", true);
 	}
 }
 
