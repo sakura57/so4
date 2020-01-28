@@ -2,6 +2,9 @@
 
 #include <string>
 
+#define GAME_TITLE_STRING "Spaced Out 4"
+#define GAME_VERSION_STRING "PRE-ALPHA"
+
 //interface is defined as alias of struct (all members public by default)
 #if !defined(interface)
 #define interface struct

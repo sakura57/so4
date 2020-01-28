@@ -421,6 +421,9 @@
     <ClCompile Include="CDebugConsole.cxx">
       <Filter>Engine\Debug</Filter>
     </ClCompile>
+    <ClCompile Include="DebugCommands.cxx">
+      <Filter>Engine\Debug</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IEngine.hxx">
@@ -952,6 +955,9 @@
       <Filter>Engine\Debug</Filter>
     </ClInclude>
     <ClInclude Include="IDebugConsole.hxx">
+      <Filter>Engine\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugCommands.hxx">
       <Filter>Engine\Debug</Filter>
     </ClInclude>
   </ItemGroup>
