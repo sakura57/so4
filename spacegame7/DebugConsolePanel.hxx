@@ -4,19 +4,17 @@
 
 #include "InterfacePanel.hxx"
 
-class DebugConsole : public InterfacePanel
+class DebugConsolePanel : public InterfacePanel
 {
 public:
-	DebugConsole()
-	{};
-	virtual ~DebugConsole()
-	{};
+	DebugConsolePanel();
+	virtual ~DebugConsolePanel();
 
 	virtual void render_panel(float const flDelta);
 
 	virtual bool panel_active(void)
 	{
-		return true;
+		return this->m_bPanelActive;
 	};
 
 	virtual bool prevents_game_input(void)
@@ -25,4 +23,8 @@ public:
 	};
 
 private:
+	bool m_bPanelActive;
+	bool m_bScrollToBottom;
+	static bool m_bPanelExists;
+	char *m_szInputBuffer;
 };

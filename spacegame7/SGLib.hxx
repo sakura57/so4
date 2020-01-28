@@ -22,6 +22,7 @@
 #include "ISpellManager.hxx"
 #include "IMatManager.hxx"
 #include "IGameClock.hxx"
+#include "IDebugConsole.hxx"
 
 namespace SG
 {
@@ -43,6 +44,7 @@ namespace SG
 	ISpellManager *get_spell_manager(void);
 	IMatManager* get_material_manager(void);
 	IGameClock* get_game_clock(void);
+	IDebugConsole* get_debug_console(void);
 
 	std::mt19937 &get_random(void);
 }

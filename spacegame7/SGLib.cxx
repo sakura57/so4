@@ -11,6 +11,7 @@
 #include "CSpellManager.hxx"
 #include "CMatManager.hxx"
 #include "CGameClock.hxx"
+#include "CDebugConsole.hxx"
 
 IEngine *SG::get_engine(void)
 {
@@ -124,4 +125,10 @@ IGameClock* SG::get_game_clock(void)
 {
 	static CGameClock gameClock;
 	return &gameClock;
+}
+
+IDebugConsole* SG::get_debug_console(void)
+{
+	static CDebugConsole debugConsole;
+	return &debugConsole;
 }
