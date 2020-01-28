@@ -25,7 +25,7 @@ void CDebugConsole::console_write_line(std::string const &text)
 
 void CDebugConsole::console_issue_command(std::string const &text)
 {
-	SCOPE_LOCK(this->m_mFieldAccess);
+	this->m_mFieldAccess.lock();
 
 	std::stringstream ss(text);
 	std::istream_iterator<std::string> begin(ss);
@@ -41,7 +41,13 @@ void CDebugConsole::console_issue_command(std::string const &text)
 
 	if(i != this->m_commandMap.end())
 	{
-		i->second(command_tokenized);
+		ConsoleCommandCallback cb = i->second;
+
+		this->m_mFieldAccess.unlock();
+
+		cb(command_tokenized);
+
+		this->m_mFieldAccess.lock();
 	}
 	else
 	{
@@ -49,6 +55,8 @@ void CDebugConsole::console_issue_command(std::string const &text)
 
 		this->write_line(unknownCommandText);
 	}
+
+	this->m_mFieldAccess.unlock();
 }
 
 void CDebugConsole::console_get_latest_n_lines(int const lines, std::string &text)
