@@ -18,6 +18,7 @@
 
 #include "CMainMenuState.hxx"
 #include "Spells.hxx"
+#include "DebugCommands.hxx"
 
 //TODO: shouldn't have to include this
 #include <gl/GLU.h>
@@ -50,6 +51,9 @@ CGame::CGame(void)
 	this->m_pMaterialManager = SG::get_material_manager();
 	this->m_pGameClock = SG::get_game_clock();
 	this->m_pDebugConsole = SG::get_debug_console();
+
+	//populate the debug console command map
+	populate_debug_commands();
 
 	//threads will continue until otherwise instructed to stop
 	this->m_bMainLoopContinue.store(true);
