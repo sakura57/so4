@@ -314,7 +314,9 @@ void CGame::enter_world_loop(void)
 		//update world
 		this->m_pWorld->world_tick(flDelta);
 
-		std::this_thread::sleep_for(std::chrono::microseconds(500));
+		std::chrono::duration<float> sleep_duration = std::chrono::microseconds(250);
+
+		std::this_thread::sleep_for(sleep_duration);
 
 		if(this->m_bMainLoopContinue.load() == false)
 		{
@@ -359,7 +361,9 @@ void CGame::enter_script_loop(void)
 			this->core_fault(e);
 		}
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(1));
+		std::chrono::duration<float> sleep_duration = std::chrono::milliseconds(1);
+
+		std::this_thread::sleep_for(sleep_duration);
 
 		if(this->m_bMainLoopContinue.load() == false)
 		{
