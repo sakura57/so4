@@ -379,9 +379,6 @@
     <ClCompile Include="CGameClock.cxx">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="DebugConsole.cxx">
-      <Filter>Engine\Interface</Filter>
-    </ClCompile>
     <ClCompile Include="CAsteroidMineable.cxx">
       <Filter>Engine\Object</Filter>
     </ClCompile>
@@ -414,6 +411,12 @@
     </ClCompile>
     <ClCompile Include="SectorMapPanel.cxx">
       <Filter>Engine\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugConsolePanel.cxx">
+      <Filter>Engine\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="CDebugConsole.cxx">
+      <Filter>Engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -894,9 +897,6 @@
     <ClInclude Include="CGameClock.hxx">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="DebugConsole.hxx">
-      <Filter>Engine\Interface</Filter>
-    </ClInclude>
     <ClInclude Include="CAsteroidMineable.hxx">
       <Filter>Engine\Object</Filter>
     </ClInclude>
@@ -941,6 +941,15 @@
     </ClInclude>
     <ClInclude Include="SectorMapPanel.hxx">
       <Filter>Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugConsolePanel.hxx">
+      <Filter>Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="IDebugConsole.hxx">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="CDebugConsole.hxx">
+      <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

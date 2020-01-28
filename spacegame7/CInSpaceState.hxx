@@ -62,6 +62,7 @@ private:
 	void create_ability_repertoire(void);
 	void create_skill_tree_panel(void);
 	void create_sector_map_panel(void);
+	void create_debug_console_panel(void);
 	void pull_configuration_settings(void);
 
 	/*

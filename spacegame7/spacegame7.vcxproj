@@ -194,6 +194,7 @@
     <ClCompile Include="CCharacterEntityManager.cxx" />
     <ClCompile Include="CChaseCamera.cxx" />
     <ClCompile Include="CCommsManager.cxx" />
+    <ClCompile Include="CDebugConsole.cxx" />
     <ClCompile Include="CDestinedProjectile.cxx" />
     <ClCompile Include="CEngineFlame.cxx" />
     <ClCompile Include="CEntityInventory.cxx" />
@@ -258,7 +259,7 @@
     <ClCompile Include="CStaticObject.cxx" />
     <ClCompile Include="CUniverse.cxx" />
     <ClCompile Include="CWorldTransaction.cxx" />
-    <ClCompile Include="DebugConsole.cxx" />
+    <ClCompile Include="DebugConsolePanel.cxx" />
     <ClCompile Include="EquipTraderPanel.cxx" />
     <ClCompile Include="IMaterial.cxx" />
     <ClCompile Include="IMaterialClass.cxx" />
@@ -308,6 +309,7 @@
     <ClInclude Include="CCharacterEntityManager.hxx" />
     <ClInclude Include="CChaseCamera.hxx" />
     <ClInclude Include="CCommsManager.hxx" />
+    <ClInclude Include="CDebugConsole.hxx" />
     <ClInclude Include="CDestinedProjectile.hxx" />
     <ClInclude Include="CEngineFlame.hxx" />
     <ClInclude Include="CEntityInventory.hxx" />
@@ -376,13 +378,14 @@
     <ClInclude Include="CTransientStatusEffect.hxx" />
     <ClInclude Include="CUniverse.hxx" />
     <ClInclude Include="CWorldTransaction.hxx" />
-    <ClInclude Include="DebugConsole.hxx" />
+    <ClInclude Include="DebugConsolePanel.hxx" />
     <ClInclude Include="DebugPanel.hxx" />
     <ClInclude Include="EquipTraderPanel.hxx" />
     <ClInclude Include="Faction.hxx" />
     <ClInclude Include="GLStarfield.hxx" />
     <ClInclude Include="ICharacterEntity.hxx" />
     <ClInclude Include="ICharacterEntityManager.hxx" />
+    <ClInclude Include="IDebugConsole.hxx" />
     <ClInclude Include="IEntityInventory.hxx" />
     <ClInclude Include="CGameSettings.hxx" />
     <ClInclude Include="IGameClock.hxx" />

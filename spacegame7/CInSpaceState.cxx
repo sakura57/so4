@@ -22,6 +22,7 @@
 #include "PlayerDiedPanel.hxx"
 #include "SkillTreePanel.hxx"
 #include "CAsteroidMineable.hxx"
+#include "DebugConsolePanel.hxx"
 
 #include <sstream>
 #include <gl/GLU.h>
@@ -588,6 +589,12 @@ void CInSpaceState::state_process_event(sf::View &mainView, sf::RenderWindow &sf
 
 					this->state_send_notification(std::string("Mouse Track: ") + std::string(this->m_bTrackMode ? "ON" : "OFF"));
 				}
+				else if(sfEvent.key.code == sf::Keyboard::Tilde)
+				{
+					this->m_pInterfaceManager->register_tangible_ui_event();
+
+					this->create_debug_console_panel();
+				}
 			}
 
 			if(sfEvent.key.code == sf::Keyboard::Escape)
@@ -923,6 +930,11 @@ void CInSpaceState::create_ability_repertoire(void)
 void CInSpaceState::create_sector_map_panel(void)
 {
 	this->m_pInterfaceManager->add_panel(new SectorMapPanel(this->m_uiSectorId));
+}
+
+void CInSpaceState::create_debug_console_panel(void)
+{
+	this->m_pInterfaceManager->add_panel(new DebugConsolePanel);
 }
 
 void CInSpaceState::create_material_viewer(void)
