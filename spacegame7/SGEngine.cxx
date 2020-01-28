@@ -42,10 +42,8 @@ InstanceId SGEngine::instance_request(unsigned int const uiSize)
 
 ALLOC_SEARCH:
 	//search for an unused pool block
-	while(get_block_flag(this->m_pPoolFlags[this->m_uiPoolPosition++], BLOCK_FLAG_ALLOCATED))
+	if(get_block_flag(this->m_pPoolFlags[this->m_uiPoolPosition], BLOCK_FLAG_ALLOCATED))
 	{
-		//++this->m_uiPoolPosition;
-
 		if (this->m_uiPoolPosition == DEFAULT_POOL_SIZE)
 		{
 			if (bTraversedOnce)
@@ -61,15 +59,25 @@ ALLOC_SEARCH:
 				//exception will be thrown
 				this->m_uiPoolPosition = 0;
 
-				break;
+				goto ALLOC_SEARCH_REEVALUATE;
 			}
 		}
 	}
+	else
+	{
+		goto ALLOC_SEARCH_CONCLUDED;
+	}
 
+	++this->m_uiPoolPosition;
+
+	goto ALLOC_SEARCH;
+
+ALLOC_SEARCH_REEVALUATE:
 	if(bTraversedOnce && this->m_uiPoolPosition == 0)
 	{
 		goto ALLOC_SEARCH;
 	}
+ALLOC_SEARCH_CONCLUDED:
 
 	//mark the block as allocated
 	set_block_flag(this->m_pPoolFlags[this->m_uiPoolPosition], BLOCK_FLAG_ALLOCATED);

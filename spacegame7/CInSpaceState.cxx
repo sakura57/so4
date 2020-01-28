@@ -188,7 +188,7 @@ void CInSpaceState::state_initializing(void)
 
 	this->m_pScriptEngine->script_enqueue(this->m_szStartingScript.c_str());
 
-	//this->m_pScriptEngine->script_enqueue("data\\scripts\\stresstest.lua");
+	//this->m_pScriptEngine->script_enqueue("scripts\\stresstest.lua");
 
 	if (this->m_bRmsnEnabledForThisSession)
 	{
