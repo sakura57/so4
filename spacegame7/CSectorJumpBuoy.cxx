@@ -64,15 +64,12 @@ void CSectorJumpBuoy::alive_tick(float const flDelta)
 			if(this->m_flAccelCountdown < 0.0f)
 			{
 				pInteractorShip->set_velocity(Vector2f(20000.0f, 20000.0f));
-
-				//SG::get_audio_manager()->play_sound(11);
-				
-				//SG::get_particle_manager()->add_particle(10, pInteractorShip->get_position(), pInteractorShip->get_velocity(), 0.0f, 0.0f);
-
-				this->m_flAccelCountdown = 1000000.0f;
 			}
 			else
 			{
+				pInteractorShip->set_throttle(0.0f);
+				pInteractorShip->set_velocity(pInteractorShip->get_velocity() * 0.99f);
+
 				this->m_flAccelCountdown -= flDelta;
 			}
 		}
