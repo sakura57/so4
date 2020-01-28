@@ -1,5 +1,7 @@
 #include "CDebugConsole.hxx"
 #include "Util.hxx"
+#include <sstream>
+#include <iterator>
 
 #define CONSOLE_MAXIMUM_LINES 80
 
@@ -25,7 +27,28 @@ void CDebugConsole::console_issue_command(std::string const &text)
 {
 	SCOPE_LOCK(this->m_mFieldAccess);
 
-	//TODO: implement
+	std::stringstream ss(text);
+	std::istream_iterator<std::string> begin(ss);
+	std::istream_iterator<std::string> end;
+	std::vector<std::string> command_tokenized(begin, end);
+
+	if(command_tokenized.size() == 0)
+	{
+		return;
+	}
+
+	auto i = this->m_commandMap.find(command_tokenized[0]);
+
+	if(i != this->m_commandMap.end())
+	{
+		i->second(command_tokenized);
+	}
+	else
+	{
+		std::string unknownCommandText = "Unknown command \'" + command_tokenized[0] + "\'";
+
+		this->write_line(unknownCommandText);
+	}
 }
 
 void CDebugConsole::console_get_latest_n_lines(int const lines, std::string &text)
@@ -84,6 +107,13 @@ void CDebugConsole::console_clear()
 	this->clear();
 }
 
+void CDebugConsole::console_register_command(std::string const &command, ConsoleCommandCallback const &callback)
+{
+	SCOPE_LOCK(this->m_mFieldAccess);
+
+	this->m_commandMap[command] = callback;
+}
+
 void CDebugConsole::clear()
 {
 	ConsoleLine* pLine = this->m_pListHead;
@@ -96,6 +126,8 @@ void CDebugConsole::clear()
 
 		pLine = pLineNext;
 	}
+
+	this->m_bConsoleUpdated = true;
 }
 
 void CDebugConsole::write_line(std::string const &text)

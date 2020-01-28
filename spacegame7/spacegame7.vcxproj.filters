@@ -86,6 +86,9 @@
     <Filter Include="Engine\Intransient\MaterialBank">
       <UniqueIdentifier>{a461a2d1-5837-4c51-aaf1-1c2247a3a7ca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Debug">
+      <UniqueIdentifier>{7d267c63-ab38-4312-aca3-d4bd8b5e8199}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cxx">
@@ -416,7 +419,7 @@
       <Filter>Engine\Interface</Filter>
     </ClCompile>
     <ClCompile Include="CDebugConsole.cxx">
-      <Filter>Engine</Filter>
+      <Filter>Engine\Debug</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -945,11 +948,11 @@
     <ClInclude Include="DebugConsolePanel.hxx">
       <Filter>Engine\Interface</Filter>
     </ClInclude>
-    <ClInclude Include="IDebugConsole.hxx">
-      <Filter>Engine</Filter>
-    </ClInclude>
     <ClInclude Include="CDebugConsole.hxx">
-      <Filter>Engine</Filter>
+      <Filter>Engine\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="IDebugConsole.hxx">
+      <Filter>Engine\Debug</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
