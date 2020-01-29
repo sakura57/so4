@@ -227,6 +227,7 @@ void CGameDataManager::load_equiparch_data(void)
 			arch->flProjectileLifetime = CGameDataManager::read_ini_float(CGameDataManager::get_full_data_file_path("equiparch.ini").c_str(), szSection, "projectile_lifetime", "1");
 			arch->flRefireDelay = CGameDataManager::read_ini_float(CGameDataManager::get_full_data_file_path("equiparch.ini").c_str(), szSection, "refire_delay", "1");
 			arch->uiFireSound = CGameDataManager::read_ini_uint(CGameDataManager::get_full_data_file_path("equiparch.ini").c_str(), szSection, "fire_sound", "1");
+			arch->flEnergyCost = CGameDataManager::read_ini_float(CGameDataManager::get_full_data_file_path("equiparch.ini").c_str(), szSection, "energy_cost", "0");
 
 			arch->flMotorLifetime = CGameDataManager::read_ini_float(CGameDataManager::get_full_data_file_path("equiparch.ini").c_str(), szSection, "motor_lifetime", "1");
 			arch->flMotorDelay = CGameDataManager::read_ini_float(CGameDataManager::get_full_data_file_path("equiparch.ini").c_str(), szSection, "motor_delay", "1");
