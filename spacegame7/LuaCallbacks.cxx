@@ -805,7 +805,7 @@ extern "C"
 
 		pShip->set_target((InstanceId const)lua_tointeger(L, 2));
 
-		if (iInstanceId == SG::get_world()->get_player())
+		if (iInstanceId == SG::get_world()->get_player_unchecked())
 		{
 			SG::get_audio_manager()->play_sound(30U);
 		}
