@@ -442,10 +442,15 @@ void CInSpaceState::state_postrender_tick(sf::RenderWindow &, float const)
 
 void CInSpaceState::state_terminating(void)
 {
-	if (this->m_pActiveCamera->instance_get_flags() & CChaseCamera::InstanceFlag)
+	if(this->m_pActiveCamera != nullptr)
 	{
-		CChaseCamera *pChaseCamera = static_cast<CChaseCamera *>(this->m_pActiveCamera);
-		pChaseCamera->release_target();
+		if(this->m_pActiveCamera->instance_get_flags() & CChaseCamera::InstanceFlag)
+		{
+			CChaseCamera* pChaseCamera = static_cast<CChaseCamera*>(this->m_pActiveCamera);
+			pChaseCamera->release_target();
+		}
+
+		this->m_pActiveCamera = nullptr;
 	}
 
 	this->m_pPlayer = nullptr;

@@ -1423,6 +1423,23 @@ void CGameDataManager::load_from_save(std::string const& saveFile)
 		SG::get_intransient_data_manager()->get_character_entity_manager()
 	};
 
+	ITransientStateStructure* transientStates[] =
+	{
+		SG::get_script_engine(),
+		SG::get_world(),
+		SG::get_particle_manager()
+	};
+
+	//send a termination signal to the active game state
+	SG::get_game_state_manager()->get_game_state()->state_terminating();
+
+	//call shifting_out() for transient state structures that might be
+	//disrupted by the load
+	for(ITransientStateStructure* transientState : transientStates)
+	{
+		transientState->shifting_out();
+	}
+
 	char szSectionNamesBuffer[LOADER_MAX_SECTIONS_BUFFER_SIZE] = "";
 	unsigned int uiSectionNamesLen = LOADER_MAX_SECTIONS_BUFFER_SIZE;
 
