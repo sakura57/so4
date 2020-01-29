@@ -18,13 +18,15 @@ IMPORTANT: If you notice that your work is included in this repository, and your
 
 SO4's project files work with VS2019. SO4 uses the VS2015 Platform Toolset (v140), which must be installed for the project to compile correctly. 
 
-After cloning the repository, open the solution in VS2019 and ensure the NuGet packages for SFML and Lua are downloaded. After this, you should be able to compile without issues.
+After cloning the repository, open the solution in VS2019 and ensure the NuGet packages for SFML and Lua are downloaded. 
 
-Once the game is compiled, copy settings.ini and imgui.ini from the root of the repository to the location the game was compiled to. This isn't strictly necessary, as the game will create default versions of these files for you, but it's still recommended since settings.ini includes comments, making it easier to read and edit by hand, and the default ImGUI window locations and sizes might end up a bit unwieldy and 
+Once the game is compiled, copy settings.ini and imgui.ini from the root of the repository to the location the game was compiled to.
+
+You may need to adjust the working directory for the game to work properly when started under debugging in VS. In the Project Properties, set the working directory to the folder the location the game was compiled to.
 
 ## Contributing
 
-Anyone is welcome to contribute. The game is far from finished and there's a lot of work to be done, and it's been pretty slow-going doing it all myself. You can start by taking a look at the design document (dd.md) to get a feel for the vision of the game. Current tasks and bugs are all tracked as issues.
+Anyone is welcome to contribute. The game is far from finished and there's a lot of work to be done, and it's been pretty slow-going doing it all myself. Take a look at CONTRIBUTING.md for more information.
 
 ## License
 
