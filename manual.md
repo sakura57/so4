@@ -31,6 +31,8 @@ The HUD layout is highly customizable; HUD views can be resized, moved around th
 
 When mouse-tracking is enabled, simply point the mouse anywhere on the screen and your ship will orient itself toward that point. You can enable and disable mouse tracking by pressing Control.
 
+Right-click to fire guns, and press the spacebar to fire missiles.
+
 Thruster controls:
 
 - Press W for forward throttle
