@@ -14,7 +14,7 @@ This document is subject to change. Some sections may be incomplete, or require 
 
 ### Concept
 
-SG7 is a sci-fi themed, 2D overhead-view, action-adventure game with RPG-inspired character development elements.
+SG7 is a 2D overhead-view, action-adventure game set in space with RPG-inspired character development elements.
 
 ### Setting
 
@@ -121,6 +121,31 @@ During their exploration, the player may encounter Asteroid Fields. These contai
 Mining an asteroid gives the player a number of a particular Resource. Resources come in several different types, broken down by Category (Copper, Iron, Methane) which themselves are subsets of a Type (Metallic, Inorganic). Each Material possesses a range of attributes, which are decided randomly upon asteroid field generation.
 
 Attributes model different properties of the material, for example, Malleability or Electrical Conductivity. These attributes are used during the crafting process to determine the quality of the final product.
+
+### Equipment
+
+A large part of the player's time will be spent acquiring better equipment, and finding the optimal "build" for their ship.
+
+Weapons have a number of different attributes that make them unique. These might include:
+
+- Shield damage
+- Hull damage
+- Projectile velocity
+- Projectile lifetime, which also dictates range
+- Refire rate
+- Energy consumption
+- Projectile appearance and firing sound
+
+Weapons come in several different types, each with a different ratio of hull to shield damage.
+
+- Lasers, with 2:1 hull to shield damage ratio
+- Kinetic weapons, or "sluggers", with 4:1 hull to shield damage ratio
+- Plasma weapons, with 1:2 hull to shield damage ratio
+- Missiles, with 2:1 hull to shield damage ratio
+
+Thus, the player must find a balanced loadout in order to maximize their effectiveness. If they outfit their ship with only plasma weapons, they will quickly bring down enemies' shields, but will struggle to deal any hull damage afterward. Similarly, if the player relies too heavily on kinetic weapons, they will take a very long time to bring down shields, but will quickly rip apart the enemy ship once their shields come down.
+
+In addition, different factions within the game might have different "flavors" that can be identified in all weapons they produce and use. For example, pirate weapons might have high damage and projectile velocity, but high energy consumption as a tradeoff. This gives players an obvious path to take to acquire different weapons if they notice they like certain aspects of a faction's weapons.
 
 ### Upgrades and Crafting
 
