@@ -290,5 +290,42 @@ void populate_debug_commands()
 		}
 	);
 
+	pDebugConsole->console_register_command(
+		"exp",
+		[pDebugConsole](std::vector<std::string> const& args) {
+			unsigned int const expectedArguments = 2;
+
+			if(args.size() != expectedArguments)
+			{
+				pDebugConsole->console_write_line("Expected " + Conversion::uint_to_string(expectedArguments - 1) + " arguments");
+
+				return;
+			}
+
+			bool inputValid = true;
+			unsigned long expToGain;
+
+			try
+			{
+				expToGain = std::stoi(args[1]);
+			}
+			catch(std::invalid_argument & e)
+			{
+				inputValid = false;
+			}
+
+			if(!inputValid)
+			{
+				pDebugConsole->console_write_line("Invalid argument format");
+			}
+			else
+			{
+				pDebugConsole->console_write_line("OK");
+
+				SG::get_intransient_data_manager()->get_character_entity_manager()->get_player_character_entity()->gain_exp(expToGain);
+			}
+		}
+	);
+
 	bDebugCommandsPopulated = true;
 }
