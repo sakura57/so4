@@ -129,6 +129,8 @@ void CInSpaceState::state_initializing(void)
 	this->m_sfBgVerts[3].position = sf::Vector2f(0, 0);
 	this->m_sfBgVerts[4].position = sf::Vector2f(DEFAULT_WINDOW_WIDTH, 0);
 
+	this->m_sfBackgroundShader.setUniform("resolution", sf::Glsl::Vec2(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT));
+
 	ICharacterEntity * pPlayerEntity = SG::get_intransient_data_manager()->get_character_entity_manager()->get_player_character_entity();
 
 	CChaseCamera *cc;
@@ -339,8 +341,7 @@ void CInSpaceState::state_render_world_tick(sf::View &sfView, sf::RenderWindow &
 
 		sf::Vector2f vCameraPosition = sfView.getCenter();
 
-		this->m_sfBackgroundShader.setParameter("resolution", DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);
-		this->m_sfBackgroundShader.setParameter("offset", vCameraPosition.x * 0.00025f, vCameraPosition.y * 0.00025f);
+		this->m_sfBackgroundShader.setUniform("offset", sf::Glsl::Vec2(vCameraPosition.x * 0.00025f, vCameraPosition.y * 0.00025f));
 
 		sfWindow.draw(this->m_sfBgVerts, states);
 	}
