@@ -1,11 +1,14 @@
 ---
 name: Bug report
-about: Create a report to help us improve
+about: Create a report for a bug, crash, or error
 title: ''
 labels: bug
 assignees: ''
 
 ---
+
+**Version**
+Identify in some way the build you were running. For example, "latest".
 
 **Description**
 A clear and concise description of what the bug is.
