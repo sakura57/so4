@@ -117,8 +117,8 @@ public:
 	};
 
 	CWeaponInstance()
+		: m_flRefireTimeRemaining(-1.0f)
 	{
-		//nothing to do
 	};
 
 	virtual ~CWeaponInstance()
