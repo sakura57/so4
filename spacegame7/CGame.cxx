@@ -213,11 +213,11 @@ void CGame::enter_render_loop(void)
 		{
 			//tick character entities (spell cooldowns, etc)
 			this->m_pCharEntityManager->tick(flDelta);
-
-			//call do_sounds to clean up finished sounds, as well as
-			//play queued sounds
-			this->m_pAudioManager->do_sounds();
 		}
+
+		//call do_sounds to clean up finished sounds, as well as
+		//play queued sounds
+		this->m_pAudioManager->do_sounds();
 
 		//LOCK the window access mutex. This mutex should remain
 		//locked for the entire render operation.
