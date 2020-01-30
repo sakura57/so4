@@ -78,6 +78,11 @@ void InterfaceManager::free_all_panels(void)
 
 	for(InterfacePanel *pPanel : this->m_vPanels)
 	{
+		if(pPanel->prevents_game_input())
+		{
+			--this->m_iInputHinderingPanelCount;
+		}
+
 		delete pPanel;
 	}
 
