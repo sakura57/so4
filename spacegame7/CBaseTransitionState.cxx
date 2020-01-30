@@ -49,3 +49,8 @@ bool CBaseTransitionState::state_terminated(void)
 {
 	return false;
 }
+
+bool CBaseTransitionState::state_game_paused(void)
+{
+	return false;
+}

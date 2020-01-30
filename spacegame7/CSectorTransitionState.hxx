@@ -29,6 +29,7 @@ public:
 	virtual void state_process_event(sf::View &, sf::RenderWindow &, sf::Event &) final;
 
 	virtual bool state_terminated(void) final;
+	virtual bool state_game_paused(void) final;
 
 	virtual void state_enable_input(bool const) final
 	{

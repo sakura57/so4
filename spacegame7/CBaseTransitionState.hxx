@@ -30,6 +30,8 @@ public:
 
 	virtual bool state_terminated(void) final;
 
+	virtual bool state_game_paused(void) final;
+
 	virtual void state_enable_input(bool const) final
 	{
 	};

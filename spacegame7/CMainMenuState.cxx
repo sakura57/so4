@@ -76,3 +76,7 @@ bool CMainMenuState::state_terminated(void)
 	return this->m_bInitialized && SG::get_interface_manager()->get_num_panels() == 0;
 }
 
+bool CMainMenuState::state_game_paused(void)
+{
+	return false;
+}
