@@ -40,7 +40,8 @@ CInSpaceState::CInSpaceState(char const *startingScript, SectorId sectorId, Vect
 	m_szPlayerName(SG::get_intransient_data_manager()->get_character_entity_manager()->get_player_character_entity()->get_name()),
 	m_bRmsnEnabledForThisSession(false),
 	m_szRmsnScript(""),
-	m_uiSectorId(sectorId)
+	m_uiSectorId(sectorId),
+	m_bGamePaused(false)
 {
 	this->m_pEngine = SG::get_engine();
 	this->m_pRenderPipeline = SG::get_render_pipeline();
@@ -1049,4 +1050,12 @@ void CInSpaceState::set_rmsn_script(std::string const& szRmsnScript)
 
 	this->m_bRmsnEnabledForThisSession = true;
 	this->m_szRmsnScript = szRmsnScript;
+}
+
+bool CInSpaceState::state_game_paused(void)
+{
+	SCOPE_LOCK(this->m_mFieldAccess);
+
+	//TODO: for now, pause the game whenever interface manager reports input block
+	return this->m_pInterfaceManager->input_blocked();
 }

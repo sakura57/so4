@@ -49,3 +49,8 @@ bool CSectorTransitionState::state_terminated(void)
 {
 	return false;
 }
+
+bool CSectorTransitionState::state_game_paused(void)
+{
+	return false;
+}

@@ -58,6 +58,9 @@ CGame::CGame(void)
 	//threads will continue until otherwise instructed to stop
 	this->m_bMainLoopContinue.store(true);
 
+	//game starts unpaused
+	this->m_bGamePaused.store(false);
+
 	//limiting framerate to 60 as opposed to vsync on
 	//seems to decrease cpu usage
 	this->m_sfWindow.setFramerateLimit(0);
@@ -197,12 +200,24 @@ void CGame::enter_render_loop(void)
 			break;
 		}
 
-		//tick character entities (spell cooldowns, etc)
-		this->m_pCharEntityManager->tick(flDelta);
+		if(pGameState->state_game_paused() && this->m_bGamePaused.load() == false)
+		{
+			this->m_bGamePaused.store(true);
+		}
+		else if(!pGameState->state_game_paused() && this->m_bGamePaused.load() == true)
+		{
+			this->m_bGamePaused.store(false);
+		}
 
-		//call do_sounds to clean up finished sounds, as well as
-		//play queued sounds
-		this->m_pAudioManager->do_sounds();
+		if(this->m_bGamePaused.load() == false)
+		{
+			//tick character entities (spell cooldowns, etc)
+			this->m_pCharEntityManager->tick(flDelta);
+
+			//call do_sounds to clean up finished sounds, as well as
+			//play queued sounds
+			this->m_pAudioManager->do_sounds();
+		}
 
 		//LOCK the window access mutex. This mutex should remain
 		//locked for the entire render operation.
@@ -313,11 +328,14 @@ void CGame::enter_world_loop(void)
 		std::chrono::duration<float> time_diff = time - lastTime;
 		float flDelta = time_diff.count();
 
-		//update particles
-		this->m_pParticleManager->update_particles(this->m_sfWindow, flDelta);
+		if(this->m_bGamePaused.load() == false)
+		{
+			//update particles
+			this->m_pParticleManager->update_particles(this->m_sfWindow, flDelta);
 
-		//update world
-		this->m_pWorld->world_tick(flDelta);
+			//update world
+			this->m_pWorld->world_tick(flDelta);
+		}
 
 		std::chrono::duration<float> sleep_duration = std::chrono::microseconds(250);
 
@@ -357,13 +375,16 @@ void CGame::enter_script_loop(void)
 		std::chrono::duration<float> time_diff = time - lastTime;
 		float flDelta = time_diff.count();
 
-		try
+		if(this->m_bGamePaused.load() == false)
 		{
-			this->m_pScriptEngine->script_tick(flDelta);
-		}
-		catch(SGException e)
-		{
-			this->core_fault(e);
+			try
+			{
+				this->m_pScriptEngine->script_tick(flDelta);
+			}
+			catch(SGException e)
+			{
+				this->core_fault(e);
+			}
 		}
 
 		std::chrono::duration<float> sleep_duration = std::chrono::milliseconds(1);

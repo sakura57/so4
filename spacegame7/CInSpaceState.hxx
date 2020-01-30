@@ -40,6 +40,8 @@ public:
 
 	virtual bool state_terminated(void) final;
 
+	virtual bool state_game_paused(void) final;
+
 	virtual void state_enable_input(bool const) final;
 
 	virtual void state_send_notification(std::string const &) final;
@@ -70,6 +72,8 @@ private:
 	* ACCESSING
 	*/
 	bool m_bInputEnabled;
+
+	bool m_bGamePaused;
 
 	bool m_bRmsnEnabledForThisSession;
 	std::string m_szRmsnScript;

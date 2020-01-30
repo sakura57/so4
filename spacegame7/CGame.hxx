@@ -38,6 +38,7 @@ public:
 	void enter_main_loop(void);
 private:
 	std::atomic_bool m_bMainLoopContinue;
+	std::atomic_bool m_bGamePaused;
 
 	unsigned int resX;
 	unsigned int resY;

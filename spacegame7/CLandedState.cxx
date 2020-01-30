@@ -49,3 +49,8 @@ bool CLandedState::state_terminated(void)
 {
 	return false;
 }
+
+bool CLandedState::state_game_paused(void)
+{
+	return false;
+}

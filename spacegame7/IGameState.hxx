@@ -25,4 +25,5 @@ interface IGameState
 	virtual void state_send_notification(std::string const &) {};
 
 	virtual bool state_terminated(void) = 0;
+	virtual bool state_game_paused(void) = 0;
 };
