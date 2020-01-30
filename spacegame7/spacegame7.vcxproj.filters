@@ -424,6 +424,12 @@
     <ClCompile Include="DebugCommands.cxx">
       <Filter>Engine\Debug</Filter>
     </ClCompile>
+    <ClCompile Include="CGameExitState.cxx">
+      <Filter>Engine\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="InGameMenuPanel.cxx">
+      <Filter>Engine\Interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IEngine.hxx">
@@ -959,6 +965,9 @@
     </ClInclude>
     <ClInclude Include="DebugCommands.hxx">
       <Filter>Engine\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="CGameExitState.hxx">
+      <Filter>Engine\GameState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

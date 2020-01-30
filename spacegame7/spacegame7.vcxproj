@@ -203,6 +203,7 @@
     <ClCompile Include="CGame.cxx" />
     <ClCompile Include="CGameClock.cxx" />
     <ClCompile Include="CGameDataManager.cxx" />
+    <ClCompile Include="CGameExitState.cxx" />
     <ClCompile Include="CGameSettings.cxx" />
     <ClCompile Include="CGameStateManager.cxx" />
     <ClCompile Include="CGameWorld.cxx" />
@@ -264,6 +265,7 @@
     <ClCompile Include="EquipTraderPanel.cxx" />
     <ClCompile Include="IMaterial.cxx" />
     <ClCompile Include="IMaterialClass.cxx" />
+    <ClCompile Include="InGameMenuPanel.cxx" />
     <ClCompile Include="JunkTraderPanel.cxx" />
     <ClCompile Include="LoadGamePanel.cxx" />
     <ClCompile Include="MaterialBankPanel.cxx" />
@@ -320,6 +322,7 @@
     <ClInclude Include="CGame.hxx" />
     <ClInclude Include="CGameClock.hxx" />
     <ClInclude Include="CGameDataManager.hxx" />
+    <ClInclude Include="CGameExitState.hxx" />
     <ClInclude Include="CGameStateManager.hxx" />
     <ClInclude Include="CGameWorld.hxx" />
     <ClInclude Include="Character.hxx" />

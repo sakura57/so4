@@ -469,11 +469,11 @@ void CInSpaceState::state_process_event(sf::View &mainView, sf::RenderWindow &sf
 		return;
 	}
 
-	if(!this->m_pInterfaceManager->input_blocked())
+	if(sfEvent.type == sf::Event::MouseButtonPressed)
 	{
-		if(sfEvent.type == sf::Event::MouseButtonPressed)
+		if(this->m_pPlayer)
 		{
-			if(this->m_pPlayer)
+			if(!this->m_pInterfaceManager->input_blocked())
 			{
 				/*
 				 * We detected a left mouse down event. Convert to world coordinates and pass these to the
@@ -508,9 +508,12 @@ void CInSpaceState::state_process_event(sf::View &mainView, sf::RenderWindow &sf
 				}
 			}
 		}
-		else if(sfEvent.type == sf::Event::KeyPressed)
+	}
+	else if(sfEvent.type == sf::Event::KeyPressed)
+	{
+		if(this->m_pPlayer)
 		{
-			if(this->m_pPlayer)
+			if(!this->m_pInterfaceManager->input_blocked())
 			{
 				for(int i = 1; i <= 10; ++i)
 				{
