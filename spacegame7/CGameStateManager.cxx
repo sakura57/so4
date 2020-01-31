@@ -7,7 +7,9 @@ CGameStateManager::CGameStateManager()
 {
 	this->m_currentState = nullptr;
 	this->m_bLoading = false;
+
 	this->m_loadingState = new CLoadingScreenState;
+	this->m_loadingState->state_initializing();
 }
 
 CGameStateManager::~CGameStateManager()
