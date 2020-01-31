@@ -206,6 +206,9 @@ private:
 
 	static void load_settings_data(void);
 
+	static void load_from_save_delegate(std::string const&);
+	static void dump_to_save_delegate(std::string const&, BaseId const);
+
 	static void rough_touch_file(std::string const&);
 
 	void verify_shiparch(ShipArch const &);

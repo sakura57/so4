@@ -94,6 +94,8 @@ void CGame::enter_main_loop(void)
 	this->m_pGameStateManager->transition_game_state(new CMainMenuState);
 
 	std::thread loadingThread(&CGame::load_data_delegate, this);
+	loadingThread.detach();
+
 	std::thread worldThread(&CGame::enter_world_loop, this);
 	std::thread scriptThread(&CGame::enter_script_loop, this);
 	
@@ -248,11 +250,11 @@ void CGame::enter_render_loop(void)
 		//DO STATE PRE RENDER CALL HERE
 		pGameState->state_prerender_tick(mainView, this->m_sfWindow, flDelta);
 
+		//begin the rendering operation by clearing the screen
+		this->m_sfWindow.clear(sf::Color::Black);
+
 		if(pGameState->state_render_world())
 		{
-			//begin the rendering operation by clearing the screen
-			this->m_sfWindow.clear(sf::Color::Black);
-
 			//DO STATE WORLD RENDER TICK HERE
 			pGameState->state_render_world_tick(mainView, this->m_sfWindow, flDelta);
 

@@ -11,6 +11,7 @@
 #include <deque>
 #include <set>
 #include <cstdio>
+#include <thread>
 
 #define LOADER_MAX_SECTIONS_BUFFER_SIZE 8192
 #define LOADER_MAX_VALUE_BUFFER_SIZE 2048
@@ -1390,6 +1391,15 @@ void CGameDataManager::load_skill_data(void)
 
 void CGameDataManager::dump_to_save(std::string const& saveFile, BaseId const baseId)
 {
+	SG::get_game_state_manager()->notify_initiate_loading();
+
+	std::thread savingThread(&CGameDataManager::dump_to_save_delegate, saveFile, baseId);
+
+	savingThread.detach();
+}
+
+void CGameDataManager::dump_to_save_delegate(std::string const& saveFile, BaseId const baseId)
+{
 	std::vector<ISaveable*> vSaveableStructures = {
 		SG::get_intransient_data_manager()->get_character_entity_manager(),
 		SG::get_material_manager()
@@ -1415,15 +1425,12 @@ void CGameDataManager::dump_to_save(std::string const& saveFile, BaseId const ba
 	{
 		pSaveable->dump_to_save(saveFile);
 	}
+
+	SG::get_game_state_manager()->notify_loading_finished();
 }
 
 void CGameDataManager::load_from_save(std::string const& saveFile)
 {
-	std::vector<ISaveable*> vSaveableStructures = {
-		SG::get_material_manager(),
-		SG::get_intransient_data_manager()->get_character_entity_manager()
-	};
-
 	ITransientStateStructure* transientStates[] =
 	{
 		SG::get_script_engine(),
@@ -1434,12 +1441,26 @@ void CGameDataManager::load_from_save(std::string const& saveFile)
 	//send a termination signal to the active game state
 	SG::get_game_state_manager()->get_game_state()->state_terminating();
 
+	SG::get_game_state_manager()->notify_initiate_loading();
+
 	//call shifting_out() for transient state structures that might be
 	//disrupted by the load
 	for(ITransientStateStructure* transientState : transientStates)
 	{
 		transientState->shifting_out();
 	}
+
+	std::thread loadingThread(&CGameDataManager::load_from_save_delegate, saveFile);
+
+	loadingThread.detach();
+}
+
+void CGameDataManager::load_from_save_delegate(std::string const& saveFile)
+{
+	std::vector<ISaveable*> vSaveableStructures = {
+		SG::get_material_manager(),
+		SG::get_intransient_data_manager()->get_character_entity_manager()
+	};
 
 	char szSectionNamesBuffer[LOADER_MAX_SECTIONS_BUFFER_SIZE] = "";
 	unsigned int uiSectionNamesLen = LOADER_MAX_SECTIONS_BUFFER_SIZE;
@@ -1451,7 +1472,7 @@ void CGameDataManager::load_from_save(std::string const& saveFile)
 
 	char* szSection = szSectionNamesBuffer;
 
-	if (strlen(szSection) == 0)
+	if(strlen(szSection) == 0)
 	{
 		throw SGException("save file doesn\'t exist, or contains no sections");
 	}
@@ -1459,12 +1480,12 @@ void CGameDataManager::load_from_save(std::string const& saveFile)
 	bool bFoundHeaderSection = false;
 	BaseId baseId = 1U;
 
-	while (*szSection)
+	while(*szSection)
 	{
 		unsigned int uiStringLen = LOADER_MAX_VALUE_BUFFER_SIZE;
 		strcpy_s(szStringBuffer, LOADER_MAX_VALUE_BUFFER_SIZE, "");
 
-		if (!stricmp(szSection, "game"))
+		if(!stricmp(szSection, "game"))
 		{
 			baseId = CGameDataManager::read_ini_uint(szSaveFile, szSection, "base", "1");
 
@@ -1480,13 +1501,13 @@ void CGameDataManager::load_from_save(std::string const& saveFile)
 		szSection += strlen(szSection) + 1;
 	}
 
-	if (!bFoundHeaderSection)
+	if(!bFoundHeaderSection)
 	{
 		return;
 	}
 
 	szSection = szSectionNamesBuffer;
-	
+
 	for(ISaveable* pSaveable : vSaveableStructures)
 	{
 		pSaveable->load_from_save(saveFile);
@@ -1496,6 +1517,8 @@ void CGameDataManager::load_from_save(std::string const& saveFile)
 	SG::get_material_manager()->build_material_pools();
 
 	SG::get_game_state_manager()->transition_game_state(new CBaseTransitionState(baseId));
+
+	SG::get_game_state_manager()->notify_loading_finished();
 }
 
 /*
