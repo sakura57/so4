@@ -303,6 +303,9 @@ NO_INSTANCES_TO_RENDER: //this label should come immediately after the render lo
 		//restore the default view, and begin GUI rendering
 		this->m_sfWindow.setView(this->m_sfWindow.getDefaultView());
 
+		//RENDER STATE UI HERE
+		pGameState->state_render_ui_tick(mainView, this->m_sfWindow, flDelta);
+
 		if(pGameState->state_render_ui())
 		{
 			ImGui::SFML::Update(this->m_sfWindow, imDeltaClock.restart());
@@ -313,9 +316,6 @@ NO_INSTANCES_TO_RENDER: //this label should come immediately after the render lo
 
 			ImGui::SFML::Render(this->m_sfWindow);
 		}
-
-		//RENDER STATE UI HERE
-		pGameState->state_render_ui_tick(mainView, this->m_sfWindow, flDelta);
 
 		//rendering operation completed. display the frame.
 		this->m_sfWindow.display();
