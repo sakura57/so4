@@ -67,6 +67,7 @@ private:
 	void enter_world_loop(void);
 	void enter_render_loop(void);
 	void enter_script_loop(void);
+	void load_data_delegate(void);
 
 	void core_fault(SGException const &e);
 };

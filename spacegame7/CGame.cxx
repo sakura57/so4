@@ -89,6 +89,24 @@ CGame::~CGame(void)
  */
 void CGame::enter_main_loop(void)
 {
+	this->m_pGameStateManager->notify_initiate_loading();
+
+	this->m_pGameStateManager->transition_game_state(new CMainMenuState);
+
+	std::thread loadingThread(&CGame::load_data_delegate, this);
+	loadingThread.detach();
+
+	std::thread worldThread(&CGame::enter_world_loop, this);
+	std::thread scriptThread(&CGame::enter_script_loop, this);
+	
+	this->enter_render_loop();
+
+	scriptThread.join();
+	worldThread.join();
+}
+
+void CGame::load_data_delegate(void)
+{
 	std::cout << "LOADING..." << std::endl;
 
 	try
@@ -114,7 +132,7 @@ void CGame::enter_main_loop(void)
 
 		//std::cout << "Generating resources." << std::endl;
 		//this->m_pMaterialManager->force_generation();
-		
+
 		std::cout << "Loading shiparch." << std::endl;
 		this->m_pGameDataManager->load_shiparch_data();
 		std::cout << "Loading equiparch." << std::endl;
@@ -147,15 +165,7 @@ void CGame::enter_main_loop(void)
 
 	std::cout << "Finished loading! -> Main menu transition" << std::endl;
 
-	this->m_pGameStateManager->transition_game_state(new CMainMenuState);
-
-	std::thread worldThread(&CGame::enter_world_loop, this);
-	std::thread scriptThread(&CGame::enter_script_loop, this);
-	
-	this->enter_render_loop();
-
-	scriptThread.join();
-	worldThread.join();
+	this->m_pGameStateManager->notify_loading_finished();
 }
 
 /*
@@ -242,45 +252,50 @@ void CGame::enter_render_loop(void)
 
 		//begin the rendering operation by clearing the screen
 		this->m_sfWindow.clear(sf::Color::Black);
-		
-		//DO STATE WORLD RENDER TICK HERE
-		pGameState->state_render_world_tick(mainView, this->m_sfWindow, flDelta);
-		
-		this->m_pWorld->begin_world_transaction();
-		//we will begin walking world instances; if we encounter a world object,
-		//render the object
-		IWorldInstance *pInstance = this->m_pWorld->instance_walk_begin();
 
-		if(pInstance == nullptr)
+		if(pGameState->state_render_world())
 		{
-			goto NO_INSTANCES_TO_RENDER;
-		}
+			//DO STATE WORLD RENDER TICK HERE
+			pGameState->state_render_world_tick(mainView, this->m_sfWindow, flDelta);
 
-		do
-		{
-			InstanceFlags uiFlags = pInstance->instance_get_flags();
+			this->m_pWorld->begin_world_transaction();
+			//we will begin walking world instances; if we encounter a world object,
+			//render the object
+			IWorldInstance* pInstance = this->m_pWorld->instance_walk_begin();
 
-			//is the instance a world object?
-			if(uiFlags & IWorldObject::InstanceFlag)
+			if(pInstance == nullptr)
 			{
-				IWorldObject *pObject = static_cast<IWorldObject*>(pInstance);
-
-				RenderParameters renderParms;
-				pObject->get_render_parms(renderParms);
-
-				try {
-					this->m_pRenderPipeline->render_object(pObject, this->m_sfWindow, renderParms);
-				} catch(SGException e) {
-					this->core_fault(e);
-				}
+				goto NO_INSTANCES_TO_RENDER;
 			}
 
-		} while(pInstance = this->m_pWorld->instance_walk_next());
-NO_INSTANCES_TO_RENDER: //this label should come immediately after the render loop
-		this->m_pWorld->end_world_transaction();
+			do
+			{
+				InstanceFlags uiFlags = pInstance->instance_get_flags();
 
-		//render particles (particle updation was moved to the world thread)
-		this->m_pParticleManager->do_particles(this->m_sfWindow, flDelta);
+				//is the instance a world object?
+				if(uiFlags & IWorldObject::InstanceFlag)
+				{
+					IWorldObject* pObject = static_cast<IWorldObject*>(pInstance);
+
+					RenderParameters renderParms;
+					pObject->get_render_parms(renderParms);
+
+					try {
+						this->m_pRenderPipeline->render_object(pObject, this->m_sfWindow, renderParms);
+					}
+					catch(SGException e) {
+						this->core_fault(e);
+					}
+				}
+
+			} while(pInstance = this->m_pWorld->instance_walk_next());
+
+NO_INSTANCES_TO_RENDER: //this label should come immediately after the render loop
+			this->m_pWorld->end_world_transaction();
+
+			//render particles (particle updation was moved to the world thread)
+			this->m_pParticleManager->do_particles(this->m_sfWindow, flDelta);
+		}
 		
 		//RENDER STATE WORLD UI HERE
 		pGameState->state_render_world_ui_tick(mainView, this->m_sfWindow, flDelta);
@@ -288,13 +303,27 @@ NO_INSTANCES_TO_RENDER: //this label should come immediately after the render lo
 		//restore the default view, and begin GUI rendering
 		this->m_sfWindow.setView(this->m_sfWindow.getDefaultView());
 
-		ImGui::SFML::Update(this->m_sfWindow, imDeltaClock.restart());
+		//RENDER STATE UI HERE
+		pGameState->state_render_ui_tick(mainView, this->m_sfWindow, flDelta);
 
-		//do ImGui windows
-		this->m_pInterfaceManager->render_all_panels(flDelta);
-		this->m_pCommsManager->render_comms(flDelta);
+		if(pGameState->state_render_ui())
+		{
+			ImGui::SFML::Update(this->m_sfWindow, imDeltaClock.restart());
 
-		ImGui::SFML::Render(this->m_sfWindow);
+			//do ImGui windows
+			this->m_pInterfaceManager->render_all_panels(flDelta);
+
+			//tick comm manager
+			if(this->m_bGamePaused.load() == false)
+			{
+				this->m_pCommsManager->tick_comms(flDelta);
+			}
+
+			//render comms
+			this->m_pCommsManager->render_comms();
+
+			ImGui::SFML::Render(this->m_sfWindow);
+		}
 
 		//rendering operation completed. display the frame.
 		this->m_sfWindow.display();

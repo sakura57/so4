@@ -1,0 +1,7 @@
+Pre-alpha Build 2 (v0.0.2-prealpha, in progress)
+- Pausing, game can now be paused by opening in-game menus
+- Added loading screen
+- Added title graphic
+
+Pre-alpha Build 1 (v0.0.1-prealpha)
+- First public build!

@@ -42,7 +42,9 @@ public:
 	 */
 	void send_comm_unimportant(std::string const &sender, std::string const &text);
 
-	void render_comms(float const flDelta);
+	void render_comms(void);
+
+	void tick_comms(float const flDelta);
 
 	//from ITransientStateStructure
 	virtual void shifting_out(void) final;

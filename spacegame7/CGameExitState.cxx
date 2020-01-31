@@ -51,3 +51,13 @@ bool CGameExitState::state_game_paused(void)
 {
 	return false;
 }
+
+bool CGameExitState::state_render_world(void)
+{
+	return true;
+}
+
+bool CGameExitState::state_render_ui(void)
+{
+	return true;
+}

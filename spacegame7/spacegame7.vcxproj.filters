@@ -430,6 +430,9 @@
     <ClCompile Include="InGameMenuPanel.cxx">
       <Filter>Engine\Interface</Filter>
     </ClCompile>
+    <ClCompile Include="CLoadingScreenState.cxx">
+      <Filter>Engine\GameState</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IEngine.hxx">
@@ -967,6 +970,9 @@
       <Filter>Engine\Debug</Filter>
     </ClInclude>
     <ClInclude Include="CGameExitState.hxx">
+      <Filter>Engine\GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="CLoadingScreenState.hxx">
       <Filter>Engine\GameState</Filter>
     </ClInclude>
   </ItemGroup>

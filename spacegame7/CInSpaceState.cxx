@@ -1062,3 +1062,13 @@ bool CInSpaceState::state_game_paused(void)
 	//TODO: for now, pause the game whenever interface manager reports input block
 	return this->m_pInterfaceManager->input_blocked();
 }
+
+bool CInSpaceState::state_render_world(void)
+{
+	return true;
+}
+
+bool CInSpaceState::state_render_ui(void)
+{
+	return true;
+}

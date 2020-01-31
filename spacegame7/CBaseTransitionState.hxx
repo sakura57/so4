@@ -32,6 +32,9 @@ public:
 
 	virtual bool state_game_paused(void) final;
 
+	virtual bool state_render_world(void) final;
+	virtual bool state_render_ui(void) final;
+
 	virtual void state_enable_input(bool const) final
 	{
 	};

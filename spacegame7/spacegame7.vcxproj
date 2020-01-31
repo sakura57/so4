@@ -213,6 +213,7 @@
     <ClCompile Include="CIntransientDataManager.cxx" />
     <ClCompile Include="CLandedState.cxx" />
     <ClCompile Include="CLandingBuoy.cxx" />
+    <ClCompile Include="CLoadingScreenState.cxx" />
     <ClCompile Include="CLootTableManager.cxx" />
     <ClCompile Include="CLuaEngine.cxx" />
     <ClCompile Include="CMainMenuState.cxx" />
@@ -332,6 +333,7 @@
     <ClInclude Include="CIntransientDataManager.hxx" />
     <ClInclude Include="CLandedState.hxx" />
     <ClInclude Include="CLandingBuoy.hxx" />
+    <ClInclude Include="CLoadingScreenState.hxx" />
     <ClInclude Include="CLootTableManager.hxx" />
     <ClInclude Include="CLuaEngine.hxx" />
     <ClInclude Include="CMainMenuState.hxx" />

@@ -13,11 +13,11 @@
 #include "GLStarfield.hxx"
 #include "IUniverse.hxx"
 
-class CGameExitState : public IGameState
+class CLoadingScreenState : public IGameState
 {
 public:
-	CGameExitState();
-	~CGameExitState();
+	CLoadingScreenState();
+	~CLoadingScreenState();
 
 	virtual void state_initializing(void) final;
 	virtual void state_prerender_tick(sf::View&, sf::RenderWindow&, float const) final;
@@ -56,4 +56,7 @@ private:
 	CAudioManager* m_pAudioManager;
 	CParticleManager* m_pParticleManager;
 	CCommsManager* m_pCommsManager;
+
+	sf::Texture m_sfLoadingTextTexture;
+	sf::Sprite m_sfLoadingText;
 };
