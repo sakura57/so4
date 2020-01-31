@@ -36,4 +36,7 @@ private:
 	unsigned int m_uiGraphicsQuality;
 	float m_flTimeElapsed;
 	bool m_bInitialized;
+
+	sf::Texture m_sfTitleCardTexture;
+	sf::Sprite m_sfTitleCard;
 };

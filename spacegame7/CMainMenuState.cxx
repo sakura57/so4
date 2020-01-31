@@ -17,6 +17,11 @@ void CMainMenuState::state_initializing(void)
 	this->m_flTimeElapsed = 0.0f;
 	SG::get_game_settings()->get_setting<unsigned int>("quality_level", this->m_uiGraphicsQuality);
 
+	this->m_sfTitleCardTexture.loadFromFile(CGameDataManager::get_full_data_file_path("graphics\\titlecard.png").c_str());
+	this->m_sfTitleCard.setTexture(this->m_sfTitleCardTexture);
+	this->m_sfTitleCard.setScale(1.0f, 1.0f);
+	this->m_sfTitleCard.setOrigin(256.0f, 256.0f);
+
 	this->m_sfBackgroundShader.loadFromFile(CGameDataManager::get_full_data_file_path("shaders\\mainmenu_bg.txt").c_str(), sf::Shader::Fragment);
 	this->m_sfBgVerts[0].position = sf::Vector2f(DEFAULT_WINDOW_WIDTH, 0);
 	this->m_sfBgVerts[1].position = sf::Vector2f(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);
@@ -55,8 +60,15 @@ void CMainMenuState::state_render_world_ui_tick(sf::View &, sf::RenderWindow &, 
 {
 }
 
-void CMainMenuState::state_render_ui_tick(sf::View &, sf::RenderWindow &, float const)
+void CMainMenuState::state_render_ui_tick(sf::View &sfView, sf::RenderWindow &sfWindow, float const flDelta)
 {
+	sf::Vector2u windowDimensions = sfWindow.getSize();
+	sf::Vector2f textOrigin = this->m_sfTitleCard.getOrigin();
+	sf::Vector2f titleCardPosition((float)windowDimensions.x / 2.0f, (float)windowDimensions.y / 4.0f);
+
+	this->m_sfTitleCard.setPosition(titleCardPosition);
+
+	sfWindow.draw(this->m_sfTitleCard);
 }
 
 void CMainMenuState::state_postrender_tick(sf::RenderWindow &, float const)
