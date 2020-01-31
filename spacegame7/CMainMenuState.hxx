@@ -26,6 +26,9 @@ public:
 
 	virtual bool state_game_paused(void) final;
 
+	virtual bool state_render_world(void) final;
+	virtual bool state_render_ui(void) final;
+
 private:
 	sf::VertexArray m_sfBgVerts;
 	sf::Shader m_sfBackgroundShader;

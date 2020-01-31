@@ -240,47 +240,52 @@ void CGame::enter_render_loop(void)
 		//DO STATE PRE RENDER CALL HERE
 		pGameState->state_prerender_tick(mainView, this->m_sfWindow, flDelta);
 
-		//begin the rendering operation by clearing the screen
-		this->m_sfWindow.clear(sf::Color::Black);
-		
-		//DO STATE WORLD RENDER TICK HERE
-		pGameState->state_render_world_tick(mainView, this->m_sfWindow, flDelta);
-		
-		this->m_pWorld->begin_world_transaction();
-		//we will begin walking world instances; if we encounter a world object,
-		//render the object
-		IWorldInstance *pInstance = this->m_pWorld->instance_walk_begin();
-
-		if(pInstance == nullptr)
+		if(pGameState->state_render_world())
 		{
-			goto NO_INSTANCES_TO_RENDER;
-		}
+			//begin the rendering operation by clearing the screen
+			this->m_sfWindow.clear(sf::Color::Black);
 
-		do
-		{
-			InstanceFlags uiFlags = pInstance->instance_get_flags();
+			//DO STATE WORLD RENDER TICK HERE
+			pGameState->state_render_world_tick(mainView, this->m_sfWindow, flDelta);
 
-			//is the instance a world object?
-			if(uiFlags & IWorldObject::InstanceFlag)
+			this->m_pWorld->begin_world_transaction();
+			//we will begin walking world instances; if we encounter a world object,
+			//render the object
+			IWorldInstance* pInstance = this->m_pWorld->instance_walk_begin();
+
+			if(pInstance == nullptr)
 			{
-				IWorldObject *pObject = static_cast<IWorldObject*>(pInstance);
-
-				RenderParameters renderParms;
-				pObject->get_render_parms(renderParms);
-
-				try {
-					this->m_pRenderPipeline->render_object(pObject, this->m_sfWindow, renderParms);
-				} catch(SGException e) {
-					this->core_fault(e);
-				}
+				goto NO_INSTANCES_TO_RENDER;
 			}
 
-		} while(pInstance = this->m_pWorld->instance_walk_next());
-NO_INSTANCES_TO_RENDER: //this label should come immediately after the render loop
-		this->m_pWorld->end_world_transaction();
+			do
+			{
+				InstanceFlags uiFlags = pInstance->instance_get_flags();
 
-		//render particles (particle updation was moved to the world thread)
-		this->m_pParticleManager->do_particles(this->m_sfWindow, flDelta);
+				//is the instance a world object?
+				if(uiFlags & IWorldObject::InstanceFlag)
+				{
+					IWorldObject* pObject = static_cast<IWorldObject*>(pInstance);
+
+					RenderParameters renderParms;
+					pObject->get_render_parms(renderParms);
+
+					try {
+						this->m_pRenderPipeline->render_object(pObject, this->m_sfWindow, renderParms);
+					}
+					catch(SGException e) {
+						this->core_fault(e);
+					}
+				}
+
+			} while(pInstance = this->m_pWorld->instance_walk_next());
+
+NO_INSTANCES_TO_RENDER: //this label should come immediately after the render loop
+			this->m_pWorld->end_world_transaction();
+
+			//render particles (particle updation was moved to the world thread)
+			this->m_pParticleManager->do_particles(this->m_sfWindow, flDelta);
+		}
 		
 		//RENDER STATE WORLD UI HERE
 		pGameState->state_render_world_ui_tick(mainView, this->m_sfWindow, flDelta);
@@ -288,13 +293,16 @@ NO_INSTANCES_TO_RENDER: //this label should come immediately after the render lo
 		//restore the default view, and begin GUI rendering
 		this->m_sfWindow.setView(this->m_sfWindow.getDefaultView());
 
-		ImGui::SFML::Update(this->m_sfWindow, imDeltaClock.restart());
+		if(pGameState->state_render_ui())
+		{
+			ImGui::SFML::Update(this->m_sfWindow, imDeltaClock.restart());
 
-		//do ImGui windows
-		this->m_pInterfaceManager->render_all_panels(flDelta);
-		this->m_pCommsManager->render_comms(flDelta);
+			//do ImGui windows
+			this->m_pInterfaceManager->render_all_panels(flDelta);
+			this->m_pCommsManager->render_comms(flDelta);
 
-		ImGui::SFML::Render(this->m_sfWindow);
+			ImGui::SFML::Render(this->m_sfWindow);
+		}
 
 		//rendering operation completed. display the frame.
 		this->m_sfWindow.display();

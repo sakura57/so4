@@ -26,4 +26,6 @@ interface IGameState
 
 	virtual bool state_terminated(void) = 0;
 	virtual bool state_game_paused(void) = 0;
+	virtual bool state_render_world(void) = 0;
+	virtual bool state_render_ui(void) = 0;
 };
