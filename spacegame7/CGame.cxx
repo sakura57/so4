@@ -314,6 +314,9 @@ NO_INSTANCES_TO_RENDER: //this label should come immediately after the render lo
 			ImGui::SFML::Render(this->m_sfWindow);
 		}
 
+		//RENDER STATE UI HERE
+		pGameState->state_render_ui_tick(mainView, this->m_sfWindow, flDelta);
+
 		//rendering operation completed. display the frame.
 		this->m_sfWindow.display();
 
