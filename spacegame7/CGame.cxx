@@ -312,7 +312,15 @@ NO_INSTANCES_TO_RENDER: //this label should come immediately after the render lo
 
 			//do ImGui windows
 			this->m_pInterfaceManager->render_all_panels(flDelta);
-			this->m_pCommsManager->render_comms(flDelta);
+
+			//tick comm manager
+			if(this->m_bGamePaused.load() == false)
+			{
+				this->m_pCommsManager->tick_comms(flDelta);
+			}
+
+			//render comms
+			this->m_pCommsManager->render_comms();
 
 			ImGui::SFML::Render(this->m_sfWindow);
 		}
