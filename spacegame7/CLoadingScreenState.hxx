@@ -56,4 +56,7 @@ private:
 	CAudioManager* m_pAudioManager;
 	CParticleManager* m_pParticleManager;
 	CCommsManager* m_pCommsManager;
+
+	sf::Texture m_sfLoadingTextTexture;
+	sf::Sprite m_sfLoadingText;
 };
