@@ -1,14 +1,21 @@
 #include <mutex>
 #include "CGameStateManager.hxx"
 #include "SGLib.hxx"
+#include "CLoadingScreenState.hxx"
 
 CGameStateManager::CGameStateManager()
 {
 	this->m_currentState = nullptr;
+	this->m_bLoading = false;
+	this->m_loadingState = new CLoadingScreenState;
 }
 
 CGameStateManager::~CGameStateManager()
 {
+	if(this->m_loadingState != nullptr)
+	{
+		delete this->m_loadingState;
+	}
 }
 
 void CGameStateManager::transition_game_state(IGameState *pNewState)
@@ -26,6 +33,11 @@ void CGameStateManager::transition_game_state(IGameState *pNewState)
 IGameState *CGameStateManager::get_game_state(void)
 {
 	SCOPE_LOCK(this->m_mFieldAccess);
+
+	if(this->m_bLoading)
+	{
+		return this->m_loadingState;
+	}
 
 	return this->m_currentState;
 }
@@ -77,4 +89,28 @@ void CGameStateManager::flush_semitransient_states(void)
 	{
 		transientState->shifting_out();
 	}
+}
+
+void CGameStateManager::notify_initiate_loading()
+{
+	SCOPE_LOCK(this->m_mFieldAccess);
+
+	if(this->m_bLoading == true)
+	{
+		throw SGException("Duplicate call to CGameStateManager::notify_initiate_loading()");
+	}
+
+	this->m_bLoading = true;
+}
+
+void CGameStateManager::notify_loading_finished()
+{
+	SCOPE_LOCK(this->m_mFieldAccess);
+
+	if(this->m_bLoading == false)
+	{
+		throw SGException("Duplicate call to CGameStateManager::notify_loading_finished()");
+	}
+
+	this->m_bLoading = false;
 }

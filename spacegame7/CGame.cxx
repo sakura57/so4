@@ -89,6 +89,22 @@ CGame::~CGame(void)
  */
 void CGame::enter_main_loop(void)
 {
+	this->m_pGameStateManager->notify_initiate_loading();
+
+	this->m_pGameStateManager->transition_game_state(new CMainMenuState);
+
+	std::thread loadingThread(&CGame::load_data_delegate, this);
+	std::thread worldThread(&CGame::enter_world_loop, this);
+	std::thread scriptThread(&CGame::enter_script_loop, this);
+	
+	this->enter_render_loop();
+
+	scriptThread.join();
+	worldThread.join();
+}
+
+void CGame::load_data_delegate(void)
+{
 	std::cout << "LOADING..." << std::endl;
 
 	try
@@ -114,7 +130,7 @@ void CGame::enter_main_loop(void)
 
 		//std::cout << "Generating resources." << std::endl;
 		//this->m_pMaterialManager->force_generation();
-		
+
 		std::cout << "Loading shiparch." << std::endl;
 		this->m_pGameDataManager->load_shiparch_data();
 		std::cout << "Loading equiparch." << std::endl;
@@ -147,15 +163,7 @@ void CGame::enter_main_loop(void)
 
 	std::cout << "Finished loading! -> Main menu transition" << std::endl;
 
-	this->m_pGameStateManager->transition_game_state(new CMainMenuState);
-
-	std::thread worldThread(&CGame::enter_world_loop, this);
-	std::thread scriptThread(&CGame::enter_script_loop, this);
-	
-	this->enter_render_loop();
-
-	scriptThread.join();
-	worldThread.join();
+	this->m_pGameStateManager->notify_loading_finished();
 }
 
 /*
