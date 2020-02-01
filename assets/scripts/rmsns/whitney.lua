@@ -252,4 +252,5 @@ end
 
 function mission_actually_give_money()
 	sgs_player_adjust_money(10000)
+	sgs_send_notification("Money: +10000")
 end
