@@ -1,5 +1,7 @@
 #pragma once
 
+#include <queue>
+
 #include "Defs.hxx"
 #include "IGameState.hxx"
 #include "IEngine.hxx"
@@ -150,4 +152,6 @@ private:
 	bool m_flDeathScreenSpawned;
 	bool m_bTrackMode;
 	SectorId m_uiSectorId;
+
+	std::queue<std::string> m_qNotificationQueue;
 };

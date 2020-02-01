@@ -126,5 +126,6 @@ end
 
 function mission_transfer_reward()
 	sgs_player_adjust_money(2000)
+	sgs_send_notification("Money: +2000")
 	sgs_waypoint_set(0, 0)
 end

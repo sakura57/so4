@@ -433,6 +433,9 @@
     <ClCompile Include="CLoadingScreenState.cxx">
       <Filter>Engine\GameState</Filter>
     </ClCompile>
+    <ClCompile Include="NotificationPanel.cxx">
+      <Filter>Engine\Interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IEngine.hxx">
