@@ -266,7 +266,7 @@ void CInSpaceState::state_prerender_tick(sf::View &mainView, sf::RenderWindow &s
 	}
 
 	//BEGIN TESTING CODE
-	if (this->m_pPlayer)
+	if (sfWindow.hasFocus() && this->m_pPlayer)
 	{
 		sf::Vector2i mousePos = sf::Mouse::getPosition(sfWindow);
 
