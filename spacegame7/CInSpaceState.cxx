@@ -27,6 +27,11 @@
 #include <sstream>
 #include <gl/GLU.h>
 
+//the maximum allowed size of the notification queue.
+//if an attempt is made to post a notification while the queue
+//is over this size, the notification is simply dropped.
+#define MAXIMUM_PENDING_NOTIFICATIONS 5
+
 CInSpaceState::CInSpaceState(char const *startingScript, SectorId sectorId, Vector2f const &vStartingPosition)
 	: m_glstarfield(8 * DEFAULT_WINDOW_WIDTH, 14 * DEFAULT_WINDOW_HEIGHT),
 	m_sfBgVerts(sf::TrianglesStrip, 5),
@@ -205,6 +210,22 @@ void CInSpaceState::state_prerender_tick(sf::View &mainView, sf::RenderWindow &s
 	//update the time since last notification
 	this->m_mFieldAccess.lock();
 	this->m_flTimeSinceLastNotification += flDelta;
+
+	//process notifications, if there are any in the queue,
+	//pop the first in the queue and create a UI panel for it
+	if(this->m_flTimeSinceLastNotification > 3.0f)
+	{
+		if(this->m_qNotificationQueue.size() > 0)
+		{
+			std::string szNotification = this->m_qNotificationQueue.front();
+			this->m_qNotificationQueue.pop();
+
+			this->m_pInterfaceManager->add_panel(new NotificationPanel(szNotification));
+			this->m_flTimeSinceLastNotification = 0.0f;
+			this->m_szLastNotificationReceived = szNotification;
+		}
+	}
+
 	this->m_mFieldAccess.unlock();
 
 	if(this->m_pPlayer == nullptr && !this->m_flDeathScreenSpawned)
@@ -968,13 +989,12 @@ void CInSpaceState::state_send_notification(std::string const &szNotification)
 {
 	SCOPE_LOCK(this->m_mFieldAccess);
 
-	//anti-notification spam
-	if(this->m_flTimeSinceLastNotification > 1.0f || szNotification != this->m_szLastNotificationReceived)
+	if(this->m_qNotificationQueue.size() > MAXIMUM_PENDING_NOTIFICATIONS)
 	{
-		this->m_pInterfaceManager->add_panel(new NotificationPanel(szNotification));
-		this->m_flTimeSinceLastNotification = 0.0f;
-		this->m_szLastNotificationReceived = szNotification;
+		return;
 	}
+
+	this->m_qNotificationQueue.push(szNotification);
 }
 
 void CInSpaceState::build_death_string(InstanceId const uiKillerId, DeathCause const deathCause)
