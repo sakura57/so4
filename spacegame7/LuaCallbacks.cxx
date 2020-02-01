@@ -1560,6 +1560,32 @@ extern "C"
 
 		return 1;
 	}
+
+	/*
+	* Callback for send_notification
+	*/
+	static int sgs::send_notification(lua_State* L)
+	{
+		int n = lua_gettop(L);
+
+		if(n != 1)
+		{
+			lua_pushstring(L, "incorrect number of arguments");
+			lua_error(L);
+		}
+
+		if(!lua_isstring(L, 1))
+		{
+			lua_pushstring(L, "incorrect arg types");
+			lua_error(L);
+		}
+
+		char const* szText = lua_tostring(L, 1);
+
+		SG::get_game_state_manager()->get_game_state()->state_send_notification(std::string(szText));
+
+		return 0;
+	}
 }
 
 /*
@@ -1611,6 +1637,7 @@ void sgs::register_callbacks(void)
 	pScriptEngine->register_callback("sgs_map_add_circle", &sgs::map_add_circle);
 	pScriptEngine->register_callback("sgs_map_add_zone_rectangular", &sgs::map_add_zone_rectangular);
 	pScriptEngine->register_callback("sgs_map_add_zone_circular", &sgs::map_add_zone_circular);
+	pScriptEngine->register_callback("sgs_send_notification", &sgs::send_notification);
 }
 
 /*

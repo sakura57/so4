@@ -57,6 +57,8 @@ extern "C"
 		static int map_add_circle(lua_State*);
 		static int map_add_zone_circular(lua_State*);
 		static int map_add_zone_rectangular(lua_State*);
+		
+		static int send_notification(lua_State*);
 	}
 }
 
