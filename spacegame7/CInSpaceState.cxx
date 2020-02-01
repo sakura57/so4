@@ -46,7 +46,8 @@ CInSpaceState::CInSpaceState(char const *startingScript, SectorId sectorId, Vect
 	m_bRmsnEnabledForThisSession(false),
 	m_szRmsnScript(""),
 	m_uiSectorId(sectorId),
-	m_bGamePaused(false)
+	m_bGamePaused(false),
+	m_bTrackMode(true)
 {
 	this->m_pEngine = SG::get_engine();
 	this->m_pRenderPipeline = SG::get_render_pipeline();
