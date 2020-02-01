@@ -1,14 +1,14 @@
 #include "NotificationPanel.hxx"
 
-#define NOTIFICATION_DURATION 2.5
-#define NOTIFICATION_SCROLL_SPEED 15.0f
+#define NOTIFICATION_DURATION 2.5f
+#define NOTIFICATION_SCROLL_SPEED 10.0f
 
 void NotificationPanel::render_panel(float const flDelta)
 {
 	ImVec2 displaySize = ImGui::GetIO().DisplaySize;
 
 	ImVec2 textSize = ImGui::CalcTextSize(this->m_szText.c_str());
-	ImGui::SetNextWindowPos(ImVec2(displaySize.x / 2.0f - textSize.x / 2.0f, displaySize.y / 3.0f - this->m_flDuration * NOTIFICATION_SCROLL_SPEED), ImGuiCond_Always);
+	ImGui::SetNextWindowPos(ImVec2(displaySize.x / 2.0f - textSize.x / 2.0f, displaySize.y / 3.75f + clamp(2.5f - this->m_flDuration, 0.0f, 1.0f) * NOTIFICATION_SCROLL_SPEED), ImGuiCond_Always);
 
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
 
