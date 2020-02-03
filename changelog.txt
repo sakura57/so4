@@ -1,7 +1,12 @@
-Pre-alpha Build 2 (v0.0.2-prealpha, in progress)
+Pre-alpha Build 2 (v0.0.2-prealpha)
 - Pausing, game can now be paused by opening in-game menus
 - Added loading screen
 - Added title graphic
+- Improved savegame loading and fixed several crashes related to savegames
+- Several UI tweaks and QOL changes
+- Changes to notifications and how they're presented, addressed notification spam
+- Mission payouts now send notifications
+- Various bugfixes
 
 Pre-alpha Build 1 (v0.0.1-prealpha)
 - First public build!
