@@ -44,10 +44,31 @@ void LoadoutPanel::render_panel(float const flDelta)
 				continue;
 			}
 
+			CWeaponInstance* pWeapInstance = nullptr;
+
+			if(pChildEquip->instance_get_flags() & CWeaponInstance::InstanceFlag)
+			{
+				pWeapInstance = static_cast<CWeaponInstance*>(pChildEquip);
+			}
+
 			//pChildEquip->instance_acquired();
 
 			Archetype const* pChildArch = pChildEquip->get_archetype();
 			EquipArch const* pChildEquipArch = reinterpret_cast<EquipArch const*>(pChildArch);
+
+			std::string szWeaponNameText(pChildEquipArch->szEquipName.c_str());
+
+			if(pWeapInstance != nullptr && pChildArch->uiArchType == MissileArch::Type)
+			{
+				float flRefireTime = pWeapInstance->get_refire_time_remaining();
+
+				if(flRefireTime > 0.0f)
+				{
+					szWeaponNameText.append(" [");
+					szWeaponNameText.append(Conversion::float_to_string(flRefireTime));
+					szWeaponNameText.append("]");
+				}
+			}
 
 			bool bChildEnabled = pChildEquip->is_alive();
 
@@ -57,7 +78,7 @@ void LoadoutPanel::render_panel(float const flDelta)
 
 			ImGui::PushID(instanceId);
 			ImGui::PushStyleColor(ImGuiCol_Text, vColor);
-			if(ImGui::Selectable(pChildEquipArch->szEquipName.c_str()))
+			if(ImGui::Selectable(szWeaponNameText.c_str()))
 			{
 				pChildEquip->alive_set(!bChildEnabled);
 			}
