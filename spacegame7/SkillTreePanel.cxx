@@ -139,7 +139,7 @@ void SkillTreePanel::render_panel(float const flDelta)
 		ImGui::SetCursorPos(ImVec2(windowSize.x - (windowSize.x / 2.0f) - 32.0f, cursorPos.y));
 
 		bool bHasLegendarySkill = this->m_pEntity->has_skill(this->m_pCurrentLegendarySkill->get_id());
-		bool bCanAcquireLegendarySkill = !bHasLegendarySkill && (totalSkillsInTree == skillsAcquiredInTree);
+		bool bCanAcquireLegendarySkill = !bHasLegendarySkill && (totalSkillsInTree == skillsAcquiredInTree) && (uiFreeSkillPoints > 0U);
 
 		render_skill_button(this->m_pCurrentLegendarySkill, true, bHasLegendarySkill, bCanAcquireLegendarySkill);
 	}

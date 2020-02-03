@@ -153,6 +153,12 @@ public:
 		
 	};
 
+	float get_refire_time_remaining(void)
+	{
+		SCOPE_LOCK(this->m_mFieldAccess);
+		return this->m_flRefireTimeRemaining;
+	};
+
 	void fire(void);
 
 private:

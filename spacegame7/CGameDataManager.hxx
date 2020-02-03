@@ -4,6 +4,7 @@
 #include <list>
 #include <random>
 #include <mutex>
+#include <future>
 
 #include "Archetype.hxx"
 #include "Loadout.hxx"
@@ -48,7 +49,7 @@ public:
 	static void load_all_loottables(ILootTableManager *);
 	static void load_all_resource_classes(IMatManager *);
 
-	static void load_from_save(std::string const &);
+	static std::future<bool> load_from_save(std::string const &);
 	static void dump_to_save(std::string const &, BaseId const);
 
 	void load_shiparch_data(void);
@@ -201,12 +202,14 @@ public:
 
 	static std::string get_full_data_file_path(std::string const &);
 
+	static bool get_directory_exists(std::string const&);
+
 private:
 	static bool settingsLoaded;
 
 	static void load_settings_data(void);
 
-	static void load_from_save_delegate(std::string const&);
+	static bool load_from_save_delegate(std::string const&);
 	static void dump_to_save_delegate(std::string const&, BaseId const);
 
 	static void rough_touch_file(std::string const&);
