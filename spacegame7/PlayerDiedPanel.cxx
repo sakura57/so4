@@ -37,11 +37,31 @@ void PlayerDiedPanel::render_panel(float const flDelta)
 
 		try
 		{
-			SG::get_game_data_manager()->load_from_save(saveFileName);
+			this->m_bGameLoadAttempt = SG::get_game_data_manager()->load_from_save(saveFileName);
 		}
 		catch (SGException e)
 		{
 			SG::get_game_state_manager()->get_game_state()->state_send_notification("Could not load save");
+		}
+	}
+
+	if(this->m_bGameLoadAttempt.valid())
+	{
+		if(this->m_bGameLoadAttempt.wait_for(std::chrono::seconds(0)) == std::future_status::ready)
+		{
+			if(this->m_bGameLoadAttempt.get() == true)
+			{
+				//the load operation succeeded.
+				//in practice, this piece of code will probably never be reached,
+				//because the interface manager will be shifted out as a result of the
+				//load operation, but just in case, we will delete ourself.
+
+				this->m_bPanelActive = false;
+			}
+			else
+			{
+				ImGui::OpenPopup("Load Failed");
+			}
 		}
 	}
 
@@ -57,6 +77,18 @@ void PlayerDiedPanel::render_panel(float const flDelta)
 	if(ImGui::Button("Exit to Desktop"))
 	{
 		//TODO: make this do something
+	}
+
+	if(ImGui::BeginPopupModal("Load Failed", NULL, ImGuiWindowFlags_AlwaysAutoResize))
+	{
+		ImGui::Text("Load game failed.\nThe savegame does not exist or is invalid.");
+		ImGui::Separator();
+
+		if(ImGui::Button("Okay", ImVec2(120, 0)))
+		{
+			ImGui::CloseCurrentPopup();
+		}
+		ImGui::EndPopup();
 	}
 
 	ImGui::End();

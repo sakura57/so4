@@ -1,5 +1,7 @@
 #pragma once
 
+#include <future>
+
 #include "InterfacePanel.hxx"
 
 class PlayerDiedPanel : public InterfacePanel
@@ -36,4 +38,5 @@ private:
 	std::string m_szDeathString;
 	static bool m_bPanelExists;
 	bool m_bPanelActive;
+	std::future<bool> m_bGameLoadAttempt;
 };
