@@ -5,22 +5,9 @@
 class LoadGamePanel : public InterfacePanel
 {
 public:
-	LoadGamePanel()
-	{
-		if (this->m_bPanelExists)
-		{
-			this->m_bPanelActive = false;
-		}
-		else
-		{
-			this->m_bPanelActive = true;
-			this->m_bPanelExists = true;
-		}
-	};
-	virtual ~LoadGamePanel()
-	{
-		this->m_bPanelExists = false;
-	};
+	LoadGamePanel();
+
+	virtual ~LoadGamePanel();
 
 	virtual void render_panel(float const flDelta);
 
@@ -34,4 +21,6 @@ public:
 private:
 	static bool m_bPanelExists;
 	bool m_bPanelActive;
+	bool m_bLoadingOperationInitiated;
+	std::future<bool> m_fLoadingOperationResult;
 };

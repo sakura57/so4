@@ -13,6 +13,10 @@
 #include <cstdio>
 #include <thread>
 
+//TODO: included for filesystem functions,
+//make them more portable instead
+#include <Windows.h>
+
 #define LOADER_MAX_SECTIONS_BUFFER_SIZE 8192
 #define LOADER_MAX_VALUE_BUFFER_SIZE 2048
 
@@ -1429,7 +1433,7 @@ void CGameDataManager::dump_to_save_delegate(std::string const& saveFile, BaseId
 	SG::get_game_state_manager()->notify_loading_finished();
 }
 
-void CGameDataManager::load_from_save(std::string const& saveFile)
+std::future<bool> CGameDataManager::load_from_save(std::string const& saveFile)
 {
 	ITransientStateStructure* transientStates[] =
 	{
@@ -1450,12 +1454,12 @@ void CGameDataManager::load_from_save(std::string const& saveFile)
 		transientState->shifting_out();
 	}
 
-	std::thread loadingThread(&CGameDataManager::load_from_save_delegate, saveFile);
+	std::future<bool> loadingFuture = std::async(&CGameDataManager::load_from_save_delegate, saveFile);
 
-	loadingThread.detach();
+	return loadingFuture;
 }
 
-void CGameDataManager::load_from_save_delegate(std::string const& saveFile)
+bool CGameDataManager::load_from_save_delegate(std::string const& saveFile)
 {
 	std::vector<ISaveable*> vSaveableStructures = {
 		SG::get_material_manager(),
@@ -1474,7 +1478,11 @@ void CGameDataManager::load_from_save_delegate(std::string const& saveFile)
 
 	if(strlen(szSection) == 0)
 	{
-		throw SGException("save file doesn\'t exist, or contains no sections");
+		//send a loading finished notification so we don't
+		//hang on a loading screen
+		SG::get_game_state_manager()->notify_loading_finished();
+
+		return false;
 	}
 
 	bool bFoundHeaderSection = false;
@@ -1503,7 +1511,11 @@ void CGameDataManager::load_from_save_delegate(std::string const& saveFile)
 
 	if(!bFoundHeaderSection)
 	{
-		return;
+		//send a loading finished notification so we don't
+		//hang on a loading screen
+		SG::get_game_state_manager()->notify_loading_finished();
+
+		return false;
 	}
 
 	szSection = szSectionNamesBuffer;
@@ -1519,6 +1531,8 @@ void CGameDataManager::load_from_save_delegate(std::string const& saveFile)
 	SG::get_game_state_manager()->transition_game_state(new CBaseTransitionState(baseId));
 
 	SG::get_game_state_manager()->notify_loading_finished();
+
+	return true;
 }
 
 /*
@@ -1677,4 +1691,27 @@ std::string CGameDataManager::get_full_data_file_path(std::string const &relpath
 	fullpath.append(relpath);
 
 	return fullpath;
+}
+
+bool CGameDataManager::get_directory_exists(std::string const &szDirectoryPath)
+{
+	WIN32_FIND_DATAA findData;
+
+	HANDLE hFile = FindFirstFileA(szDirectoryPath.c_str(), &findData);
+
+	if(hFile == INVALID_HANDLE_VALUE)
+	{
+		return false;
+	}
+	else
+	{
+		FindClose(hFile);
+
+		if(findData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
+		{
+			return true;
+		}
+
+		return false;
+	}
 }
