@@ -4,6 +4,7 @@
 #include "ICharacterEntity.hxx"
 #include "ArenaStartPanel.hxx"
 #include "CSectorTransitionState.hxx"
+#include "MainMenuPanel.hxx"
 
 bool ArenaStartPanel::m_bPanelExists = false;
 
@@ -69,6 +70,15 @@ void ArenaStartPanel::render_panel(float const flDelta)
 		}
 
 		SG::get_game_state_manager()->transition_game_state(new CSectorTransitionState(7, "", Vector2f(0.0f, 0.0f)));
+	}
+
+	ImGui::Separator();
+
+	if(ImGui::Button("Back"))
+	{
+		SG::get_interface_manager()->add_panel(new MainMenuPanel);
+
+		this->m_bPanelActive = false;
 	}
 
 	ImGui::End();
