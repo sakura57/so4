@@ -6,6 +6,7 @@
 #include "ICharacterEntity.hxx"
 #include "LoadGamePanel.hxx"
 #include "CSectorTransitionState.hxx"
+#include "MainMenuPanel.hxx"
 
 bool LoadGamePanel::m_bPanelExists = false;
 
@@ -100,6 +101,15 @@ void LoadGamePanel::render_panel(float const flDelta)
 
 			this->m_bLoadingOperationInitiated = false;
 		}
+	}
+
+	ImGui::Separator();
+
+	if(ImGui::Button("Back"))
+	{
+		SG::get_interface_manager()->add_panel(new MainMenuPanel);
+
+		this->m_bPanelActive = false;
 	}
 
 	if(ImGui::BeginPopupModal("Load Failed", NULL, ImGuiWindowFlags_AlwaysAutoResize))
