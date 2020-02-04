@@ -5,6 +5,8 @@
 #include "CharacterCreationPanel.hxx"
 #include "CBaseTransitionState.hxx"
 
+#include "MainMenuPanel.hxx"
+
 bool CharacterCreationPanel::m_bPanelExists = false;
 
 void CharacterCreationPanel::render_panel(float const flDelta)
@@ -76,6 +78,15 @@ void CharacterCreationPanel::render_panel(float const flDelta)
 		}
 
 		SG::get_game_state_manager()->transition_game_state(new CBaseTransitionState(1));
+	}
+
+	ImGui::Separator();
+
+	if(ImGui::Button("Back"))
+	{
+		SG::get_interface_manager()->add_panel(new MainMenuPanel);
+
+		this->m_bPanelActive = false;
 	}
 
 	ImGui::End();
