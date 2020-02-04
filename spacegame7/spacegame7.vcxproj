@@ -277,6 +277,7 @@
     <ClCompile Include="PlayerDiedPanel.cxx" />
     <ClCompile Include="SaveGamePanel.cxx" />
     <ClCompile Include="SectorMapPanel.cxx" />
+    <ClCompile Include="SettingsPanel.cxx" />
     <ClCompile Include="SkillTreePanel.cxx" />
     <ClCompile Include="Spells.cxx" />
     <ClCompile Include="Util.cxx" />
