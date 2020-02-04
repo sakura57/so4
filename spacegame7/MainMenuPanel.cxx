@@ -1,5 +1,5 @@
 #include "MainMenuPanel.hxx"
-
+#include "CGameExitState.hxx"
 
 void MainMenuPanel::render_panel(float const flDelta)
 {
@@ -53,7 +53,7 @@ void MainMenuPanel::render_panel(float const flDelta)
 	ImGui::SetCursorPosX(windowWidth / 8.0f);
 	if(ImGui::Button("Exit", buttonSize))
 	{
-		this->m_bPanelActive = false;
+		SG::get_game_state_manager()->transition_game_state(new CGameExitState);
 	}
 
 	ImGui::End();
