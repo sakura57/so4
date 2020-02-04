@@ -30,7 +30,7 @@ void SettingsPanel::render_panel(float const flDelta)
 
 	auto settings = SG::get_game_settings();
 
-	ImGui::Begin("Settings", nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_Modal);
+	ImGui::Begin("Settings", nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize);
 
 	ImGui::Text("Audio");
 	ImGui::Separator();
