@@ -7,15 +7,10 @@
 
 #include "MainMenuPanel.hxx"
 
-bool CharacterCreationPanel::m_bPanelExists = false;
+int CharacterCreationPanel::m_iPanelInstances = 0;
 
 void CharacterCreationPanel::render_panel(float const flDelta)
 {
-	if(!this->m_bPanelExists)
-	{
-		return;
-	}
-
 	static char szCharName[16] = "Recruit";
 	static int iCurrentItem = 0;
 

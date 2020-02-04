@@ -7,19 +7,18 @@ class ArenaStartPanel : public InterfacePanel
 public:
 	ArenaStartPanel()
 	{
-		if (this->m_bPanelExists)
+		if(++this->m_iPanelInstances > 1)
 		{
 			this->m_bPanelActive = false;
 		}
 		else
 		{
 			this->m_bPanelActive = true;
-			this->m_bPanelExists = true;
 		}
 	};
 	virtual ~ArenaStartPanel()
 	{
-		this->m_bPanelExists = false;
+		--this->m_iPanelInstances;
 	};
 
 	virtual void render_panel(float const flDelta);
@@ -32,6 +31,6 @@ public:
 	};
 
 private:
-	static bool m_bPanelExists;
+	static int m_iPanelInstances;
 	bool m_bPanelActive;
 };

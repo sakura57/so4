@@ -1,14 +1,9 @@
 #include "CharacterSheetPanel.hxx"
 
-bool CharacterSheetPanel::m_bPanelExists = false;
+int CharacterSheetPanel::m_iPanelInstances = 0;
 
 void CharacterSheetPanel::render_panel(float const flDelta)
 {
-	if(!this->m_bPanelExists)
-	{
-		return;
-	}
-
 	if(this->m_pEntity == nullptr)
 	{
 		return;
@@ -39,7 +34,6 @@ void CharacterSheetPanel::render_panel(float const flDelta)
 
 	if(ImGui::Button("Done"))
 	{
-		this->m_bPanelExists = false;
 		this->m_bPanelActive = false;
 	}
 

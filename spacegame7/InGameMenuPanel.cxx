@@ -3,24 +3,23 @@
 #include "CMainMenuState.hxx"
 #include "CGameExitState.hxx"
 
-bool InGameMenuPanel::m_bPanelExists = false;
+int InGameMenuPanel::m_iPanelInstances = 0;
 
 InGameMenuPanel::InGameMenuPanel()
 {
-	if(this->m_bPanelExists)
+	if(++this->m_iPanelInstances > 1)
 	{
 		this->m_bPanelActive = false;
 	}
 	else
 	{
 		this->m_bPanelActive = true;
-		this->m_bPanelExists = true;
 	}
 }
 
 InGameMenuPanel::~InGameMenuPanel()
 {
-	this->m_bPanelExists = false;
+	--this->m_iPanelInstances;
 }
 
 void InGameMenuPanel::render_panel(float const flDelta)

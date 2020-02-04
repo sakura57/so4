@@ -1,25 +1,36 @@
 #include "SettingsPanel.hxx"
 #include "SGLib.hxx"
 
+int SettingsPanel::m_iPanelInstances = 0;
+
 SettingsPanel::SettingsPanel()
 	: m_bPopupActive(true)
 {
+	if(++SettingsPanel::m_iPanelInstances > 1)
+	{
+		this->m_bPanelActive = false;
+	}
+	else
+	{
+		this->m_bPanelActive = true;
+	}
 }
 
 SettingsPanel::~SettingsPanel()
 {
+	--SettingsPanel::m_iPanelInstances;
 }
 
 void SettingsPanel::render_panel(float const flDelta)
 {
-	if(!this->m_bPopupActive)
+	if(!this->m_bPanelActive)
 	{
 		return;
 	}
 
 	auto settings = SG::get_game_settings();
 
-	ImGui::Begin("Settings", nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize);
+	ImGui::Begin("Settings", nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_Modal);
 
 	ImGui::Text("Audio");
 	ImGui::Separator();
@@ -164,7 +175,7 @@ void SettingsPanel::render_panel(float const flDelta)
 
 		if(ImGui::Button("Close"))
 		{
-			this->m_bPopupActive = false;
+			this->m_bPanelActive = false;
 		}
 
 		if(bOpenChangeDialog)

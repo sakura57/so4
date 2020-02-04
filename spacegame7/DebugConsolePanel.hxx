@@ -25,6 +25,6 @@ public:
 private:
 	bool m_bPanelActive;
 	bool m_bScrollToBottom;
-	static bool m_bPanelExists;
+	static int m_iPanelInstances;
 	char *m_szInputBuffer;
 };

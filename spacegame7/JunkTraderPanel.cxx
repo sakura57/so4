@@ -3,15 +3,10 @@
 #include "SGLib.hxx"
 #include <sstream>
 
-bool JunkTraderPanel::m_bPanelExists = false;
+int JunkTraderPanel::m_iPanelInstances = 0;
 
 void JunkTraderPanel::render_panel(float const flDelta)
 {
-	if(!this->m_bPanelExists)
-	{
-		return;
-	}
-
 	if(this->m_pInventory == nullptr)
 	{
 		return;
@@ -99,7 +94,6 @@ void JunkTraderPanel::render_panel(float const flDelta)
 	if(ImGui::Button("Leave"))
 	{
 		this->m_bPanelActive = false;
-		this->m_bPanelExists = false;
 	}
 
 	ImGui::End();

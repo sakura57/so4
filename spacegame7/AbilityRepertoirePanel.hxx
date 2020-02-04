@@ -11,19 +11,18 @@ public:
 	AbilityRepertoirePanel(ICharacterEntity *pCharEntity)
 		: m_pCharEntity(pCharEntity)
 	{
-		if(this->m_bPanelExists)
+		if(++this->m_iPanelInstances > 1)
 		{
 			this->m_bPanelActive = false;
 		}
 		else
 		{
 			this->m_bPanelActive = true;
-			this->m_bPanelExists = true;
 		}
 	};
 	virtual ~AbilityRepertoirePanel()
 	{
-		this->m_bPanelExists = false;
+		--this->m_iPanelInstances;
 	};
 
 	virtual void render_panel(float const flDelta);
@@ -41,5 +40,5 @@ public:
 private:
 	ICharacterEntity *m_pCharEntity;
 	bool m_bPanelActive;
-	static bool m_bPanelExists;
+	static int m_iPanelInstances;
 };

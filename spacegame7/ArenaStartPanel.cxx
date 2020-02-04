@@ -6,15 +6,10 @@
 #include "CSectorTransitionState.hxx"
 #include "MainMenuPanel.hxx"
 
-bool ArenaStartPanel::m_bPanelExists = false;
+int ArenaStartPanel::m_iPanelInstances = 0;
 
 void ArenaStartPanel::render_panel(float const flDelta)
 {
-	if (!this->m_bPanelExists)
-	{
-		return;
-	}
-
 	static char szCharName[16] = "Recruit";
 	static int iCurrentItem = 0;
 

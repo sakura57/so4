@@ -20,7 +20,7 @@ public:
 
 	virtual bool panel_active(void)
 	{
-		return this->m_bPopupActive;
+		return this->m_bPanelActive;
 	};
 
 	virtual bool prevents_game_input(void)
@@ -71,4 +71,7 @@ private:
 	};
 
 	bool m_bPopupActive;
+
+	bool m_bPanelActive;
+	static int m_iPanelInstances;
 };

@@ -3,15 +3,10 @@
 #include "SGLib.hxx"
 #include <sstream>
 
-bool SaveGamePanel::m_bPanelExists = false;
+int SaveGamePanel::m_iPanelInstances = 0;
 
 void SaveGamePanel::render_panel(float const flDelta)
 {
-	if (!this->m_bPanelExists)
-	{
-		return;
-	}
-
 	ImGui::SetNextWindowPosCenter(ImGuiCond_Once | ImGuiCond_Appearing);
 
 	ImVec2 displaySize = ImGui::GetIO().DisplaySize;

@@ -3,19 +3,18 @@
 
 #define INPUT_BUFFER_SIZE 256
 
-bool DebugConsolePanel::m_bPanelExists = false;
+int DebugConsolePanel::m_iPanelInstances = 0;
 
 DebugConsolePanel::DebugConsolePanel()
 	: m_bScrollToBottom(false)
 {
-	if(this->m_bPanelExists)
+	if(++this->m_iPanelInstances > 1)
 	{
 		this->m_bPanelActive = false;
 	}
 	else
 	{
 		this->m_bPanelActive = true;
-		this->m_bPanelExists = true;
 	}
 
 	this->m_szInputBuffer = new char[INPUT_BUFFER_SIZE];
@@ -25,7 +24,7 @@ DebugConsolePanel::DebugConsolePanel()
 
 DebugConsolePanel::~DebugConsolePanel()
 {
-	this->m_bPanelExists = false;
+	--this->m_iPanelInstances;
 
 	delete[] this->m_szInputBuffer;
 }
@@ -97,7 +96,6 @@ void DebugConsolePanel::render_panel(float const flDelta)
 
 	if(ImGui::Button("Exit"))
 	{
-		this->m_bPanelExists = false;
 		this->m_bPanelActive = false;
 	}
 

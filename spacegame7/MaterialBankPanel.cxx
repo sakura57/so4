@@ -4,15 +4,10 @@
 #include <sstream>
 #include "MaterialExaminePanel.hxx"
 
-bool MaterialBankPanel::m_bPanelExists = false;
+int MaterialBankPanel::m_iPanelInstances = 0;
 
 void MaterialBankPanel::render_panel(float const flDelta)
 {
-	if(!this->m_bPanelExists)
-	{
-		return;
-	}
-
 	if(this->m_pMatBank == nullptr)
 	{
 		return;
@@ -46,7 +41,6 @@ void MaterialBankPanel::render_panel(float const flDelta)
 
 	if(ImGui::Button("Done"))
 	{
-		this->m_bPanelExists = false;
 		this->m_bPanelActive = false;
 	}
 

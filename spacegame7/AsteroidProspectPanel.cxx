@@ -7,15 +7,10 @@
 #define LINE_LENGTH 24
 #define LINES_PER_BOX 12
 
-bool AsteroidProspectPanel::m_bPanelExists = false;
+int AsteroidProspectPanel::m_iPanelInstances = 0;
 
 void AsteroidProspectPanel::render_panel(float const flDelta)
 {
-	if(!this->m_bPanelExists)
-	{
-		return;
-	}
-
 	if(this->m_uiAstfieldId == 0)
 	{
 		return;
@@ -48,7 +43,6 @@ void AsteroidProspectPanel::render_panel(float const flDelta)
 
 	if(ImGui::Button("Done"))
 	{
-		this->m_bPanelExists = false;
 		this->m_bPanelActive = false;
 	}
 
