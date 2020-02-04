@@ -2,15 +2,10 @@
 #include "SGLib.hxx"
 #include "AbilityToolbar.hxx"
 
-bool AbilityRepertoirePanel::m_bPanelExists = false;
+int AbilityRepertoirePanel::m_iPanelInstances = 0;
 
 void AbilityRepertoirePanel::render_panel(float const flDelta)
 {
-	if(!this->m_bPanelExists)
-	{
-		return;
-	}
-
 	ImGui::Begin("Known Abilities");
 
 	std::vector<SpellId> vKnownSpells = this->m_pCharEntity->get_known_spells();
@@ -83,7 +78,6 @@ void AbilityRepertoirePanel::render_panel(float const flDelta)
 	if(ImGui::Button("Done"))
 	{
 		this->m_bPanelActive = false;
-		this->m_bPanelExists = false;
 	}
 
 	ImGui::End();

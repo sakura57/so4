@@ -63,6 +63,8 @@ void InterfaceManager::render_all_panels(float const flDelta)
 				--this->m_iInputHinderingPanelCount;
 			}
 
+			delete* i;
+
 			this->m_vPanels.erase(i++);
 		}
 		else

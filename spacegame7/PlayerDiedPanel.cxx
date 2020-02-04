@@ -2,7 +2,7 @@
 #include "CMainMenuState.hxx"
 #include "PlayerDiedPanel.hxx"
 
-bool PlayerDiedPanel::m_bPanelExists = false;
+int PlayerDiedPanel::m_iPanelInstances = 0;
 
 void PlayerDiedPanel::render_panel(float const flDelta)
 {
@@ -96,5 +96,5 @@ void PlayerDiedPanel::render_panel(float const flDelta)
 
 bool PlayerDiedPanel::panel_active(void)
 {
-	return true;
+	return this->m_bPanelActive;
 };

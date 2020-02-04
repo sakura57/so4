@@ -9,14 +9,13 @@ public:
 	MaterialExaminePanel(std::string szMaterialSerial)
 		: m_szMaterialSerial(szMaterialSerial)
 	{
-		if(this->m_bPanelExists)
+		if(++this->m_iPanelInstances > 1)
 		{
 			this->m_bPanelActive = false;
 		}
 		else
 		{
 			this->m_bPanelActive = true;
-			this->m_bPanelExists = true;
 		}
 
 		this->build_id_text_block();
@@ -24,7 +23,7 @@ public:
 	};
 	virtual ~MaterialExaminePanel()
 	{
-		this->m_bPanelExists = false;
+		--this->m_iPanelInstances;
 	};
 
 	virtual void render_panel(float const flDelta);
@@ -40,7 +39,7 @@ private:
 	std::string m_szMaterialSerial;
 	std::string m_szIdText;
 	std::string m_szMatAttribsText;
-	static bool m_bPanelExists;
+	static int m_iPanelInstances;
 	bool m_bPanelActive;
 
 	void build_id_text_block(void);

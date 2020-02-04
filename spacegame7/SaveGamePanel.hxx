@@ -10,19 +10,18 @@ class SaveGamePanel : public InterfacePanel
 public:
 	SaveGamePanel()
 	{
-		if (this->m_bPanelExists)
+		if(++SaveGamePanel::m_iPanelInstances > 1)
 		{
 			this->m_bPanelActive = false;
 		}
 		else
 		{
 			this->m_bPanelActive = true;
-			this->m_bPanelExists = true;
 		}
 	};
 	virtual ~SaveGamePanel()
 	{
-		this->m_bPanelExists = false;
+		--SaveGamePanel::m_iPanelInstances;
 	};
 
 	virtual void render_panel(float const flDelta);
@@ -36,5 +35,5 @@ public:
 
 private:
 	bool m_bPanelActive;
-	static bool m_bPanelExists;
+	static int m_iPanelInstances;
 };

@@ -11,14 +11,13 @@ public:
 	SkillTreePanel(ICharacterEntity* pEntity)
 		: m_pEntity(pEntity), m_bRepaintTree(true)
 	{
-		if (this->m_bPanelExists)
+		if(++SkillTreePanel::m_iPanelInstances > 1)
 		{
 			this->m_bPanelActive = false;
 		}
 		else
 		{
 			this->m_bPanelActive = true;
-			this->m_bPanelExists = true;
 		}
 
 		CGameDataManager* pGDM = SG::get_game_data_manager();
@@ -33,7 +32,7 @@ public:
 	};
 	virtual ~SkillTreePanel()
 	{
-		this->m_bPanelExists = false;
+		--SkillTreePanel::m_iPanelInstances;
 	};
 
 	virtual void render_panel(float const flDelta);
@@ -48,7 +47,7 @@ public:
 private:
 	ICharacterEntity* m_pEntity;
 	bool m_bPanelActive;
-	static bool m_bPanelExists;
+	static int m_iPanelInstances;
 	CSkillTree* m_pSelectedSkillTree;
 	std::vector<std::vector<CSkill*>> m_vCurrentTreeSkills;
 	CSkill* m_pCurrentLegendarySkill;

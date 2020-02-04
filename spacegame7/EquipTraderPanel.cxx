@@ -3,15 +3,10 @@
 #include "SGLib.hxx"
 #include <sstream>
 
-bool EquipTraderPanel::m_bPanelExists = false;
+int EquipTraderPanel::m_iPanelInstances = 0;
 
 void EquipTraderPanel::render_panel(float const flDelta)
 {
-	if(!this->m_bPanelExists)
-	{
-		return;
-	}
-
 	if(this->m_pInventory == nullptr)
 	{
 		return;
@@ -313,7 +308,6 @@ void EquipTraderPanel::render_panel(float const flDelta)
 
 	if(ImGui::Button("Leave"))
 	{
-		this->m_bPanelExists = false;
 		this->m_bPanelActive = false;
 	}
 

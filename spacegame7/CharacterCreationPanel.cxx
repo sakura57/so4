@@ -5,15 +5,12 @@
 #include "CharacterCreationPanel.hxx"
 #include "CBaseTransitionState.hxx"
 
-bool CharacterCreationPanel::m_bPanelExists = false;
+#include "MainMenuPanel.hxx"
+
+int CharacterCreationPanel::m_iPanelInstances = 0;
 
 void CharacterCreationPanel::render_panel(float const flDelta)
 {
-	if(!this->m_bPanelExists)
-	{
-		return;
-	}
-
 	static char szCharName[16] = "Recruit";
 	static int iCurrentItem = 0;
 
@@ -76,6 +73,15 @@ void CharacterCreationPanel::render_panel(float const flDelta)
 		}
 
 		SG::get_game_state_manager()->transition_game_state(new CBaseTransitionState(1));
+	}
+
+	ImGui::Separator();
+
+	if(ImGui::Button("Back"))
+	{
+		SG::get_interface_manager()->add_panel(new MainMenuPanel);
+
+		this->m_bPanelActive = false;
 	}
 
 	ImGui::End();

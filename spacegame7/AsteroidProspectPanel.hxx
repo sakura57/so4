@@ -15,14 +15,13 @@ public:
 	AsteroidProspectPanel(AstfieldId uiAstfieldId)
 		: m_uiAstfieldId(uiAstfieldId), m_szDepositSerial("")
 	{
-		if(this->m_bPanelExists)
+		if(++this->m_iPanelInstances > 1)
 		{
 			this->m_bPanelActive = false;
 		}
 		else
 		{
 			this->m_bPanelActive = true;
-			this->m_bPanelExists = true;
 		}
 
 		this->build_id_text_block();
@@ -30,7 +29,7 @@ public:
 	};
 	virtual ~AsteroidProspectPanel()
 	{
-		this->m_bPanelExists = false;
+		--this->m_iPanelInstances;
 	};
 
 	virtual void render_panel(float const flDelta);
@@ -47,7 +46,7 @@ private:
 	std::string m_szIdText;
 	std::string m_szDescText;
 	std::string m_szDepositSerial;
-	static bool m_bPanelExists;
+	static int m_iPanelInstances;
 	bool m_bPanelActive;
 	char m_szDescBuffer[BUFFER_SIZE];
 

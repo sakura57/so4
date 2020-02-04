@@ -21,5 +21,5 @@ public:
 	};
 private:
 	bool m_bPanelActive;
-	static bool m_bPanelExists;
+	static int m_iPanelInstances;
 };

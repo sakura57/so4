@@ -3,15 +3,10 @@
 #include "SGLib.hxx"
 #include <sstream>
 
-bool MaterialExaminePanel::m_bPanelExists = false;
+int MaterialExaminePanel::m_iPanelInstances = 0;
 
 void MaterialExaminePanel::render_panel(float const flDelta)
 {
-	if(!this->m_bPanelExists)
-	{
-		return;
-	}
-
 	if(this->m_szMaterialSerial == "")
 	{
 		return;
@@ -29,7 +24,6 @@ void MaterialExaminePanel::render_panel(float const flDelta)
 
 	if(ImGui::Button("Done"))
 	{
-		this->m_bPanelExists = false;
 		this->m_bPanelActive = false;
 	}
 

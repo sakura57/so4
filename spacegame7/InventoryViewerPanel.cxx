@@ -3,15 +3,10 @@
 #include "SGLib.hxx"
 #include <sstream>
 
-bool InventoryViewerPanel::m_bPanelExists = false;
+int InventoryViewerPanel::m_iPanelInstances = 0;
 
 void InventoryViewerPanel::render_panel(float const flDelta)
 {
-	if(!this->m_bPanelExists)
-	{
-		return;
-	}
-
 	if(this->m_pInventory == nullptr)
 	{
 		return;
@@ -66,7 +61,6 @@ void InventoryViewerPanel::render_panel(float const flDelta)
 
 	if(ImGui::Button("Done"))
 	{
-		this->m_bPanelExists = false;
 		this->m_bPanelActive = false;
 	}
 

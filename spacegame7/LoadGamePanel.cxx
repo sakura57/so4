@@ -6,35 +6,30 @@
 #include "ICharacterEntity.hxx"
 #include "LoadGamePanel.hxx"
 #include "CSectorTransitionState.hxx"
+#include "MainMenuPanel.hxx"
 
-bool LoadGamePanel::m_bPanelExists = false;
+int LoadGamePanel::m_iPanelInstances = 0;
 
 LoadGamePanel::LoadGamePanel()
 	: m_bLoadingOperationInitiated(false)
 {
-	if(this->m_bPanelExists)
+	if(++this->m_iPanelInstances > 1)
 	{
 		this->m_bPanelActive = false;
 	}
 	else
 	{
 		this->m_bPanelActive = true;
-		this->m_bPanelExists = true;
 	}
 }
 
 LoadGamePanel::~LoadGamePanel()
 {
-	this->m_bPanelExists = false;
+	--this->m_iPanelInstances;
 }
 
 void LoadGamePanel::render_panel(float const flDelta)
 {
-	if (!this->m_bPanelExists)
-	{
-		return;
-	}
-
 	static std::string loadFailedPopupText("");
 
 	ImGui::SetNextWindowPosCenter(ImGuiCond_Once | ImGuiCond_Appearing);
@@ -100,6 +95,15 @@ void LoadGamePanel::render_panel(float const flDelta)
 
 			this->m_bLoadingOperationInitiated = false;
 		}
+	}
+
+	ImGui::Separator();
+
+	if(ImGui::Button("Back"))
+	{
+		SG::get_interface_manager()->add_panel(new MainMenuPanel);
+
+		this->m_bPanelActive = false;
 	}
 
 	if(ImGui::BeginPopupModal("Load Failed", NULL, ImGuiWindowFlags_AlwaysAutoResize))

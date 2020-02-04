@@ -19,7 +19,7 @@ public:
 	};
 
 private:
-	static bool m_bPanelExists;
+	static int m_iPanelInstances;
 	bool m_bPanelActive;
 	bool m_bLoadingOperationInitiated;
 	std::future<bool> m_fLoadingOperationResult;

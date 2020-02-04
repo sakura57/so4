@@ -85,7 +85,7 @@ void CMainMenuState::state_process_event(sf::View &, sf::RenderWindow &, sf::Eve
 
 bool CMainMenuState::state_terminated(void)
 {
-	return this->m_bInitialized && SG::get_interface_manager()->get_num_panels() == 0;
+	return false;
 }
 
 bool CMainMenuState::state_game_paused(void)

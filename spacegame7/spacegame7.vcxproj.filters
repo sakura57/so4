@@ -439,6 +439,12 @@
     <ClCompile Include="LoadoutPanel.cxx">
       <Filter>Engine\Interface</Filter>
     </ClCompile>
+    <ClCompile Include="MainMenuPanel.cxx">
+      <Filter>Engine\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingsPanel.cxx">
+      <Filter>Engine\Interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IEngine.hxx">

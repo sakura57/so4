@@ -2,7 +2,30 @@
 #include "SGLib.hxx"
 #include "CObject.hxx"
 
-bool SectorMapPanel::m_bPanelExists = false;
+int SectorMapPanel::m_iPanelInstances = 0;
+
+SectorMapPanel::SectorMapPanel(SectorId const uiSector)
+	: m_uiSectorId(uiSector), m_pSector(nullptr), m_pSectorMapRenderer(SG::get_render_pipeline()->get_sector_map_renderer())
+{
+	if(++SectorMapPanel::m_iPanelInstances > 1)
+	{
+		this->m_bPanelActive = false;
+	}
+	else
+	{
+		this->m_bPanelActive = true;
+
+		if(uiSector)
+		{
+			m_pSector = &SG::get_universe()->get_sector(uiSector);
+		}
+	}
+}
+
+SectorMapPanel::~SectorMapPanel()
+{
+	--SectorMapPanel::m_iPanelInstances;
+}
 
 void SectorMapPanel::render_panel(float const flDelta)
 {
@@ -51,7 +74,6 @@ void SectorMapPanel::render_panel(float const flDelta)
 	if(ImGui::Button("Done"))
 	{
 		this->m_bPanelActive = false;
-		this->m_bPanelExists = false;
 	}
 
 	ImGui::End();

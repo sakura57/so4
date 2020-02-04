@@ -9,19 +9,18 @@ public:
 	CharacterSheetPanel(ICharacterEntity *pEntity)
 		: m_pEntity(pEntity)
 	{
-		if(this->m_bPanelExists)
+		if(++this->m_iPanelInstances > 1)
 		{
 			this->m_bPanelActive = false;
 		}
 		else
 		{
 			this->m_bPanelActive = true;
-			this->m_bPanelExists = true;
 		}
 	};
 	virtual ~CharacterSheetPanel()
 	{
-		this->m_bPanelExists = false;
+		--this->m_iPanelInstances;
 	};
 
 	virtual void render_panel(float const flDelta);
@@ -36,5 +35,5 @@ public:
 private:
 	ICharacterEntity *m_pEntity;
 	bool m_bPanelActive;
-	static bool m_bPanelExists;
+	static int m_iPanelInstances;
 };

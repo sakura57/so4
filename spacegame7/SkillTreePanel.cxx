@@ -3,15 +3,10 @@
 #include "ISpell.hxx"
 #include <iostream>
 
-bool SkillTreePanel::m_bPanelExists = false;
+int SkillTreePanel::m_iPanelInstances = 0;
 
 void SkillTreePanel::render_panel(float const flDelta)
 {
-	if (!this->m_bPanelExists)
-	{
-		return;
-	}
-
 	if (this->m_pEntity == nullptr)
 	{
 		return;
@@ -148,7 +143,6 @@ void SkillTreePanel::render_panel(float const flDelta)
 
 	if (ImGui::Button("Done"))
 	{
-		this->m_bPanelExists = false;
 		this->m_bPanelActive = false;
 	}
 

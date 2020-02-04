@@ -270,12 +270,14 @@
     <ClCompile Include="JunkTraderPanel.cxx" />
     <ClCompile Include="LoadGamePanel.cxx" />
     <ClCompile Include="LoadoutPanel.cxx" />
+    <ClCompile Include="MainMenuPanel.cxx" />
     <ClCompile Include="MaterialBankPanel.cxx" />
     <ClCompile Include="MaterialExaminePanel.cxx" />
     <ClCompile Include="NotificationPanel.cxx" />
     <ClCompile Include="PlayerDiedPanel.cxx" />
     <ClCompile Include="SaveGamePanel.cxx" />
     <ClCompile Include="SectorMapPanel.cxx" />
+    <ClCompile Include="SettingsPanel.cxx" />
     <ClCompile Include="SkillTreePanel.cxx" />
     <ClCompile Include="Spells.cxx" />
     <ClCompile Include="Util.cxx" />
