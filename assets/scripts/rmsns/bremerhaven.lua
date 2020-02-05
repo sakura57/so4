@@ -80,14 +80,28 @@ function mission_await_player()
 	local dist = sgs_object_get_distance_to_object(player, target_ship)
 	
 	if dist < 1000.0 then
-		sgs_send_comm(target_name, comms_greetings[greeting])
-		sgs_object_set_attitude(target_ship, player, -0.7)
-		sgs_enqueue_callback(1.0, "mission_targets_dead")
-		sgs_enqueue_callback(10.0, "mission_reinforcements")
+		local ox, oy = sgs_object_get_position(player)
+		sgs_hud_hide()
+		sgs_object_halt(player)
+		sgs_cam_begin_vignette_camera(5.0, ox, oy, tarx, tary)
 		sgs_waypoint_remove()
+		sgs_enqueue_callback(8.0, "mission_introduce_pirates_scene_over")
+		sgs_enqueue_callback(1.0, "mission_pirate_sends_intro_comm")
 	else
 		sgs_enqueue_callback(1.0, "mission_await_player")
 	end
+end
+
+function mission_pirate_sends_intro_comm()
+	sgs_send_comm(target_name, comms_greetings[greeting])
+end
+
+function mission_introduce_pirates_scene_over()
+	sgs_cam_begin_chase_camera(player)
+	sgs_hud_show()
+	sgs_object_set_attitude(target_ship, player, -0.7)
+	sgs_enqueue_callback(1.0, "mission_targets_dead")
+	sgs_enqueue_callback(10.0, "mission_reinforcements")
 end
 
 function mission_reinforcements()
