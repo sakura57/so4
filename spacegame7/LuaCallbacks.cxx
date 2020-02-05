@@ -13,6 +13,8 @@
 #include "CSectorTransitionState.hxx"
 #include "CBaseTransitionState.hxx"
 #include "CAsteroidField.hxx"
+#include "CChaseCamera.hxx"
+#include "CVignetteCamera.hxx"
 
 extern "C"
 {
@@ -1586,6 +1588,105 @@ extern "C"
 
 		return 0;
 	}
+
+	/*
+	* Callback for cam_begin_chase_camera.
+	*/
+	static int sgs::cam_begin_chase_camera(lua_State* L)
+	{
+		int n = lua_gettop(L);
+
+		if(n != 1)
+		{
+			lua_pushstring(L, "incorrect number of arguments");
+			lua_error(L);
+		}
+
+		if(!lua_isinteger(L, 1))
+		{
+			lua_pushstring(L, "incorrect arg types");
+			lua_error(L);
+		}
+
+		InstanceId const iInstanceId = (InstanceId const)lua_tointeger(L, 1);
+
+		SG::get_world()->begin_world_transaction();
+
+		IWorldObject* pObject = sgs::worldobject_from_id(L, iInstanceId);
+
+		CListenable* pListenable;
+
+		if(pObject == nullptr || (pListenable = dynamic_cast<CListenable*>(pObject)) == nullptr)
+		{
+			SG::get_world()->end_world_transaction();
+
+			lua_pushstring(L, "object is invalid or of incorrect type to be the target of a chase camera");
+			lua_error(L);
+		}
+
+		SG::get_render_pipeline()->remove_active_camera();
+
+		CChaseCamera* cc;
+		InstanceId ccid;
+		CInstanceFactory::create<CChaseCamera>(ccid, cc);
+
+		pListenable->listener_add(cc);
+
+		cc->acquire_target(pObject);
+		cc->alive_set(true);
+		cc->set_position(pObject->get_position());
+		cc->set_bounds(Vector2f(2.275f * DEFAULT_WINDOW_WIDTH, 2.275f * DEFAULT_WINDOW_HEIGHT));
+
+		SG::get_render_pipeline()->set_active_camera(cc);
+
+		SG::get_world()->end_world_transaction();
+
+		SG::get_world()->instance_add(cc);
+
+		return 0;
+	}
+
+	/*
+	* Callback for cam_begin_vignette_camera
+	*/
+	static int sgs::cam_begin_vignette_camera(lua_State* L)
+	{
+		int n = lua_gettop(L);
+
+		if(n != 5)
+		{
+			lua_pushstring(L, "incorrect number of arguments");
+			lua_error(L);
+		}
+
+		if(!lua_isnumber(L, 1) || !lua_isnumber(L, 2) || !lua_isnumber(L, 3) || !lua_isnumber(L, 4) || !lua_isnumber(L, 5))
+		{
+			lua_pushstring(L, "incorrect arg types");
+			lua_error(L);
+		}
+
+		float flSplineDuration = (float)lua_tonumber(L, 1);
+		Vector2f vStartPosition = Vector2f((float)lua_tonumber(L, 2), (float)lua_tonumber(L, 3));
+		Vector2f vEndPosition = Vector2f((float)lua_tonumber(L, 4), (float)lua_tonumber(L, 5));
+
+		CVignetteCamera* vc;
+		InstanceId ccid;
+		CInstanceFactory::create<CVignetteCamera>(ccid, vc);
+
+		vc->alive_set(true);
+		vc->set_position(vStartPosition);
+		vc->set_bounds(Vector2f(2.275f * DEFAULT_WINDOW_WIDTH, 2.275f * DEFAULT_WINDOW_HEIGHT));
+		vc->set_origin_point(vStartPosition);
+		vc->set_final_point(vEndPosition);
+		vc->set_path_duration(flSplineDuration);
+
+		SG::get_render_pipeline()->remove_active_camera();
+		SG::get_render_pipeline()->set_active_camera(vc);
+
+		SG::get_world()->instance_add(vc);
+
+		return 0;
+	}
 }
 
 /*
@@ -1638,6 +1739,8 @@ void sgs::register_callbacks(void)
 	pScriptEngine->register_callback("sgs_map_add_zone_rectangular", &sgs::map_add_zone_rectangular);
 	pScriptEngine->register_callback("sgs_map_add_zone_circular", &sgs::map_add_zone_circular);
 	pScriptEngine->register_callback("sgs_send_notification", &sgs::send_notification);
+	pScriptEngine->register_callback("sgs_cam_begin_chase_camera", &sgs::cam_begin_chase_camera);
+	pScriptEngine->register_callback("sgs_cam_begin_vignette_camera", &sgs::cam_begin_vignette_camera);
 }
 
 /*

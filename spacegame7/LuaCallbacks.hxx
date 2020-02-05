@@ -59,6 +59,11 @@ extern "C"
 		static int map_add_zone_rectangular(lua_State*);
 		
 		static int send_notification(lua_State*);
+
+		static int cam_begin_chase_camera(lua_State*);
+		static int cam_begin_vignette_camera(lua_State*);
+		static int hud_hide(lua_State*);
+		static int hud_show(lua_State*);
 	}
 }
 
