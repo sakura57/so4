@@ -260,6 +260,7 @@
     <ClCompile Include="CStaticCamera.cxx" />
     <ClCompile Include="CStaticObject.cxx" />
     <ClCompile Include="CUniverse.cxx" />
+    <ClCompile Include="CVignetteCamera.cxx" />
     <ClCompile Include="CWorldTransaction.cxx" />
     <ClCompile Include="DebugCommands.cxx" />
     <ClCompile Include="DebugConsolePanel.cxx" />
@@ -387,6 +388,7 @@
     <ClInclude Include="CStatusPerfectDefense.hxx" />
     <ClInclude Include="CTransientStatusEffect.hxx" />
     <ClInclude Include="CUniverse.hxx" />
+    <ClInclude Include="CVignetteCamera.hxx" />
     <ClInclude Include="CWorldTransaction.hxx" />
     <ClInclude Include="DebugCommands.hxx" />
     <ClInclude Include="DebugConsolePanel.hxx" />

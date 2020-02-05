@@ -445,6 +445,9 @@
     <ClCompile Include="SettingsPanel.cxx">
       <Filter>Engine\Interface</Filter>
     </ClCompile>
+    <ClCompile Include="CVignetteCamera.cxx">
+      <Filter>Engine\Object\Camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IEngine.hxx">
@@ -986,6 +989,9 @@
     </ClInclude>
     <ClInclude Include="CLoadingScreenState.hxx">
       <Filter>Engine\GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="CVignetteCamera.hxx">
+      <Filter>Engine\Object\Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
