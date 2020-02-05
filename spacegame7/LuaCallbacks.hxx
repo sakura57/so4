@@ -64,6 +64,7 @@ extern "C"
 		static int cam_begin_vignette_camera(lua_State*);
 		static int hud_hide(lua_State*);
 		static int hud_show(lua_State*);
+		static int object_halt(lua_State*);
 	}
 }
 

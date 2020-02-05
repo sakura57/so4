@@ -1687,6 +1687,92 @@ extern "C"
 
 		return 0;
 	}
+
+	/*
+	* Callback for hud_hide
+	*/
+	static int sgs::hud_hide(lua_State* L)
+	{
+		int n = lua_gettop(L);
+
+		if(n != 0)
+		{
+			lua_pushstring(L, "incorrect number of arguments");
+			lua_error(L);
+		}
+
+		SG::get_game_state_manager()->get_game_state()->state_enable_input(false);
+
+		return 0;
+	}
+
+	/*
+	* Callback for hud_show
+	*/
+	static int sgs::hud_show(lua_State* L)
+	{
+		int n = lua_gettop(L);
+
+		if(n != 0)
+		{
+			lua_pushstring(L, "incorrect number of arguments");
+			lua_error(L);
+		}
+
+		SG::get_game_state_manager()->get_game_state()->state_enable_input(true);
+
+		return 0;
+	}
+
+	/*
+	 * Callback for object_halt
+	 */
+	static int sgs::object_halt(lua_State* L)
+	{
+		int n = lua_gettop(L);
+
+		if(n != 1)
+		{
+			lua_pushstring(L, "incorrect number of arguments");
+			lua_error(L);
+		}
+
+		if(!lua_isinteger(L, 1))
+		{
+			lua_pushstring(L, "incorrect arg types");
+			lua_error(L);
+		}
+
+		InstanceId const iInstanceId = (InstanceId const)lua_tointeger(L, 1);
+
+		SG::get_world()->begin_world_transaction();
+
+		IWorldObject* pObject = sgs::worldobject_from_id(L, iInstanceId);
+		
+		//if the object implements IPhysicalObject, zero its velocity and angular
+		//velocity
+		if(pObject->instance_get_flags() & IPhysicalObject::InstanceFlag)
+		{
+			IPhysicalObject* pPhysicalObject = dynamic_cast<IPhysicalObject*>(pObject);
+
+			pPhysicalObject->set_velocity(Vector2f(0.0f, 0.0f));
+			pPhysicalObject->set_angular_velocity(0.0f);
+		}
+
+		//if the object is a CShip, we want to set its throttle values to 0 so it
+		//doesn't immediately start building up speed again
+		if(pObject->instance_get_flags() & CShip::InstanceFlag)
+		{
+			CShip *pShip = static_cast<CShip*>(pObject);
+
+			pShip->set_throttle(0.0f);
+			pShip->set_spin_throttle(0.0f);
+		}
+
+		SG::get_world()->end_world_transaction();
+
+		return 0;
+	}
 }
 
 /*
@@ -1741,6 +1827,9 @@ void sgs::register_callbacks(void)
 	pScriptEngine->register_callback("sgs_send_notification", &sgs::send_notification);
 	pScriptEngine->register_callback("sgs_cam_begin_chase_camera", &sgs::cam_begin_chase_camera);
 	pScriptEngine->register_callback("sgs_cam_begin_vignette_camera", &sgs::cam_begin_vignette_camera);
+	pScriptEngine->register_callback("sgs_hud_hide", &sgs::hud_hide);
+	pScriptEngine->register_callback("sgs_hud_show", &sgs::hud_show);
+	pScriptEngine->register_callback("sgs_object_halt", &sgs::object_halt);
 }
 
 /*
