@@ -144,7 +144,6 @@ void CInSpaceState::state_initializing(void)
 	InstanceId ccid;
 	CInstanceFactory::create<CChaseCamera>(ccid, cc);
 	this->m_pWorld->instance_add(cc);
-	this->m_pActiveCamera = cc;
 	this->m_pRenderPipeline->set_active_camera(cc);
 
 	CShip *obj;
@@ -466,15 +465,19 @@ void CInSpaceState::state_postrender_tick(sf::RenderWindow &, float const)
 
 void CInSpaceState::state_terminating(void)
 {
-	if(this->m_pActiveCamera != nullptr)
+	ICamera* pActiveCamera = this->m_pRenderPipeline->acquire_active_camera();
+
+	if(pActiveCamera != nullptr)
 	{
-		if(this->m_pActiveCamera->instance_get_flags() & CChaseCamera::InstanceFlag)
+		if(pActiveCamera->instance_get_flags() & CChaseCamera::InstanceFlag)
 		{
-			CChaseCamera* pChaseCamera = static_cast<CChaseCamera*>(this->m_pActiveCamera);
+			CChaseCamera* pChaseCamera = static_cast<CChaseCamera*>(pActiveCamera);
 			pChaseCamera->release_target();
 		}
 
-		this->m_pActiveCamera = nullptr;
+		pActiveCamera = nullptr;
+
+		this->m_pRenderPipeline->release_active_camera();
 	}
 
 	this->m_pPlayer = nullptr;
@@ -682,12 +685,14 @@ void CInSpaceState::do_targeting_ui(sf::RenderWindow &sfWindow)
 		return;
 	}
 
-	if(this->m_pActiveCamera == nullptr)
+	if(this->m_bInputEnabled == false)
 	{
 		return;
 	}
 
-	if(this->m_bInputEnabled == false)
+	ICamera* pActiveCamera = this->m_pRenderPipeline->acquire_active_camera();
+
+	if(pActiveCamera == nullptr)
 	{
 		return;
 	}
@@ -704,7 +709,7 @@ void CInSpaceState::do_targeting_ui(sf::RenderWindow &sfWindow)
 		Vector2f vTargetPosition = this->m_vWaypointPosition;
 		this->m_mFieldAccess.unlock();
 
-		Vector2f vCameraPosition = this->m_pActiveCamera->get_position();
+		Vector2f vCameraPosition = pActiveCamera->get_position();
 		Vector2f vDelta = vTargetPosition - vCameraPosition;
 
 		sf::Color selectorColor(0.0f, 232.0f, 255.0f, 232.0f);
@@ -755,7 +760,7 @@ void CInSpaceState::do_targeting_ui(sf::RenderWindow &sfWindow)
 				IWorldObject *pTargetObject = static_cast<IWorldObject*>(pTargetInstance);
 
 				Vector2f vTargetPosition = pTargetObject->get_position();
-				Vector2f vCameraPosition = this->m_pActiveCamera->get_position();
+				Vector2f vCameraPosition = pActiveCamera->get_position();
 				Vector2f vDelta = vTargetPosition - vCameraPosition;
 
 				sf::Color selectorColor(255.0f, 255.0f, 255.0f, 232.0f);
@@ -871,6 +876,8 @@ void CInSpaceState::do_targeting_ui(sf::RenderWindow &sfWindow)
 
 		this->m_pWorld->end_world_transaction();
 	}
+
+	this->m_pRenderPipeline->release_active_camera();
 }
 
 /*

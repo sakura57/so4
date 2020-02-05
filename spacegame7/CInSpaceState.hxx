@@ -120,8 +120,6 @@ private:
 	IStaticTextureManager *m_pStaticTextureManager;
 	IUniverse *m_pUniverse;
 
-	ICamera * m_pActiveCamera;
-
 	CShip * m_pPlayer;
 	std::string m_szPlayerName;
 	InstanceId m_iPlayerId;
