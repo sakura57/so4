@@ -34,7 +34,10 @@ void CharacterCreationPanel::render_panel(float const flDelta)
 
 	if(ImGui::Button("Begin"))
 	{
-		ICharacterEntityManager *pEntityManager = SG::get_intransient_data_manager()->get_character_entity_manager();
+		IIntransientDataManager* pIDM = SG::get_intransient_data_manager();
+		pIDM->clear_string_variables();
+
+		ICharacterEntityManager *pEntityManager = pIDM->get_character_entity_manager();
 		pEntityManager->clear_entities();
 		pEntityManager->create_player_entity();
 
