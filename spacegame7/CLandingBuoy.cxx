@@ -169,6 +169,13 @@ void CLandingBuoy::interact(InstanceId const interactor)
 		return;
 	}
 
+	if(SG::get_intransient_data_manager()->get_string_variable("docking_enabled") == "n")
+	{
+		SG::get_game_state_manager()->get_game_state()->state_send_notification("You may not dock at this time");
+
+		return;
+	}
+
 	//Ensure the interactor is within range,
 	//if not and it's the player, send a comm
 	if(interactor != INVALID_INSTANCE)
