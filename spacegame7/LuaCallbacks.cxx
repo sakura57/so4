@@ -1767,6 +1767,7 @@ extern "C"
 
 			pShip->set_throttle(0.0f);
 			pShip->set_spin_throttle(0.0f);
+			pShip->set_strafe_throttle(0.0f);
 		}
 
 		SG::get_world()->end_world_transaction();
