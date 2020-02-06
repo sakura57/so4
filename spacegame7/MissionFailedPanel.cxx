@@ -6,7 +6,7 @@ int MissionFailedPanel::m_iPanelInstances = 0;
 
 void MissionFailedPanel::render_panel(float const flDelta)
 {
-	ImGui::SetNextWindowPosCenter(ImGuiCond_Once | ImGuiCond_Appearing);
+	ImGui::SetNextWindowPosCenter();
 
 	ImGui::Begin(
 		"Mission Failed",
