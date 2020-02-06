@@ -1406,6 +1406,7 @@ void CGameDataManager::dump_to_save_delegate(std::string const& saveFile, BaseId
 {
 	std::vector<ISaveable*> vSaveableStructures = {
 		SG::get_intransient_data_manager()->get_character_entity_manager(),
+		SG::get_intransient_data_manager(),
 		SG::get_material_manager()
 	};
 
@@ -1463,6 +1464,7 @@ bool CGameDataManager::load_from_save_delegate(std::string const& saveFile)
 {
 	std::vector<ISaveable*> vSaveableStructures = {
 		SG::get_material_manager(),
+		SG::get_intransient_data_manager(),
 		SG::get_intransient_data_manager()->get_character_entity_manager()
 	};
 

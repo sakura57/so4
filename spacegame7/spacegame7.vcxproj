@@ -211,6 +211,7 @@
     <ClCompile Include="CharacterSheetPanel.cxx" />
     <ClCompile Include="CInSpaceState.cxx" />
     <ClCompile Include="CIntransientDataManager.cxx" />
+    <ClCompile Include="CIntransientDataSaver.cxx" />
     <ClCompile Include="CLandedState.cxx" />
     <ClCompile Include="CLandingBuoy.cxx" />
     <ClCompile Include="CLoadingScreenState.cxx" />
@@ -336,6 +337,7 @@
     <ClInclude Include="CharacterSheetPanel.hxx" />
     <ClInclude Include="CInSpaceState.hxx" />
     <ClInclude Include="CIntransientDataManager.hxx" />
+    <ClInclude Include="CIntransientDataSaver.hxx" />
     <ClInclude Include="CLandedState.hxx" />
     <ClInclude Include="CLandingBuoy.hxx" />
     <ClInclude Include="CLoadingScreenState.hxx" />

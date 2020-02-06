@@ -448,6 +448,9 @@
     <ClCompile Include="CVignetteCamera.cxx">
       <Filter>Engine\Object\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="CIntransientDataSaver.cxx">
+      <Filter>Engine\Intransient</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IEngine.hxx">
@@ -992,6 +995,9 @@
     </ClInclude>
     <ClInclude Include="CVignetteCamera.hxx">
       <Filter>Engine\Object\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="CIntransientDataSaver.hxx">
+      <Filter>Engine\Intransient</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
