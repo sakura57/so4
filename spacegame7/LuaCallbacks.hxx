@@ -65,6 +65,9 @@ extern "C"
 		static int hud_hide(lua_State*);
 		static int hud_show(lua_State*);
 		static int object_halt(lua_State*);
+		static int object_enable_weapons(lua_State*);
+
+		static int object_set_invulnerable(lua_State*);
 	}
 }
 

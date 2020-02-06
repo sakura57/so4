@@ -1774,6 +1774,90 @@ extern "C"
 
 		return 0;
 	}
+
+	/*
+	* Callback for object_set_invulnerable
+	*/
+	static int sgs::object_set_invulnerable(lua_State* L)
+	{
+		int n = lua_gettop(L);
+
+		if(n != 2)
+		{
+			lua_pushstring(L, "incorrect number of arguments");
+			lua_error(L);
+		}
+
+		if(!lua_isinteger(L, 1) || !lua_isinteger(L, 2))
+		{
+			lua_pushstring(L, "incorrect arg types");
+			lua_error(L);
+		}
+
+		InstanceId const iInstance1Id = (InstanceId const)lua_tointeger(L, 1);
+		unsigned int const uiInvulnerabilityType = (unsigned int const)lua_tointeger(L, 2);
+
+		SG::get_world()->begin_world_transaction();
+
+		IWorldObject* pObject1 = sgs::worldobject_from_id(L, iInstance1Id);
+
+		if(!(pObject1->instance_get_flags() & CShip::InstanceFlag))
+		{
+			SG::get_world()->end_world_transaction();
+			lua_pushstring(L, "object is not a CShip");
+			lua_error(L);
+		}
+
+		CShip* pEqObj1 = static_cast<CShip*>(pObject1);
+
+		pEqObj1->set_invulnerable(uiInvulnerabilityType);
+
+		SG::get_world()->end_world_transaction();
+
+		return 0;
+	}
+
+	/*
+	* Callback for object_enable_weapons
+	*/
+	static int sgs::object_enable_weapons(lua_State* L)
+	{
+		int n = lua_gettop(L);
+
+		if(n != 2)
+		{
+			lua_pushstring(L, "incorrect number of arguments");
+			lua_error(L);
+		}
+
+		if(!lua_isinteger(L, 1) || !lua_isinteger(L, 2))
+		{
+			lua_pushstring(L, "incorrect arg types");
+			lua_error(L);
+		}
+
+		InstanceId const iInstance1Id = (InstanceId const)lua_tointeger(L, 1);
+		unsigned int const uiWeaponsEnabled = (unsigned int const)lua_tointeger(L, 2);
+
+		SG::get_world()->begin_world_transaction();
+
+		IWorldObject* pObject1 = sgs::worldobject_from_id(L, iInstance1Id);
+
+		if(!(pObject1->instance_get_flags() & CEquippedObject::InstanceFlag))
+		{
+			SG::get_world()->end_world_transaction();
+			lua_pushstring(L, "object is not a CEquippedObject");
+			lua_error(L);
+		}
+
+		CEquippedObject* pEqObj1 = static_cast<CEquippedObject*>(pObject1);
+
+		pEqObj1->enable_weapons(uiWeaponsEnabled != 0);
+
+		SG::get_world()->end_world_transaction();
+
+		return 0;
+	}
 }
 
 /*
@@ -1831,6 +1915,8 @@ void sgs::register_callbacks(void)
 	pScriptEngine->register_callback("sgs_hud_hide", &sgs::hud_hide);
 	pScriptEngine->register_callback("sgs_hud_show", &sgs::hud_show);
 	pScriptEngine->register_callback("sgs_object_halt", &sgs::object_halt);
+	pScriptEngine->register_callback("sgs_object_set_invulnerable", &sgs::object_set_invulnerable);
+	pScriptEngine->register_callback("sgs_object_enable_weapons", &sgs::object_enable_weapons);
 }
 
 /*

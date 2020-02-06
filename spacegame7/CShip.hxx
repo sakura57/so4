@@ -160,6 +160,8 @@ public:
 
 	void inflict_damage(float const flHullDamage, float const flShieldDamage);
 
+	void set_invulnerable(unsigned int const);
+
 protected:
 	//should not be changed after initialize()
 	ShipArch const *m_pShipArch;
