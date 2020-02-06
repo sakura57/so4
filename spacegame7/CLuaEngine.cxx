@@ -27,6 +27,42 @@ void CLuaEngine::initialize(void)
 
 void CLuaEngine::script_tick(float const flDelta)
 {
+	this->m_mLuaAccess.lock();
+
+	if(this->m_qPendingScripts.size())
+	{
+		for(std::string szScript : this->m_qPendingScripts)
+		{
+			std::string szFullScriptPath = SG::get_game_data_manager()->get_full_data_file_path(szScript);
+
+			/*
+			 * load the script
+			 */
+			if(luaL_loadfile(this->m_pLuaState, szFullScriptPath.c_str()))
+			{
+				std::string exceptionText("Failed to load script.\n");
+				exceptionText += lua_tostring(this->m_pLuaState, -1);
+				lua_pop(this->m_pLuaState, 1);
+				throw SGException(exceptionText);
+			}
+
+			/*
+			 * execute the script
+			 */
+			if(lua_pcall(this->m_pLuaState, 0, 1, 0))
+			{
+				std::string exceptionText = "Failed to execute script " + std::string(szScript) + "\n";
+				exceptionText += lua_tostring(this->m_pLuaState, -1);
+				lua_pop(this->m_pLuaState, 1);
+				throw SGException(exceptionText);
+			}
+		}
+
+		this->m_qPendingScripts.clear();
+	}
+
+	this->m_mLuaAccess.unlock();
+
 	this->m_mTimedCallQueueAccess.lock();
 
 	if(!this->m_qPendingTimedCalls.size())
@@ -96,29 +132,7 @@ void CLuaEngine::script_enqueue(char const *szScript)
 {
 	std::lock_guard<std::mutex> lock(this->m_mLuaAccess);
 
-	std::string szFullScriptPath = SG::get_game_data_manager()->get_full_data_file_path(szScript);
-
-	/*
-	 * load the script
-	 */
-	if(luaL_loadfile(this->m_pLuaState, szFullScriptPath.c_str()))
-	{
-		std::string exceptionText("Failed to load script.\n");
-		exceptionText += lua_tostring(this->m_pLuaState, -1);
-		lua_pop(this->m_pLuaState, 1);
-		throw SGException(exceptionText);
-	}
-
-	/*
-	 * execute the script
-	 */
-	if(lua_pcall(this->m_pLuaState, 0, 1, 0))
-	{
-		std::string exceptionText = "Failed to execute script " + std::string(szScript) + "\n";
-		exceptionText += lua_tostring(this->m_pLuaState, -1);
-		lua_pop(this->m_pLuaState, 1);
-		throw SGException(exceptionText);
-	}
+	this->m_qPendingScripts.push_back(szScript);
 }
 
 /*
