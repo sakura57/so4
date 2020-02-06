@@ -16,9 +16,13 @@ local spire_buoy = sgs_dockbuoy_create(3, 0.0, 0.0, 2) --Spire
 --Dynamic spawns section
 local pi_patroller_chars = {10, 11, 12, 13, 14, 15, 22, 23, 24}
 local patroller1 = 0
+local patroller2 = 0
 
 --Jericho (test)
-local patroller2 = sgs_ship_create(25, 1000.0, 200.0, 200.0)
+if sgs_get_variable("mission2_jericho_killed") ~= "y" then
+	patroller2 = sgs_ship_create(25, 1000.0, 200.0, 200.0)
+	sgs_enqueue_callback(2.5, "jericho_has_been_killed")
+end
 
 function patroller1_spawn()
 	local patroller1_char = pi_patroller_chars[sgs_random_int(1, #pi_patroller_chars)]
@@ -65,6 +69,15 @@ function patroller1_wander2()
 	else
 		sgs_enqueue_callback(sgs_random_float(10.0, 30.0), "patroller1_wander1")
 	end
+end
+
+function jericho_has_been_killed()
+	if sgs_object_exists(patroller2) then
+		sgs_enqueue_callback(2.5, "jericho_has_been_killed")
+		return
+	end
+
+	sgs_set_variable("mission2_jericho_killed", "y")
 end
 
 patroller1_spawn()
