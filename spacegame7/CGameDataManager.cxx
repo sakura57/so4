@@ -1717,3 +1717,94 @@ bool CGameDataManager::get_directory_exists(std::string const &szDirectoryPath)
 		return false;
 	}
 }
+
+/*
+* load all dialogue from dialogue.ini
+*/
+void CGameDataManager::load_all_dialogue(CDialogueManager* pDialogueManager)
+{
+	char szSectionNamesBuffer[LOADER_MAX_SECTIONS_BUFFER_SIZE] = "";
+	unsigned int uiSectionNamesLen = LOADER_MAX_SECTIONS_BUFFER_SIZE;
+
+	char szStringBuffer[LOADER_MAX_VALUE_BUFFER_SIZE];
+
+	ReadWriteIniKeyValueStringA(nullptr, nullptr, nullptr, CGameDataManager::get_full_data_file_path("dialogue.ini").c_str(), false, szSectionNamesBuffer, &uiSectionNamesLen);
+
+	char* szSection = szSectionNamesBuffer;
+
+	if(strlen(szSection) == 0)
+	{
+		throw SGException("dialogue.ini doesn\'t exist, or contains no sections");
+	}
+
+	while(*szSection)
+	{
+		unsigned int uiStringLen = LOADER_MAX_VALUE_BUFFER_SIZE;
+		strcpy_s(szStringBuffer, LOADER_MAX_VALUE_BUFFER_SIZE, "");
+
+		if(strncmp(szSection, "node", 4) == 0)
+		{
+			DialogueLineId lineId = CGameDataManager::read_ini_uint(CGameDataManager::get_full_data_file_path("dialogue.ini").c_str(), szSection, "id", "0");
+
+			CGameDataManager::read_ini_string(CGameDataManager::get_full_data_file_path("dialogue.ini").c_str(), szSection, "character", "", szStringBuffer, uiStringLen);
+			std::string szCharacterName(szStringBuffer);
+			uiStringLen = LOADER_MAX_VALUE_BUFFER_SIZE;
+			strcpy_s(szStringBuffer, LOADER_MAX_VALUE_BUFFER_SIZE, "");
+
+			CGameDataManager::read_ini_string(CGameDataManager::get_full_data_file_path("dialogue.ini").c_str(), szSection, "text", "", szStringBuffer, uiStringLen);
+			std::string szLineText(szStringBuffer);
+			uiStringLen = LOADER_MAX_VALUE_BUFFER_SIZE;
+			strcpy_s(szStringBuffer, LOADER_MAX_VALUE_BUFFER_SIZE, "");
+
+			CGameDataManager::read_ini_string(CGameDataManager::get_full_data_file_path("dialogue.ini").c_str(), szSection, "responses", "", szStringBuffer, uiStringLen);
+
+			std::vector<DialogueResponseId> vResponses;
+			DialogueResponseId responseId;
+			std::stringstream ss(szStringBuffer);
+			while(ss >> responseId)
+			{
+				vResponses.push_back(responseId);
+			}
+
+			uiStringLen = LOADER_MAX_VALUE_BUFFER_SIZE;
+			strcpy_s(szStringBuffer, LOADER_MAX_VALUE_BUFFER_SIZE, "");
+
+			CDialogueLine* pLine = new CDialogueLine(lineId, szCharacterName, szLineText, vResponses);
+
+			pDialogueManager->add_dialogue_line(lineId, pLine);
+		}
+		else if(strncmp(szSection, "response", 8) == 0)
+		{
+			DialogueResponseId responseId = CGameDataManager::read_ini_uint(CGameDataManager::get_full_data_file_path("dialogue.ini").c_str(), szSection, "id", "0");
+
+			CGameDataManager::read_ini_string(CGameDataManager::get_full_data_file_path("dialogue.ini").c_str(), szSection, "text", "", szStringBuffer, uiStringLen);
+			std::string szResponseText(szStringBuffer);
+			uiStringLen = LOADER_MAX_VALUE_BUFFER_SIZE;
+			strcpy_s(szStringBuffer, LOADER_MAX_VALUE_BUFFER_SIZE, "");
+
+			DialogueLineId nextLineId = CGameDataManager::read_ini_uint(CGameDataManager::get_full_data_file_path("dialogue.ini").c_str(), szSection, "next_node", "0");
+
+			CGameDataManager::read_ini_string(CGameDataManager::get_full_data_file_path("dialogue.ini").c_str(), szSection, "variable_set", "", szStringBuffer, uiStringLen);
+
+			std::string szVariableKey,szVariableValue;
+			std::stringstream ss(szStringBuffer);
+			
+			if(ss >> szVariableKey && ss >> szVariableValue)
+			{ }
+			else
+			{
+				szVariableKey = std::string("");
+				szVariableValue = std::string("");
+			}
+
+			uiStringLen = LOADER_MAX_VALUE_BUFFER_SIZE;
+			strcpy_s(szStringBuffer, LOADER_MAX_VALUE_BUFFER_SIZE, "");
+
+			CDialogueResponse* pResponse = new CDialogueResponse(responseId, szResponseText, nextLineId, szVariableKey, szVariableValue);
+
+			pDialogueManager->add_dialogue_response(responseId, pResponse);
+		}
+		
+		szSection += strlen(szSection) + 1;
+	}
+}
