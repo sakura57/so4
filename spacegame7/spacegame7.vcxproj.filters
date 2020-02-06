@@ -466,6 +466,9 @@
     <ClCompile Include="CDialogueResponse.cxx">
       <Filter>Engine\Vignette\Dialogue</Filter>
     </ClCompile>
+    <ClCompile Include="DialoguePanel.cxx">
+      <Filter>Engine\Interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IEngine.hxx">
@@ -1022,6 +1025,9 @@
     </ClInclude>
     <ClInclude Include="CDialogueResponse.hxx">
       <Filter>Engine\Vignette\Dialogue</Filter>
+    </ClInclude>
+    <ClInclude Include="DialoguePanel.hxx">
+      <Filter>Engine\Interface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

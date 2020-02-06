@@ -15,6 +15,7 @@
 #include "CAsteroidField.hxx"
 #include "CChaseCamera.hxx"
 #include "CVignetteCamera.hxx"
+#include "DialoguePanel.hxx"
 
 extern "C"
 {
@@ -1858,6 +1859,97 @@ extern "C"
 
 		return 0;
 	}
+
+	/*
+	* Callback for dialogue_begin
+	*/
+	static int sgs::dialogue_begin(lua_State* L)
+	{
+		int n = lua_gettop(L);
+
+		if(n != 1)
+		{
+			lua_pushstring(L, "incorrect number of arguments");
+			lua_error(L);
+		}
+
+		if(!lua_isinteger(L, 1))
+		{
+			lua_pushstring(L, "incorrect arg types");
+			lua_error(L);
+		}
+
+		DialogueLineId const uiDialogueLineId = (InstanceId const)lua_tointeger(L, 1);
+
+		DialoguePanel* pPanel = new DialoguePanel(uiDialogueLineId);
+
+		pPanel->begin_dialogue();
+
+		SG::get_interface_manager()->add_panel(pPanel);
+
+		return 0;
+	}
+
+	/*
+	* Callback for get_asset_path
+	*/
+	static int sgs::get_asset_path(lua_State* L)
+	{
+		int n = lua_gettop(L);
+
+		if(n != 1)
+		{
+			lua_pushstring(L, "incorrect number of arguments");
+			lua_error(L);
+		}
+
+		if(!lua_isstring(L, 1))
+		{
+			lua_pushstring(L, "incorrect arg types");
+			lua_error(L);
+		}
+
+		std::string szFile(lua_tostring(L, 1));
+
+		std::string szFullPath = SG::get_game_data_manager()->get_full_data_file_path(szFile);
+
+		lua_pushstring(L, szFullPath.c_str());
+
+		return 1;
+	}
+
+	/*
+	* Callback for get_sector
+	*/
+	static int sgs::get_sector(lua_State* L)
+	{
+		int n = lua_gettop(L);
+
+		if(n != 0)
+		{
+			lua_pushstring(L, "incorrect number of arguments");
+			lua_error(L);
+		}
+
+		IGameState* pState = SG::get_game_state_manager()->get_game_state();
+
+		CInSpaceState* pInSpaceState = dynamic_cast<CInSpaceState*>(pState);
+
+		SectorId sectorId;
+
+		if(pState != nullptr)
+		{
+			sectorId = pInSpaceState->get_current_sector();
+		}
+		else
+		{
+			sectorId = 0U;
+		}
+
+		lua_pushinteger(L, (lua_Integer)sectorId);
+
+		return 1;
+	}
 }
 
 /*
@@ -1917,6 +2009,9 @@ void sgs::register_callbacks(void)
 	pScriptEngine->register_callback("sgs_object_halt", &sgs::object_halt);
 	pScriptEngine->register_callback("sgs_object_set_invulnerable", &sgs::object_set_invulnerable);
 	pScriptEngine->register_callback("sgs_object_enable_weapons", &sgs::object_enable_weapons);
+	pScriptEngine->register_callback("sgs_dialogue_begin", &sgs::dialogue_begin);
+	pScriptEngine->register_callback("sgs_get_asset_path", &sgs::get_asset_path);
+	pScriptEngine->register_callback("sgs_get_sector", &sgs::get_sector);
 }
 
 /*

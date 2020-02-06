@@ -1100,3 +1100,10 @@ bool CInSpaceState::state_render_ui(void)
 {
 	return true;
 }
+
+SectorId CInSpaceState::get_current_sector(void)
+{
+	SCOPE_LOCK(this->m_mFieldAccess);
+
+	return this->m_uiSectorId;
+}

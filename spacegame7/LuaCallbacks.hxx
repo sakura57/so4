@@ -68,6 +68,11 @@ extern "C"
 		static int object_enable_weapons(lua_State*);
 
 		static int object_set_invulnerable(lua_State*);
+
+		static int dialogue_begin(lua_State *);
+		static int get_asset_path(lua_State*);
+
+		static int get_sector(lua_State*);
 	}
 }
 

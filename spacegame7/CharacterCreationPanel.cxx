@@ -72,7 +72,7 @@ void CharacterCreationPanel::render_panel(float const flDelta)
 			break;
 		}
 
-		SG::get_game_state_manager()->transition_game_state(new CBaseTransitionState(1));
+		SG::get_game_state_manager()->transition_game_state(new CSectorTransitionState(2, "", Vector2f(-1500.0f, 14000.0f)));
 	}
 
 	ImGui::Separator();

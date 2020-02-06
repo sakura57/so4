@@ -58,6 +58,8 @@ public:
 
 	void set_rmsn_script(std::string const &);
 
+	SectorId get_current_sector(void);
+
 private:
 	void do_targeting_ui(sf::RenderWindow &);
 	void update_view(sf::View &);
