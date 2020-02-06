@@ -73,6 +73,7 @@ extern "C"
 		static int get_asset_path(lua_State*);
 
 		static int get_sector(lua_State*);
+		static int fail_mission(lua_State*);
 	}
 }
 

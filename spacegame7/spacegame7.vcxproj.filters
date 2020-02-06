@@ -469,6 +469,9 @@
     <ClCompile Include="DialoguePanel.cxx">
       <Filter>Engine\Interface</Filter>
     </ClCompile>
+    <ClCompile Include="MissionFailedPanel.cxx">
+      <Filter>Engine\Interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IEngine.hxx">
@@ -1027,6 +1030,9 @@
       <Filter>Engine\Vignette\Dialogue</Filter>
     </ClInclude>
     <ClInclude Include="DialoguePanel.hxx">
+      <Filter>Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="MissionFailedPanel.hxx">
       <Filter>Engine\Interface</Filter>
     </ClInclude>
   </ItemGroup>

@@ -16,6 +16,7 @@
 #include "CChaseCamera.hxx"
 #include "CVignetteCamera.hxx"
 #include "DialoguePanel.hxx"
+#include "MissionFailedPanel.hxx"
 
 extern "C"
 {
@@ -1950,6 +1951,34 @@ extern "C"
 
 		return 1;
 	}
+
+	/*
+	* Callback for fail_mission
+	*/
+	static int sgs::fail_mission(lua_State* L)
+	{
+		int n = lua_gettop(L);
+
+		if(n != 1)
+		{
+			lua_pushstring(L, "incorrect number of arguments");
+			lua_error(L);
+		}
+
+		if(!lua_isstring(L, 1))
+		{
+			lua_pushstring(L, "incorrect arg types");
+			lua_error(L);
+		}
+
+		std::string szFailReason(lua_tostring(L, 1));
+
+		SG::get_game_state_manager()->get_game_state()->state_enable_input(false);
+
+		SG::get_interface_manager()->add_panel(new MissionFailedPanel(szFailReason));
+
+		return 0;
+	}
 }
 
 /*
@@ -2012,6 +2041,7 @@ void sgs::register_callbacks(void)
 	pScriptEngine->register_callback("sgs_dialogue_begin", &sgs::dialogue_begin);
 	pScriptEngine->register_callback("sgs_get_asset_path", &sgs::get_asset_path);
 	pScriptEngine->register_callback("sgs_get_sector", &sgs::get_sector);
+	pScriptEngine->register_callback("sgs_fail_mission", &sgs::fail_mission);
 }
 
 /*
