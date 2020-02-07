@@ -9,7 +9,7 @@ public:
 	CUniverse();
 	~CUniverse();
 
-	virtual void add_sector(SectorId const, std::string const &, std::string const &, std::string const &, FactionId const) final;
+	virtual void add_sector(SectorId const, std::string const &, std::string const &, std::string const &, FactionId const, float const (&)[3]) final;
 	virtual void add_base(BaseId const, CBase::CreationParameters const &) final;
 	virtual void add_astfield(AstfieldId const, CAstfield::CreationParameters const&) final;
 	virtual CSector const &get_sector(SectorId const) const final;

@@ -10,14 +10,14 @@ CUniverse::~CUniverse()
 	
 }
 
-void CUniverse::add_sector(SectorId const iSectorId, std::string const &szName, std::string const &szDesc, std::string const &szScriptPath, FactionId const iGoverningFaction)
+void CUniverse::add_sector(SectorId const iSectorId, std::string const &szName, std::string const &szDesc, std::string const &szScriptPath, FactionId const iGoverningFaction, float const (&flBgTint)[3])
 {
 	if(this->m_vSectors.size() <= iSectorId)
 	{
 		this->m_vSectors.resize(iSectorId + 1);
 	}
 
-	this->m_vSectors[iSectorId] = CSector(szName, szDesc, szScriptPath, iGoverningFaction);
+	this->m_vSectors[iSectorId] = CSector(szName, szDesc, szScriptPath, iGoverningFaction, flBgTint);
 }
 
 CSector const &CUniverse::get_sector(SectorId const iSectorId) const

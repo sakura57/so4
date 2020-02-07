@@ -365,6 +365,14 @@ void CInSpaceState::state_render_world_tick(sf::View &sfView, sf::RenderWindow &
 
 		this->m_sfBackgroundShader.setUniform("offset", sf::Glsl::Vec2(vCameraPosition.x * 0.00025f, vCameraPosition.y * 0.00025f));
 
+		float flBgTint[3];
+
+		CSector const& pSector = this->m_pUniverse->get_sector(this->m_uiSectorId);
+
+		pSector.get_bg_tint(flBgTint);
+
+		this->m_sfBackgroundShader.setUniform("tint", sf::Glsl::Vec3(flBgTint[0], flBgTint[1], flBgTint[2]));
+
 		sfWindow.draw(this->m_sfBgVerts, states);
 	}
 

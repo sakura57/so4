@@ -9,9 +9,16 @@ CSector::CSector()
 CSector::CSector(std::string const &szName,
 	std::string const &szDesc,
 	std::string const &szScriptPath,
-	FactionId const iGoverningFaction)
-	: m_szName(szName), m_szDescription(szDesc), m_szScriptPath(szScriptPath), m_iGoverningFaction(iGoverningFaction)
+	FactionId const iGoverningFaction,
+	float const (&flBgTint)[3])
+	: m_szName(szName),
+	m_szDescription(szDesc),
+	m_szScriptPath(szScriptPath),
+	m_iGoverningFaction(iGoverningFaction)
 {
+	this->m_flBgTint[0] = flBgTint[0];
+	this->m_flBgTint[1] = flBgTint[1];
+	this->m_flBgTint[2] = flBgTint[2];
 }
 
 CSector::~CSector()
@@ -37,4 +44,11 @@ std::string CSector::get_script_path(void) const
 FactionId CSector::get_governing_faction(void) const
 {
 	return this->m_iGoverningFaction;
+}
+
+void CSector::get_bg_tint(float (&flBgTint)[3]) const
+{
+	flBgTint[0] = this->m_flBgTint[0];
+	flBgTint[1] = this->m_flBgTint[1];
+	flBgTint[2] = this->m_flBgTint[2];
 }

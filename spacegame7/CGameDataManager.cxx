@@ -670,7 +670,23 @@ void CGameDataManager::load_all_sectors(IUniverse *pUniverse)
 
 		FactionId iRulingFaction = (FactionId)CGameDataManager::read_ini_uint(CGameDataManager::get_full_data_file_path("universe.ini").c_str(), szSection, "ruling_faction", "0");
 
-		pUniverse->add_sector(sectorId, szSectorName, szSectorDesc, szScriptPath, iRulingFaction);
+		CGameDataManager::read_ini_string(CGameDataManager::get_full_data_file_path("universe.ini").c_str(), szSection, "bg_tint", "", szStringBuffer, uiStringLen);
+
+		float flBgTint[3];
+		int bgTintPos = 0;
+		std::stringstream ss(szStringBuffer);
+		while(ss >> flBgTint[bgTintPos++])
+		{
+			if(bgTintPos > 3)
+			{
+				throw SGException("Too many values in array");
+			}
+		}
+
+		uiStringLen = LOADER_MAX_VALUE_BUFFER_SIZE;
+		strcpy_s(szStringBuffer, LOADER_MAX_VALUE_BUFFER_SIZE, "");
+
+		pUniverse->add_sector(sectorId, szSectorName, szSectorDesc, szScriptPath, iRulingFaction, flBgTint);
 
 		szSection += strlen(szSection) + 1;
 	}
