@@ -562,3 +562,10 @@ void CShip::flick_shields(void)
 		pShield->register_hit();
 	}
 }
+
+void CShip::set_invulnerable(unsigned int const uiInvulnerabilityType)
+{
+	SCOPE_LOCK(this->m_mFieldAccess);
+
+	this->m_uiInvulnerable = uiInvulnerabilityType;
+}

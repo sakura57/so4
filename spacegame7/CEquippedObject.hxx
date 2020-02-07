@@ -174,8 +174,11 @@ public:
 		return this->m_pParentEntity;
 	};
 
+	void enable_weapons(bool const);
+
 protected:
 	bool m_bAlive;
+	bool m_bWeaponsEnabled;
 	std::vector<InstanceId> m_lChildIds;
 	Loadout m_pStartingLoadout;
 	Faction const *m_pFaction;

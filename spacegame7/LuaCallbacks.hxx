@@ -59,6 +59,21 @@ extern "C"
 		static int map_add_zone_rectangular(lua_State*);
 		
 		static int send_notification(lua_State*);
+
+		static int cam_begin_chase_camera(lua_State*);
+		static int cam_begin_vignette_camera(lua_State*);
+		static int hud_hide(lua_State*);
+		static int hud_show(lua_State*);
+		static int object_halt(lua_State*);
+		static int object_enable_weapons(lua_State*);
+
+		static int object_set_invulnerable(lua_State*);
+
+		static int dialogue_begin(lua_State *);
+		static int get_asset_path(lua_State*);
+
+		static int get_sector(lua_State*);
+		static int fail_mission(lua_State*);
 	}
 }
 

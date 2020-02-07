@@ -67,6 +67,11 @@ private:
 
 	IWorldObject *get_parent(void)
 	{
+		if(!SG::get_engine()->instance_is_allocated(this->m_iParentInstanceId))
+		{
+			return nullptr;
+		}
+
 		IWorldInstance *pInstance = SG::get_engine()->instance_get(this->m_iParentInstanceId);
 
 		if (pInstance->instance_get_flags() & IWorldObject::InstanceFlag)

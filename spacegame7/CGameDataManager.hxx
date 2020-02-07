@@ -21,6 +21,7 @@
 #include "ILootTableManager.hxx"
 #include "CSkillDataManager.hxx"
 #include "IMatManager.hxx"
+#include "CDialogueManager.hxx"
 
 /*
  * This class is only PARTIALLY threadsafe.
@@ -48,6 +49,7 @@ public:
 	static void load_all_astfields(IUniverse*);
 	static void load_all_loottables(ILootTableManager *);
 	static void load_all_resource_classes(IMatManager *);
+	static void load_all_dialogue(CDialogueManager*);
 
 	static std::future<bool> load_from_save(std::string const &);
 	static void dump_to_save(std::string const &, BaseId const);

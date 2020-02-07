@@ -196,6 +196,9 @@
     <ClCompile Include="CCommsManager.cxx" />
     <ClCompile Include="CDebugConsole.cxx" />
     <ClCompile Include="CDestinedProjectile.cxx" />
+    <ClCompile Include="CDialogueLine.cxx" />
+    <ClCompile Include="CDialogueManager.cxx" />
+    <ClCompile Include="CDialogueResponse.cxx" />
     <ClCompile Include="CEngineFlame.cxx" />
     <ClCompile Include="CEntityInventory.cxx" />
     <ClCompile Include="CEquipInstance.cxx" />
@@ -211,6 +214,7 @@
     <ClCompile Include="CharacterSheetPanel.cxx" />
     <ClCompile Include="CInSpaceState.cxx" />
     <ClCompile Include="CIntransientDataManager.cxx" />
+    <ClCompile Include="CIntransientDataSaver.cxx" />
     <ClCompile Include="CLandedState.cxx" />
     <ClCompile Include="CLandingBuoy.cxx" />
     <ClCompile Include="CLoadingScreenState.cxx" />
@@ -260,9 +264,11 @@
     <ClCompile Include="CStaticCamera.cxx" />
     <ClCompile Include="CStaticObject.cxx" />
     <ClCompile Include="CUniverse.cxx" />
+    <ClCompile Include="CVignetteCamera.cxx" />
     <ClCompile Include="CWorldTransaction.cxx" />
     <ClCompile Include="DebugCommands.cxx" />
     <ClCompile Include="DebugConsolePanel.cxx" />
+    <ClCompile Include="DialoguePanel.cxx" />
     <ClCompile Include="EquipTraderPanel.cxx" />
     <ClCompile Include="IMaterial.cxx" />
     <ClCompile Include="IMaterialClass.cxx" />
@@ -273,6 +279,7 @@
     <ClCompile Include="MainMenuPanel.cxx" />
     <ClCompile Include="MaterialBankPanel.cxx" />
     <ClCompile Include="MaterialExaminePanel.cxx" />
+    <ClCompile Include="MissionFailedPanel.cxx" />
     <ClCompile Include="NotificationPanel.cxx" />
     <ClCompile Include="PlayerDiedPanel.cxx" />
     <ClCompile Include="SaveGamePanel.cxx" />
@@ -319,6 +326,8 @@
     <ClInclude Include="CCommsManager.hxx" />
     <ClInclude Include="CDebugConsole.hxx" />
     <ClInclude Include="CDestinedProjectile.hxx" />
+    <ClInclude Include="CDialogueLine.hxx" />
+    <ClInclude Include="CDialogueResponse.hxx" />
     <ClInclude Include="CEngineFlame.hxx" />
     <ClInclude Include="CEntityInventory.hxx" />
     <ClInclude Include="CEquipInstance.hxx" />
@@ -335,6 +344,7 @@
     <ClInclude Include="CharacterSheetPanel.hxx" />
     <ClInclude Include="CInSpaceState.hxx" />
     <ClInclude Include="CIntransientDataManager.hxx" />
+    <ClInclude Include="CIntransientDataSaver.hxx" />
     <ClInclude Include="CLandedState.hxx" />
     <ClInclude Include="CLandingBuoy.hxx" />
     <ClInclude Include="CLoadingScreenState.hxx" />
@@ -387,16 +397,19 @@
     <ClInclude Include="CStatusPerfectDefense.hxx" />
     <ClInclude Include="CTransientStatusEffect.hxx" />
     <ClInclude Include="CUniverse.hxx" />
+    <ClInclude Include="CVignetteCamera.hxx" />
     <ClInclude Include="CWorldTransaction.hxx" />
     <ClInclude Include="DebugCommands.hxx" />
     <ClInclude Include="DebugConsolePanel.hxx" />
     <ClInclude Include="DebugPanel.hxx" />
+    <ClInclude Include="DialoguePanel.hxx" />
     <ClInclude Include="EquipTraderPanel.hxx" />
     <ClInclude Include="Faction.hxx" />
     <ClInclude Include="GLStarfield.hxx" />
     <ClInclude Include="ICharacterEntity.hxx" />
     <ClInclude Include="ICharacterEntityManager.hxx" />
     <ClInclude Include="IDebugConsole.hxx" />
+    <ClInclude Include="CDialogueManager.hxx" />
     <ClInclude Include="IEntityInventory.hxx" />
     <ClInclude Include="CGameSettings.hxx" />
     <ClInclude Include="IGameClock.hxx" />
@@ -459,6 +472,7 @@
     <ClInclude Include="MaterialBankPanel.hxx" />
     <ClInclude Include="MaterialExaminePanel.hxx" />
     <ClInclude Include="MaterialType.hxx" />
+    <ClInclude Include="MissionFailedPanel.hxx" />
     <ClInclude Include="NotificationPanel.hxx" />
     <ClInclude Include="Pilot.hxx" />
     <ClInclude Include="PlayerDiedPanel.hxx" />

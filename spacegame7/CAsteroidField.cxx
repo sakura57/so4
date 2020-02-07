@@ -138,8 +138,6 @@ void CAsteroidField::alive_tick(float const fDelta)
 			if(!this->m_bPlayerPresent)
 			{
 				this->m_bPlayerPresent = true;
-
-				SG::get_game_state_manager()->get_game_state()->state_send_notification("Entering asteroid field");
 			}
 		}
 		else
@@ -147,8 +145,6 @@ void CAsteroidField::alive_tick(float const fDelta)
 			if(this->m_bPlayerPresent)
 			{
 				this->m_bPlayerPresent = false;
-
-				SG::get_game_state_manager()->get_game_state()->state_send_notification("Leaving asteroid field");
 			}
 		}
 	}

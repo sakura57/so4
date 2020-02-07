@@ -58,6 +58,11 @@ void CEquippedObject::instance_create(InstanceId const instanceId)
  */
 void CEquippedObject::fire_weapons_if_ready(ArchType const equip_type)
 {
+	if(this->m_bWeaponsEnabled == false)
+	{
+		return;
+	}
+
 	//Walk child instances
 	for(InstanceId childId : this->m_lChildIds)
 	{
@@ -118,6 +123,7 @@ void CEquippedObject::initialize(CreationParameters const &creationParameters)
 	this->m_flCapacitorRegenRate = creationParameters.flCapacitorRegenRate;
 	this->m_ulExpValue = creationParameters.ulExpValue;
 	this->m_pParentEntity = creationParameters.pParentEntity;
+	this->m_bWeaponsEnabled = true;
 
 	//if we don't have a null pilot, spawn an AI controller to control
 	//the ship
@@ -318,4 +324,11 @@ void CEquippedObject::perform_hostile_action(InstanceId const iAggressor)
 	SCOPE_LOCK(this->m_mFieldAccess);
 
 	this->m_attitudeSet.set_attitude(iAggressor, ATTITUDE_LOATHING);
+}
+
+void CEquippedObject::enable_weapons(bool const bEnabled)
+{
+	SCOPE_LOCK(this->m_mFieldAccess);
+
+	this->m_bWeaponsEnabled = bEnabled;
 }

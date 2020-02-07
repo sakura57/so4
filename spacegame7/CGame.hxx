@@ -60,6 +60,7 @@ private:
 	IMatManager* m_pMaterialManager;
 	IGameClock* m_pGameClock;
 	IDebugConsole* m_pDebugConsole;
+	CDialogueManager* m_pDialogueManager;
 
 	sf::RenderWindow m_sfWindow;
 	std::mutex m_mWindowAccess;

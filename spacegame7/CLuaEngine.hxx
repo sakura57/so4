@@ -82,4 +82,6 @@ private:
 	std::mutex m_mTimedCallQueueAccess;
 	std::vector<TimedCallbackDescriptor> m_qPendingTimedCalls;
 	CallbackId m_uiLastTimedCall;
+
+	std::vector<std::string> m_qPendingScripts;
 };

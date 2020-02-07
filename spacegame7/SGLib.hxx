@@ -23,6 +23,7 @@
 #include "IMatManager.hxx"
 #include "IGameClock.hxx"
 #include "IDebugConsole.hxx"
+#include "CDialogueManager.hxx"
 
 namespace SG
 {
@@ -45,6 +46,7 @@ namespace SG
 	IMatManager* get_material_manager(void);
 	IGameClock* get_game_clock(void);
 	IDebugConsole* get_debug_console(void);
+	CDialogueManager* get_dialogue_manager(void);
 
 	std::mt19937 &get_random(void);
 }

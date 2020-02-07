@@ -132,3 +132,9 @@ IDebugConsole* SG::get_debug_console(void)
 	static CDebugConsole debugConsole;
 	return &debugConsole;
 }
+
+CDialogueManager* SG::get_dialogue_manager(void)
+{
+	static CDialogueManager dialogueManager;
+	return &dialogueManager;
+}

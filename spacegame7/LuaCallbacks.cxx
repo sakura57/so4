@@ -13,6 +13,10 @@
 #include "CSectorTransitionState.hxx"
 #include "CBaseTransitionState.hxx"
 #include "CAsteroidField.hxx"
+#include "CChaseCamera.hxx"
+#include "CVignetteCamera.hxx"
+#include "DialoguePanel.hxx"
+#include "MissionFailedPanel.hxx"
 
 extern "C"
 {
@@ -1586,6 +1590,395 @@ extern "C"
 
 		return 0;
 	}
+
+	/*
+	* Callback for cam_begin_chase_camera.
+	*/
+	static int sgs::cam_begin_chase_camera(lua_State* L)
+	{
+		int n = lua_gettop(L);
+
+		if(n != 1)
+		{
+			lua_pushstring(L, "incorrect number of arguments");
+			lua_error(L);
+		}
+
+		if(!lua_isinteger(L, 1))
+		{
+			lua_pushstring(L, "incorrect arg types");
+			lua_error(L);
+		}
+
+		InstanceId const iInstanceId = (InstanceId const)lua_tointeger(L, 1);
+
+		SG::get_world()->begin_world_transaction();
+
+		IWorldObject* pObject = sgs::worldobject_from_id(L, iInstanceId);
+
+		CListenable* pListenable;
+
+		if(pObject == nullptr || (pListenable = dynamic_cast<CListenable*>(pObject)) == nullptr)
+		{
+			SG::get_world()->end_world_transaction();
+
+			lua_pushstring(L, "object is invalid or of incorrect type to be the target of a chase camera");
+			lua_error(L);
+		}
+
+		SG::get_render_pipeline()->remove_active_camera();
+
+		CChaseCamera* cc;
+		InstanceId ccid;
+		CInstanceFactory::create<CChaseCamera>(ccid, cc);
+
+		pListenable->listener_add(cc);
+
+		cc->acquire_target(pObject);
+		cc->alive_set(true);
+		cc->set_position(pObject->get_position());
+		cc->set_bounds(Vector2f(2.275f * DEFAULT_WINDOW_WIDTH, 2.275f * DEFAULT_WINDOW_HEIGHT));
+
+		SG::get_render_pipeline()->set_active_camera(cc);
+
+		SG::get_world()->end_world_transaction();
+
+		SG::get_world()->instance_add(cc);
+
+		return 0;
+	}
+
+	/*
+	* Callback for cam_begin_vignette_camera
+	*/
+	static int sgs::cam_begin_vignette_camera(lua_State* L)
+	{
+		int n = lua_gettop(L);
+
+		if(n != 5)
+		{
+			lua_pushstring(L, "incorrect number of arguments");
+			lua_error(L);
+		}
+
+		if(!lua_isnumber(L, 1) || !lua_isnumber(L, 2) || !lua_isnumber(L, 3) || !lua_isnumber(L, 4) || !lua_isnumber(L, 5))
+		{
+			lua_pushstring(L, "incorrect arg types");
+			lua_error(L);
+		}
+
+		float flSplineDuration = (float)lua_tonumber(L, 1);
+		Vector2f vStartPosition = Vector2f((float)lua_tonumber(L, 2), (float)lua_tonumber(L, 3));
+		Vector2f vEndPosition = Vector2f((float)lua_tonumber(L, 4), (float)lua_tonumber(L, 5));
+
+		CVignetteCamera* vc;
+		InstanceId ccid;
+		CInstanceFactory::create<CVignetteCamera>(ccid, vc);
+
+		vc->alive_set(true);
+		vc->set_position(vStartPosition);
+		vc->set_bounds(Vector2f(2.275f * DEFAULT_WINDOW_WIDTH, 2.275f * DEFAULT_WINDOW_HEIGHT));
+		vc->set_origin_point(vStartPosition);
+		vc->set_final_point(vEndPosition);
+		vc->set_path_duration(flSplineDuration);
+
+		SG::get_render_pipeline()->remove_active_camera();
+		SG::get_render_pipeline()->set_active_camera(vc);
+
+		SG::get_world()->instance_add(vc);
+
+		return 0;
+	}
+
+	/*
+	* Callback for hud_hide
+	*/
+	static int sgs::hud_hide(lua_State* L)
+	{
+		int n = lua_gettop(L);
+
+		if(n != 0)
+		{
+			lua_pushstring(L, "incorrect number of arguments");
+			lua_error(L);
+		}
+
+		SG::get_game_state_manager()->get_game_state()->state_enable_input(false);
+
+		return 0;
+	}
+
+	/*
+	* Callback for hud_show
+	*/
+	static int sgs::hud_show(lua_State* L)
+	{
+		int n = lua_gettop(L);
+
+		if(n != 0)
+		{
+			lua_pushstring(L, "incorrect number of arguments");
+			lua_error(L);
+		}
+
+		SG::get_game_state_manager()->get_game_state()->state_enable_input(true);
+
+		return 0;
+	}
+
+	/*
+	 * Callback for object_halt
+	 */
+	static int sgs::object_halt(lua_State* L)
+	{
+		int n = lua_gettop(L);
+
+		if(n != 1)
+		{
+			lua_pushstring(L, "incorrect number of arguments");
+			lua_error(L);
+		}
+
+		if(!lua_isinteger(L, 1))
+		{
+			lua_pushstring(L, "incorrect arg types");
+			lua_error(L);
+		}
+
+		InstanceId const iInstanceId = (InstanceId const)lua_tointeger(L, 1);
+
+		SG::get_world()->begin_world_transaction();
+
+		IWorldObject* pObject = sgs::worldobject_from_id(L, iInstanceId);
+		
+		//if the object implements IPhysicalObject, zero its velocity and angular
+		//velocity
+		if(pObject->instance_get_flags() & IPhysicalObject::InstanceFlag)
+		{
+			IPhysicalObject* pPhysicalObject = dynamic_cast<IPhysicalObject*>(pObject);
+
+			pPhysicalObject->set_velocity(Vector2f(0.0f, 0.0f));
+			pPhysicalObject->set_angular_velocity(0.0f);
+		}
+
+		//if the object is a CShip, we want to set its throttle values to 0 so it
+		//doesn't immediately start building up speed again
+		if(pObject->instance_get_flags() & CShip::InstanceFlag)
+		{
+			CShip *pShip = static_cast<CShip*>(pObject);
+
+			pShip->set_throttle(0.0f);
+			pShip->set_spin_throttle(0.0f);
+			pShip->set_strafe_throttle(0.0f);
+		}
+
+		SG::get_world()->end_world_transaction();
+
+		return 0;
+	}
+
+	/*
+	* Callback for object_set_invulnerable
+	*/
+	static int sgs::object_set_invulnerable(lua_State* L)
+	{
+		int n = lua_gettop(L);
+
+		if(n != 2)
+		{
+			lua_pushstring(L, "incorrect number of arguments");
+			lua_error(L);
+		}
+
+		if(!lua_isinteger(L, 1) || !lua_isinteger(L, 2))
+		{
+			lua_pushstring(L, "incorrect arg types");
+			lua_error(L);
+		}
+
+		InstanceId const iInstance1Id = (InstanceId const)lua_tointeger(L, 1);
+		unsigned int const uiInvulnerabilityType = (unsigned int const)lua_tointeger(L, 2);
+
+		SG::get_world()->begin_world_transaction();
+
+		IWorldObject* pObject1 = sgs::worldobject_from_id(L, iInstance1Id);
+
+		if(!(pObject1->instance_get_flags() & CShip::InstanceFlag))
+		{
+			SG::get_world()->end_world_transaction();
+			lua_pushstring(L, "object is not a CShip");
+			lua_error(L);
+		}
+
+		CShip* pEqObj1 = static_cast<CShip*>(pObject1);
+
+		pEqObj1->set_invulnerable(uiInvulnerabilityType);
+
+		SG::get_world()->end_world_transaction();
+
+		return 0;
+	}
+
+	/*
+	* Callback for object_enable_weapons
+	*/
+	static int sgs::object_enable_weapons(lua_State* L)
+	{
+		int n = lua_gettop(L);
+
+		if(n != 2)
+		{
+			lua_pushstring(L, "incorrect number of arguments");
+			lua_error(L);
+		}
+
+		if(!lua_isinteger(L, 1) || !lua_isinteger(L, 2))
+		{
+			lua_pushstring(L, "incorrect arg types");
+			lua_error(L);
+		}
+
+		InstanceId const iInstance1Id = (InstanceId const)lua_tointeger(L, 1);
+		unsigned int const uiWeaponsEnabled = (unsigned int const)lua_tointeger(L, 2);
+
+		SG::get_world()->begin_world_transaction();
+
+		IWorldObject* pObject1 = sgs::worldobject_from_id(L, iInstance1Id);
+
+		if(!(pObject1->instance_get_flags() & CEquippedObject::InstanceFlag))
+		{
+			SG::get_world()->end_world_transaction();
+			lua_pushstring(L, "object is not a CEquippedObject");
+			lua_error(L);
+		}
+
+		CEquippedObject* pEqObj1 = static_cast<CEquippedObject*>(pObject1);
+
+		pEqObj1->enable_weapons(uiWeaponsEnabled != 0);
+
+		SG::get_world()->end_world_transaction();
+
+		return 0;
+	}
+
+	/*
+	* Callback for dialogue_begin
+	*/
+	static int sgs::dialogue_begin(lua_State* L)
+	{
+		int n = lua_gettop(L);
+
+		if(n != 1)
+		{
+			lua_pushstring(L, "incorrect number of arguments");
+			lua_error(L);
+		}
+
+		if(!lua_isinteger(L, 1))
+		{
+			lua_pushstring(L, "incorrect arg types");
+			lua_error(L);
+		}
+
+		DialogueLineId const uiDialogueLineId = (InstanceId const)lua_tointeger(L, 1);
+
+		DialoguePanel* pPanel = new DialoguePanel(uiDialogueLineId);
+
+		pPanel->begin_dialogue();
+
+		SG::get_interface_manager()->add_panel(pPanel);
+
+		return 0;
+	}
+
+	/*
+	* Callback for get_asset_path
+	*/
+	static int sgs::get_asset_path(lua_State* L)
+	{
+		int n = lua_gettop(L);
+
+		if(n != 1)
+		{
+			lua_pushstring(L, "incorrect number of arguments");
+			lua_error(L);
+		}
+
+		if(!lua_isstring(L, 1))
+		{
+			lua_pushstring(L, "incorrect arg types");
+			lua_error(L);
+		}
+
+		std::string szFile(lua_tostring(L, 1));
+
+		std::string szFullPath = SG::get_game_data_manager()->get_full_data_file_path(szFile);
+
+		lua_pushstring(L, szFullPath.c_str());
+
+		return 1;
+	}
+
+	/*
+	* Callback for get_sector
+	*/
+	static int sgs::get_sector(lua_State* L)
+	{
+		int n = lua_gettop(L);
+
+		if(n != 0)
+		{
+			lua_pushstring(L, "incorrect number of arguments");
+			lua_error(L);
+		}
+
+		IGameState* pState = SG::get_game_state_manager()->get_game_state();
+
+		CInSpaceState* pInSpaceState = dynamic_cast<CInSpaceState*>(pState);
+
+		SectorId sectorId;
+
+		if(pState != nullptr)
+		{
+			sectorId = pInSpaceState->get_current_sector();
+		}
+		else
+		{
+			sectorId = 0U;
+		}
+
+		lua_pushinteger(L, (lua_Integer)sectorId);
+
+		return 1;
+	}
+
+	/*
+	* Callback for fail_mission
+	*/
+	static int sgs::fail_mission(lua_State* L)
+	{
+		int n = lua_gettop(L);
+
+		if(n != 1)
+		{
+			lua_pushstring(L, "incorrect number of arguments");
+			lua_error(L);
+		}
+
+		if(!lua_isstring(L, 1))
+		{
+			lua_pushstring(L, "incorrect arg types");
+			lua_error(L);
+		}
+
+		std::string szFailReason(lua_tostring(L, 1));
+
+		SG::get_game_state_manager()->get_game_state()->state_enable_input(false);
+
+		SG::get_interface_manager()->add_panel(new MissionFailedPanel(szFailReason));
+
+		return 0;
+	}
 }
 
 /*
@@ -1638,6 +2031,17 @@ void sgs::register_callbacks(void)
 	pScriptEngine->register_callback("sgs_map_add_zone_rectangular", &sgs::map_add_zone_rectangular);
 	pScriptEngine->register_callback("sgs_map_add_zone_circular", &sgs::map_add_zone_circular);
 	pScriptEngine->register_callback("sgs_send_notification", &sgs::send_notification);
+	pScriptEngine->register_callback("sgs_cam_begin_chase_camera", &sgs::cam_begin_chase_camera);
+	pScriptEngine->register_callback("sgs_cam_begin_vignette_camera", &sgs::cam_begin_vignette_camera);
+	pScriptEngine->register_callback("sgs_hud_hide", &sgs::hud_hide);
+	pScriptEngine->register_callback("sgs_hud_show", &sgs::hud_show);
+	pScriptEngine->register_callback("sgs_object_halt", &sgs::object_halt);
+	pScriptEngine->register_callback("sgs_object_set_invulnerable", &sgs::object_set_invulnerable);
+	pScriptEngine->register_callback("sgs_object_enable_weapons", &sgs::object_enable_weapons);
+	pScriptEngine->register_callback("sgs_dialogue_begin", &sgs::dialogue_begin);
+	pScriptEngine->register_callback("sgs_get_asset_path", &sgs::get_asset_path);
+	pScriptEngine->register_callback("sgs_get_sector", &sgs::get_sector);
+	pScriptEngine->register_callback("sgs_fail_mission", &sgs::fail_mission);
 }
 
 /*

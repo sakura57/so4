@@ -51,6 +51,7 @@ CGame::CGame(void)
 	this->m_pMaterialManager = SG::get_material_manager();
 	this->m_pGameClock = SG::get_game_clock();
 	this->m_pDebugConsole = SG::get_debug_console();
+	this->m_pDialogueManager = SG::get_dialogue_manager();
 
 	//populate the debug console command map
 	populate_debug_commands();
@@ -129,6 +130,8 @@ void CGame::load_data_delegate(void)
 		CGameDataManager::load_all_loottables(this->m_pLootTableManager);
 		std::cout << "Loading resource classes." << std::endl;
 		CGameDataManager::load_all_resource_classes(this->m_pMaterialManager);
+		std::cout << "Loading dialogue." << std::endl;
+		CGameDataManager::load_all_dialogue(this->m_pDialogueManager);
 
 		//std::cout << "Generating resources." << std::endl;
 		//this->m_pMaterialManager->force_generation();

@@ -58,6 +58,8 @@ public:
 
 	void set_rmsn_script(std::string const &);
 
+	SectorId get_current_sector(void);
+
 private:
 	void do_targeting_ui(sf::RenderWindow &);
 	void update_view(sf::View &);
@@ -119,8 +121,6 @@ private:
 	CCommsManager *m_pCommsManager;
 	IStaticTextureManager *m_pStaticTextureManager;
 	IUniverse *m_pUniverse;
-
-	ICamera * m_pActiveCamera;
 
 	CShip * m_pPlayer;
 	std::string m_szPlayerName;
