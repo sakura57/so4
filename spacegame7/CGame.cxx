@@ -64,9 +64,10 @@ CGame::CGame(void)
 
 	//limiting framerate to 60 as opposed to vsync on
 	//seems to decrease cpu usage
-	this->m_sfWindow.setFramerateLimit(0);
-	this->m_sfWindow.setVerticalSyncEnabled(true);
-	//this->m_sfWindow.setActive(true);
+	this->m_sfWindow.setFramerateLimit(120);
+
+	//vsync seems to cause flickering and other weirdness.
+	//this->m_sfWindow.setVerticalSyncEnabled(true);
 
 	//initialize ImGui
 	ImGui::SFML::Init(this->m_sfWindow);
