@@ -226,7 +226,7 @@ function mission1_spawn_bogeys()
 	sgs_effect_jump_in(1000.0, -13000.0)
 	sgs_effect_jump_in(1650.0, -12900.0)
 	
-	sgs_cam_begin_chase_camera(pirate1_ship)
+	sgs_cam_begin_chase_camera(pirate2_ship)
 	
 	sgs_enqueue_callback(3.0, "mission1_bogeys_comm")
 end
