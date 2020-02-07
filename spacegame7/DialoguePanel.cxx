@@ -29,9 +29,9 @@ DialoguePanel::~DialoguePanel()
 void DialoguePanel::render_panel(float const flDelta)
 {
 	ImGui::SetNextWindowPosCenter();
-	ImGui::SetNextWindowSize(ImVec2(400, 400));
+	ImGui::SetNextWindowSize(ImVec2(420, 400));
 
-	ImGui::Begin("Dialogue", nullptr, ImVec2(400, 400), -1.0f, ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove);
+	ImGui::Begin("Dialogue", nullptr, ImVec2(420, 400), -1.0f, ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove);
 
 	if(!this->m_bDialogueInitialized)
 	{
@@ -67,7 +67,7 @@ void DialoguePanel::render_panel(float const flDelta)
 
 	float const footer_height_to_reserve = ImGui::GetStyle().ItemSpacing.y + ImGui::GetFrameHeightWithSpacing();
 
-	ImGui::BeginChild("ScrollingTextRegion", ImVec2(400, 300 - footer_height_to_reserve * 2), false);
+	ImGui::BeginChild("ScrollingTextRegion", ImVec2(390, 300 - footer_height_to_reserve * 2), false);
 
 	ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(4, 1));
 
@@ -86,7 +86,7 @@ void DialoguePanel::render_panel(float const flDelta)
 
 	ImGui::Separator();
 
-	ImGui::BeginChild("ResponsesRegion", ImVec2(400, 100 - footer_height_to_reserve), false, ImGuiWindowFlags_HorizontalScrollbar);
+	ImGui::BeginChild("ResponsesRegion", ImVec2(390, 100 - footer_height_to_reserve), false, ImGuiWindowFlags_HorizontalScrollbar);
 
 	if(this->m_bDialogueFinishedPrinting)
 	{
