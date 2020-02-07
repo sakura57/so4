@@ -6,7 +6,7 @@ int PlayerDiedPanel::m_iPanelInstances = 0;
 
 void PlayerDiedPanel::render_panel(float const flDelta)
 {
-	ImGui::SetNextWindowPosCenter(ImGuiCond_Once | ImGuiCond_Appearing);
+	ImGui::SetNextWindowPosCenter();
 
 	ImGui::Begin(
 		"You are dead",
