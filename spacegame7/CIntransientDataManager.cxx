@@ -70,7 +70,9 @@ std::string CIntransientDataManager::dump_string_variables(void)
 		if(!bFirst)
 		{
 			ss << " ";
-
+		}
+		else
+		{
 			bFirst = false;
 		}
 
