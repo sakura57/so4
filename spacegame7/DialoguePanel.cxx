@@ -54,7 +54,7 @@ void DialoguePanel::render_panel(float const flDelta)
 			}
 		}
 
-		if(ImGui::IsKeyPressed(ImGui::GetKeyIndex(ImGuiKey_Enter)))
+		if(ImGui::IsKeyPressed(ImGui::GetKeyIndex(ImGuiKey_Tab)))
 		{
 			this->m_uiCharactersShown = this->m_szDialogueText.size();
 			this->m_bDialogueFinishedPrinting = true;
