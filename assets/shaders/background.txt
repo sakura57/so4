@@ -5,7 +5,7 @@ precision mediump float;
  
 uniform vec2 resolution;
 uniform vec2 offset;
-
+uniform vec3 tint;
 
 #define iterations 4
 #define formuparam2 0.98
@@ -196,7 +196,7 @@ void main()
 			fade *= sampleShift;
 		v+=vec3(s1,s1*s1,s1*s1*s1*s1)*a*brightness*fade; // coloring based on distance
 		
-		backCol2 += mix(.05, 1., v2) * vec3(0.20 * t3 * t3 * t3, 0.6 * t3 * t3, t3 * t3 * 0.4) * fade;
+		backCol2 += mix(.05, 1., v2) * vec3(tint.x * t3 * t3, tint.y * t3 * t3, t3 * t3 * tint.z) * fade;
 
 		
 		s+=stepsize * 0.5;
