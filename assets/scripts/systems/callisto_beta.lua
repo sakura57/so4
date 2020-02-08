@@ -4,6 +4,7 @@ sgs_map_add_square(0.0, 0.0, 255, 255, 0) --CS Bremerhaven
 sgs_map_add_square(5000.0, 0.0, 255, 255, 0) --Whitney Station
 sgs_map_add_circle(-5000.0, 200.0, 0, 0, 255) --Callisto Alpha buoy
 sgs_map_add_circle(-8000.0, -15000.0, 0, 0, 255) --Ceres Gamma buoy
+sgs_map_add_circle(15000.0, 15000.0, 0, 0, 255) --Callisto Gamma buoy
 sgs_map_add_zone_circular(1000.0, -15000.0, 5000.0, 128, 128, 128) --Southern astfield
 sgs_map_add_zone_circular(-1000.0, 15000.0, 5000.0, 128, 128, 128) --Northern astfield
 sgs_map_finalize()
@@ -18,6 +19,7 @@ sgs_astfield_create(4, -1000.0, 15000.0, 5000.0)
 
 --Jump buoys
 sgs_jumpbuoy_create(1, -5000.0, 200.0, 1, -10000.0, 4300.0) --Buoy to Callisto Alpha
+sgs_jumpbuoy_create(1, 15000.0, 15000.0, 3, -19000.0, 750.0) --Buoy to Callisto Gamma
 sgs_jumpbuoy_create(1, -8000.0, -15000.0, 10, 17500.0, 750.0) --Buoy to Ceres Gamma
 
 --Docking buoys
