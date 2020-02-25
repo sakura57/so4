@@ -81,8 +81,8 @@ local thanks = sgs_random_int(1, #comms_thanks)
 local enroute = sgs_random_int(1, #comms_enroute)
 local madeit = sgs_random_int(1, #comms_madeit)
 
-local check1x, check1y = 15000, 10000
-local check2x, check2y = 27500, 10000
+local check1x, check1y = 15000, 0
+local check2x, check2y = 15000, 14250
 
 local freighter = sgs_ship_create(freighter_character, 5000.0, 200.0, 90.0)
 local freighter_name = sgs_ship_get_name(freighter)

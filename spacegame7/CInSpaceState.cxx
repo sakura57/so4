@@ -705,6 +705,32 @@ void CInSpaceState::do_targeting_ui(sf::RenderWindow &sfWindow)
 		return;
 	}
 
+	//TODO: don't hardcode this
+	if(this->m_uiSectorId == 3)
+	{
+		//if we're in Callisto Gamma, draw the political border
+
+		Vector2f cameraPosition = pActiveCamera->get_position();
+		Vector2f cameraBounds = pActiveCamera->get_bounds();
+
+		float cameraMinX = cameraPosition.x - cameraBounds.x / 2;
+		float cameraMaxX = cameraPosition.x + cameraBounds.x / 2;
+
+		float borderPositionX = 0.0f;
+
+		if(borderPositionX < cameraMaxX && borderPositionX > cameraMinX)
+		{
+			sf::RectangleShape borderLine(sf::Vector2f(1.0f, 5000.0f));
+
+			borderLine.setFillColor(sf::Color::Red);
+			borderLine.setOrigin(sf::Vector2f(0.5f, 2500.0f));
+
+			borderLine.setPosition(sf::Vector2f(0.0f, cameraPosition.y));
+
+			sfWindow.draw(borderLine);
+		}
+	}
+
 	this->m_iHUDTarget = this->m_pPlayer->get_target();
 
 	//TODO: might not want to always do this

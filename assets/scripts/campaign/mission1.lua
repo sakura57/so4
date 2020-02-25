@@ -10,7 +10,6 @@ local dont_stray_distance = 5000.0
 
 local pirate1_ship = 0
 local pirate2_ship = 0
-local pirate3_ship = 0
 
 local strayx, strayy = 0.0, 0.0
 
@@ -212,19 +211,15 @@ function mission1_spawn_bogeys()
 
 	local character1 = pirate_characters[sgs_random_int(1, #pirate_characters)]
 	local character2 = pirate_characters[sgs_random_int(1, #pirate_characters)]
-	local character3 = pirate_characters[sgs_random_int(1, #pirate_characters)]
 	
 	pirate1_ship = sgs_ship_create(character1, 350.0, -12900.0, 90.0)
 	pirate2_ship = sgs_ship_create(character2, 1000.0, -13000.0, 90.0)
-	pirate3_ship = sgs_ship_create(character3, 1650.0, -12900.0, 90.0)
 	
 	sgs_object_enable_weapons(pirate1_ship, 0)
 	sgs_object_enable_weapons(pirate2_ship, 0)
-	sgs_object_enable_weapons(pirate3_ship, 0)
 	
 	sgs_effect_jump_in(350.0, -12900.0)
 	sgs_effect_jump_in(1000.0, -13000.0)
-	sgs_effect_jump_in(1650.0, -12900.0)
 	
 	sgs_cam_begin_chase_camera(pirate2_ship)
 	
@@ -244,7 +239,6 @@ function mission1_bogeys_engage()
 
 	sgs_object_set_attitude(pirate1_ship, player_ship, -0.7)
 	sgs_object_set_attitude(pirate2_ship, player_ship, -0.7)
-	sgs_object_set_attitude(pirate3_ship, player_ship, -0.7)
 end
 
 function mission1_bogeys_return_player_control()
@@ -257,7 +251,6 @@ function mission1_bogeys_return_player_control()
 	
 	sgs_object_enable_weapons(pirate1_ship, 1)
 	sgs_object_enable_weapons(pirate2_ship, 1)
-	sgs_object_enable_weapons(pirate3_ship, 1)
 	
 	sgs_send_notification("Objective: Eliminate the Reavers.")
 
@@ -269,7 +262,7 @@ function mission1_check_bogeys_dead()
 		return
 	end
 	
-	if sgs_object_exists(pirate1_ship) or sgs_object_exists(pirate2_ship) or sgs_object_exists(pirate3_ship) then
+	if sgs_object_exists(pirate1_ship) or sgs_object_exists(pirate2_ship) then
 		sgs_enqueue_callback(2.0, "mission1_check_bogeys_dead")
 		
 		return

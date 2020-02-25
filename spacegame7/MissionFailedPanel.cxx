@@ -19,7 +19,7 @@ void MissionFailedPanel::render_panel(float const flDelta)
 		ImGuiWindowFlags_NoSavedSettings
 	);
 
-	ImGui::Text("The tasks of the mission were not completed successfully.");
+	ImGui::Text("Mission Failed.");
 
 	ImGui::Separator();
 

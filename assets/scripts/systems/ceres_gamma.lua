@@ -14,7 +14,7 @@ sgs_astfield_create(8, -500.0, -5000.0, 5000.0)
 sgs_astfield_create(9, -17500.0, -1750.0, 5000.0)
 
 --Jump buoys
-sgs_jumpbuoy_create(5, -17500.0, 17500.0, 9, 0.0, 0.0) --Buoy to Ceres Beta
+sgs_jumpbuoy_create(5, -17500.0, 17500.0, 9, 15000.0, 15250.0) --Buoy to Ceres Beta
 sgs_jumpbuoy_create(1, 17500.0, 500.0, 2, -8000.0, -15250.0) --Buoy to Callisto Beta
 
 --Dynamic spawns section
