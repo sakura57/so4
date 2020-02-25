@@ -48,5 +48,24 @@ function patroller2_wander()
 	sgs_enqueue_callback(sgs_random_float(10.0, 30.0), "patroller2_wander")
 end
 
+function player_check_crossed_border()
+	local player_ship = sgs_world_get_player()
+		
+	if not sgs_object_exists(player_ship) then
+		return
+	end
+	
+	if sgs_get_variable("cg_border_clearance") ~= "y" then
+		local playerx, playery = sgs_object_get_position(player_ship)
+		
+		if playerx > 0.0 then
+			sgs_fail_mission("You crossed the border into Europan space.")
+		end
+	end
+	
+	sgs_enqueue_callback(5.0, "player_check_crossed_border")
+end
+
 patroller1_wander()
 patroller2_wander()
+player_check_crossed_border()
