@@ -1,3 +1,9 @@
+Pre-alpha Build 4 (v0.0.4-prealpha)
+- Variation in background shader tint color
+- Fixes to dialogue UI
+- Add Ceres sectors, new asteroid fields
+- Add Callisto Gamma sector and political border
+
 Pre-alpha Build 3 (v0.0.3-prealpha)
 - Vignette camera
 - Dialogue
