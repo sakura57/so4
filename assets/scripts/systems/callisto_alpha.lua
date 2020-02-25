@@ -65,3 +65,5 @@ function patroller1_wander2()
 end
 patroller1_spawn()
 patroller1_wander1()
+
+dofile(sgs_get_asset_path("scripts/campaign/campaign.lua"))
