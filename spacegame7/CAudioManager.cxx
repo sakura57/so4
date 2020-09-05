@@ -1,6 +1,17 @@
 #include "CAudioManager.hxx"
 #include "SGLib.hxx"
 
+CAudioManager::CAudioManager()
+	: m_uiAmbientMusic(0), m_uiBattleMusic(0), m_bInBattle(false), m_currentMusicTrack(new sf::Music)
+{
+
+}
+
+CAudioManager::~CAudioManager()
+{
+	delete this->m_currentMusicTrack;
+}
+
 void CAudioManager::load_sound_from_file(SoundId const uiSoundId, std::string const szSoundFile, float const fVolume)
 {
 	std::lock_guard<std::mutex> lock(this->m_mFieldAccess);
@@ -15,6 +26,53 @@ void CAudioManager::load_sound_from_file(SoundId const uiSoundId, std::string co
 
 	this->m_vSoundBuffers[uiSoundId].loadFromFile(szFullSoundFilePath);
 	this->m_vVolumes[uiSoundId] = fVolume;
+}
+
+void CAudioManager::load_music_from_file(MusicId const uiMusicId, std::string const szSoundFile)
+{
+	std::lock_guard<std::mutex> lock(this->m_mFieldAccess);
+
+	std::string szFullSoundFilePath = SG::get_game_data_manager()->get_full_data_file_path(std::string("music\\") + szSoundFile);
+
+	if(this->m_vMusicTracks.size() <= uiMusicId)
+	{
+		this->m_vMusicTracks.resize(uiMusicId + 1);
+	}
+
+	this->m_vMusicTracks[uiMusicId] = szSoundFile;
+}
+
+void CAudioManager::play_music(MusicId const uiMusicId, float const flVolume, bool const bLoop)
+{
+	std::lock_guard<std::mutex> lock(this->m_mFieldAccess);
+
+	if(uiMusicId >= this->m_vMusicTracks.size())
+	{
+		return;
+	}
+
+	if(this->m_currentMusicTrack->getStatus() == sf::Music::Playing)
+	{
+		this->m_currentMusicTrack->stop();
+	}
+
+	this->m_currentMusicTrack->openFromFile(this->m_vMusicTracks[uiMusicId]);
+
+	this->m_currentMusicTrack->setLoop(bLoop);
+	this->m_currentMusicTrack->setVolume(flVolume);
+	this->m_currentMusicTrack->play();
+
+	//this->m_uiCurrentMusicTrack = (int)uiMusicId;
+}
+
+void CAudioManager::stop_music(void)
+{
+	std::lock_guard<std::mutex> lock(this->m_mFieldAccess);
+
+	if(this->m_currentMusicTrack->getStatus() == sf::Music::Playing)
+	{
+		this->m_currentMusicTrack->stop();
+	}
 }
 
 SoundInstanceId CAudioManager::play_sound(SoundId const uiSoundId)
@@ -110,6 +168,8 @@ void CAudioManager::shifting_out(void)
 	this->m_lQueuedSounds.clear();
 	this->m_lSounds.clear();
 	this->m_soundListener.setPosition(sf::Vector3f(0.0f, 0.0f, 0.0f));
+
+	this->m_currentMusicTrack->stop();
 }
 
 void CAudioManager::stop_sound(SoundInstanceId const uiSoundId)
@@ -125,4 +185,98 @@ void CAudioManager::stop_sound(SoundInstanceId const uiSoundId)
 	std::advance(i, uiSoundId);
 
 	i->stop();
+}
+
+void CAudioManager::set_ambient_music(MusicId const uiMusicId)
+{
+	std::lock_guard<std::mutex> lock(this->m_mFieldAccess);
+
+	if(uiMusicId >= this->m_vMusicTracks.size())
+	{
+		return;
+	}
+
+	this->m_uiAmbientMusic = uiMusicId;
+
+	if(this->m_bInBattle == false)
+	{
+		if(this->m_currentMusicTrack->getStatus() == sf::Music::Playing)
+		{
+			this->m_currentMusicTrack->stop();
+		}
+
+		this->m_currentMusicTrack->openFromFile(this->m_vMusicTracks[uiMusicId]);
+
+		this->m_currentMusicTrack->setLoop(true);
+		this->m_currentMusicTrack->setVolume(1.0f);
+		this->m_currentMusicTrack->play();
+	}
+}
+
+void CAudioManager::set_battle_music(MusicId const uiMusicId)
+{
+	std::lock_guard<std::mutex> lock(this->m_mFieldAccess);
+
+	if(uiMusicId >= this->m_vMusicTracks.size())
+	{
+		return;
+	}
+
+	this->m_uiBattleMusic = uiMusicId;
+
+	if(this->m_bInBattle == true)
+	{
+		if(this->m_currentMusicTrack->getStatus() == sf::Music::Playing)
+		{
+			this->m_currentMusicTrack->stop();
+		}
+
+		this->m_currentMusicTrack->openFromFile(this->m_vMusicTracks[uiMusicId]);
+
+		this->m_currentMusicTrack->setLoop(true);
+		this->m_currentMusicTrack->setVolume(1.0f);
+		this->m_currentMusicTrack->play();
+	}
+}
+
+void CAudioManager::entered_battle(void)
+{
+	std::lock_guard<std::mutex> lock(this->m_mFieldAccess);
+
+	if(this->m_bInBattle == false)
+	{
+		this->m_bInBattle = true;
+
+		if(this->m_currentMusicTrack->getStatus() == sf::Music::Playing)
+		{
+			this->m_currentMusicTrack->stop();
+		}
+
+		this->m_currentMusicTrack->openFromFile(this->m_vMusicTracks[this->m_uiBattleMusic]);
+
+		this->m_currentMusicTrack->setLoop(true);
+		this->m_currentMusicTrack->setVolume(1.0f);
+		this->m_currentMusicTrack->play();
+	}
+}
+
+void CAudioManager::exited_battle(void)
+{
+	std::lock_guard<std::mutex> lock(this->m_mFieldAccess);
+
+	if(this->m_bInBattle == true)
+	{
+		this->m_bInBattle = false;
+
+		if(this->m_currentMusicTrack->getStatus() == sf::Music::Playing)
+		{
+			this->m_currentMusicTrack->stop();
+		}
+
+		this->m_currentMusicTrack->openFromFile(this->m_vMusicTracks[this->m_uiAmbientMusic]);
+
+		this->m_currentMusicTrack->setLoop(true);
+		this->m_currentMusicTrack->setVolume(1.0f);
+		this->m_currentMusicTrack->play();
+	}
 }
