@@ -39,7 +39,7 @@ void CAudioManager::load_music_from_file(MusicId const uiMusicId, std::string co
 		this->m_vMusicTracks.resize(uiMusicId + 1);
 	}
 
-	this->m_vMusicTracks[uiMusicId] = szSoundFile;
+	this->m_vMusicTracks[uiMusicId] = szFullSoundFilePath;
 }
 
 void CAudioManager::play_music(MusicId const uiMusicId, float const flVolume, bool const bLoop)
