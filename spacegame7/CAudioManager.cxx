@@ -205,11 +205,14 @@ void CAudioManager::set_ambient_music(MusicId const uiMusicId)
 			this->m_currentMusicTrack->stop();
 		}
 
-		this->m_currentMusicTrack->openFromFile(this->m_vMusicTracks[uiMusicId]);
+		if(uiMusicId > 0)
+		{
+			this->m_currentMusicTrack->openFromFile(this->m_vMusicTracks[uiMusicId]);
 
-		this->m_currentMusicTrack->setLoop(true);
-		this->m_currentMusicTrack->setVolume(1.0f);
-		this->m_currentMusicTrack->play();
+			this->m_currentMusicTrack->setLoop(true);
+			this->m_currentMusicTrack->setVolume(1.0f);
+			this->m_currentMusicTrack->play();
+		}
 	}
 }
 
@@ -231,11 +234,14 @@ void CAudioManager::set_battle_music(MusicId const uiMusicId)
 			this->m_currentMusicTrack->stop();
 		}
 
-		this->m_currentMusicTrack->openFromFile(this->m_vMusicTracks[uiMusicId]);
+		if(uiMusicId > 0)
+		{
+			this->m_currentMusicTrack->openFromFile(this->m_vMusicTracks[uiMusicId]);
 
-		this->m_currentMusicTrack->setLoop(true);
-		this->m_currentMusicTrack->setVolume(1.0f);
-		this->m_currentMusicTrack->play();
+			this->m_currentMusicTrack->setLoop(true);
+			this->m_currentMusicTrack->setVolume(1.0f);
+			this->m_currentMusicTrack->play();
+		}
 	}
 }
 
@@ -252,11 +258,14 @@ void CAudioManager::entered_battle(void)
 			this->m_currentMusicTrack->stop();
 		}
 
-		this->m_currentMusicTrack->openFromFile(this->m_vMusicTracks[this->m_uiBattleMusic]);
+		if(this->m_uiBattleMusic > 0)
+		{
+			this->m_currentMusicTrack->openFromFile(this->m_vMusicTracks[this->m_uiBattleMusic]);
 
-		this->m_currentMusicTrack->setLoop(true);
-		this->m_currentMusicTrack->setVolume(1.0f);
-		this->m_currentMusicTrack->play();
+			this->m_currentMusicTrack->setLoop(true);
+			this->m_currentMusicTrack->setVolume(1.0f);
+			this->m_currentMusicTrack->play();
+		}
 	}
 }
 
@@ -273,10 +282,13 @@ void CAudioManager::exited_battle(void)
 			this->m_currentMusicTrack->stop();
 		}
 
-		this->m_currentMusicTrack->openFromFile(this->m_vMusicTracks[this->m_uiAmbientMusic]);
+		if(this->m_uiAmbientMusic > 0)
+		{
+			this->m_currentMusicTrack->openFromFile(this->m_vMusicTracks[this->m_uiAmbientMusic]);
 
-		this->m_currentMusicTrack->setLoop(true);
-		this->m_currentMusicTrack->setVolume(1.0f);
-		this->m_currentMusicTrack->play();
+			this->m_currentMusicTrack->setLoop(true);
+			this->m_currentMusicTrack->setVolume(1.0f);
+			this->m_currentMusicTrack->play();
+		}
 	}
 }
