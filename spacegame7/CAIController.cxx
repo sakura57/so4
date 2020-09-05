@@ -4,6 +4,22 @@
 #include <algorithm>
 #include "Spells.hxx"
 
+Spinlock CAIController::sSharedAccess;
+int CAIController::iNumControllersTargetingPlayer = 0;
+
+CAIController::~CAIController()
+{
+	if(this->m_bTargetingPlayer)
+	{
+		this->m_bTargetingPlayer = false;
+
+		CAIController::sSharedAccess.lock();
+
+		--CAIController::iNumControllersTargetingPlayer;
+
+		CAIController::sSharedAccess.unlock();
+	}
+}
 
 void CAIController::initialize(CreationParameters & creationParms)
 {
@@ -19,6 +35,8 @@ void CAIController::initialize(CreationParameters & creationParms)
 	this->m_fBreakoffTimer = -1.0f;
 	this->m_vGotoPoint = Vector2f(0.0f, 0.0f);
 	this->m_pParentEntity = creationParms.pParentEntity;
+
+	this->m_bTargetingPlayer = false;
 
 	if(this->m_pParentEntity != nullptr)
 	{
@@ -154,6 +172,7 @@ void CAIController::acquire_next_target(CShip *pParentObj)
 
 	float flClosestTargetDistance = 999999.0f;
 	InstanceId targetCandidate = INVALID_INSTANCE;
+	bool bCandidateIsPlayer = false;
 
 	for(InstanceId instanceId : worldInstances)
 	{
@@ -205,12 +224,27 @@ void CAIController::acquire_next_target(CShip *pParentObj)
 			{
 				flClosestTargetDistance = flDistance;
 				targetCandidate = instanceId;
+				bCandidateIsPlayer = pShip->is_player();
 			}
 		}
 	}
 
 	if(targetCandidate != INVALID_INSTANCE)
 	{
+		if(bCandidateIsPlayer && targetCandidate != this->m_iCurrentTarget)
+		{
+			if(!this->m_bTargetingPlayer)
+			{
+				CAIController::sSharedAccess.lock();
+
+				++CAIController::iNumControllersTargetingPlayer;
+
+				CAIController::sSharedAccess.unlock();
+
+				this->m_bTargetingPlayer = true;
+			}
+		}
+
 		this->m_state = State::Engaging;
 		this->m_iCurrentTarget = targetCandidate;
 		pParentObj->set_target(this->m_iCurrentTarget);
@@ -225,6 +259,17 @@ void CAIController::acquire_next_target(CShip *pParentObj)
 		this->m_state = State::Idle;
 
 		pParentObj->set_target(INVALID_INSTANCE);
+
+		if(this->m_bTargetingPlayer)
+		{
+			CAIController::sSharedAccess.lock();
+
+			--CAIController::iNumControllersTargetingPlayer;
+
+			CAIController::sSharedAccess.unlock();
+
+			this->m_bTargetingPlayer = false;
+		}
 	}
 }
 
@@ -480,4 +525,17 @@ int CAIController::has_spell(SpellId const iSpellToFind)
 	}
 
 	return -1;
+}
+
+int CAIController::get_num_controllers_targeting_player()
+{
+	volatile int numControllersTargetingPlayer;
+
+	CAIController::sSharedAccess.lock();
+
+	numControllersTargetingPlayer = CAIController::iNumControllersTargetingPlayer;
+
+	CAIController::sSharedAccess.unlock();
+
+	return numControllersTargetingPlayer;
 }

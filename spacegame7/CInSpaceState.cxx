@@ -467,8 +467,38 @@ void CInSpaceState::state_render_ui_tick(sf::View &, sf::RenderWindow &, float c
 {
 }
 
-void CInSpaceState::state_postrender_tick(sf::RenderWindow &, float const)
+void CInSpaceState::state_postrender_tick(sf::RenderWindow &sfWindow, float const flDelta)
 {
+	static float flTimeSincePlayerTargetLost = 0.0f;
+	static bool bPlayerWasAcquired = false;
+
+	bool bPlayerIsAcquired = CAIController::get_num_controllers_targeting_player() > 0;
+
+	if(!bPlayerIsAcquired)
+	{
+		if(bPlayerWasAcquired)
+		{
+			flTimeSincePlayerTargetLost = 0.0f;
+		}
+		else
+		{
+			if(flTimeSincePlayerTargetLost > 10.0f)
+			{
+				this->m_pAudioManager->exited_battle();
+			}
+		}
+	}
+	if(bPlayerIsAcquired)
+	{
+		if(!bPlayerWasAcquired)
+		{
+			this->m_pAudioManager->entered_battle();
+		}
+	}
+
+	bPlayerWasAcquired = bPlayerIsAcquired;
+
+	flTimeSincePlayerTargetLost += flDelta;
 }
 
 void CInSpaceState::state_terminating(void)

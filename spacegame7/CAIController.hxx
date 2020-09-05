@@ -45,8 +45,7 @@ public:
 		//nothing to do
 	};
 
-	virtual ~CAIController()
-	{ };
+	virtual ~CAIController();
 
 	virtual void CAIController::instance_create(InstanceId const instanceId)
 	{
@@ -104,6 +103,8 @@ public:
 
 	static void aim_at_point(CShip *, Vector2f const &);
 
+	static int get_num_controllers_targeting_player(void);
+
 protected:
 	InstanceId m_iParent;
 	Pilot const *m_pPilot;
@@ -131,4 +132,9 @@ private:
 	void do_goto(CShip *, float const);
 
 	int has_spell(SpellId const);
+
+	bool m_bTargetingPlayer;
+
+	static int iNumControllersTargetingPlayer;
+	static Spinlock sSharedAccess;
 };
