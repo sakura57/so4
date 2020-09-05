@@ -966,15 +966,28 @@ void CGameDataManager::load_all_audio_assets(CAudioManager *pAudioManager)
 		unsigned int uiAudioFileLen = LOADER_MAX_VALUE_BUFFER_SIZE;
 		strcpy_s(szAudioFileBuffer, LOADER_MAX_VALUE_BUFFER_SIZE, "");
 
-		SoundId uiSoundId;
+		if(strncmp(szSection, "audio", 5) == 0)
+		{
+			SoundId uiSoundId;
 
-		uiSoundId = CGameDataManager::read_ini_uint(CGameDataManager::get_full_data_file_path("audio.ini").c_str(), szSection, "id", "0");
-		CGameDataManager::read_ini_string(CGameDataManager::get_full_data_file_path("audio.ini").c_str(), szSection, "file", "", szAudioFileBuffer, uiAudioFileLen);
-		float fVolume = CGameDataManager::read_ini_float(CGameDataManager::get_full_data_file_path("audio.ini").c_str(), szSection, "volume", "1");
+			uiSoundId = CGameDataManager::read_ini_uint(CGameDataManager::get_full_data_file_path("audio.ini").c_str(), szSection, "id", "0");
+			CGameDataManager::read_ini_string(CGameDataManager::get_full_data_file_path("audio.ini").c_str(), szSection, "file", "", szAudioFileBuffer, uiAudioFileLen);
+			float fVolume = CGameDataManager::read_ini_float(CGameDataManager::get_full_data_file_path("audio.ini").c_str(), szSection, "volume", "1");
 
-		pAudioManager->load_sound_from_file(uiSoundId, szAudioFileBuffer, fVolume);
+			pAudioManager->load_sound_from_file(uiSoundId, szAudioFileBuffer, fVolume);
+		}
+		else if(strncmp(szSection, "music", 5) == 0)
+		{
+			MusicId uiMusicId;
+
+			uiMusicId = CGameDataManager::read_ini_uint(CGameDataManager::get_full_data_file_path("audio.ini").c_str(), szSection, "id", "0");
+			CGameDataManager::read_ini_string(CGameDataManager::get_full_data_file_path("audio.ini").c_str(), szSection, "file", "", szAudioFileBuffer, uiAudioFileLen);
+
+			pAudioManager->load_music_from_file(uiMusicId, szAudioFileBuffer);
+		}
 
 		szSection += strlen(szSection) + 1;
+
 	}
 }
 
