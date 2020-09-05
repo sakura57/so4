@@ -16,7 +16,7 @@ if sgs_get_sector() == 2 then
 		return
 	end
 
-	if sgs_get_variable("mission2_started") ~= "y" then
+	if sgs_get_variable("mission2_started") ~= "y" or sgs_get_variable("mission2_jericho_whereabouts_known") ~= "y" then
 		--Do a test to determine if the player is eligible to start the mission.
 		--For mission 2: At least 20,000 credits.
 		if sgs_player_get_money() < 20000 then
@@ -31,6 +31,8 @@ if sgs_get_sector() == 2 then
 		sgs_set_variable("mission2_started", "y") --The mission has been started and/or finished.
 		sgs_set_variable("mission2_inprogress", "y") --The mission is in progress, but may not be active.
 		sgs_set_variable("mission2_active", "n") --The mission is active.
+
+		sgs_set_variable("mission2_jericho_whereabouts_known", "n")
 
 		--Variables associated with various checkpoints
 		sgs_set_variable("mission2_jericho_killed", "n") --The player has killed Jericho (task 1)
@@ -59,7 +61,7 @@ elseif sgs_get_sector() == 1 then
 		return
 	end
 
-	if sgs_get_variable("mission2_started") == "y" and (sgs_get_variable("mission2_jericho_killed") ~= "y" and sgs_get_variable("mission2_jericho_spared") ~= "y") then
+	if sgs_get_variable("mission2_started") == "y" and (sgs_get_variable("mission2_jericho_whereabouts_known") == "y" and sgs_get_variable("mission2_jericho_killed") ~= "y" and sgs_get_variable("mission2_jericho_spared") ~= "y") then
 		sgs_set_variable("docking_enabled", "n")
 		
 		jericho_ship = sgs_ship_create(25, -500.0, 14000.0, 180.0)
@@ -133,6 +135,8 @@ function mission2_cb_robert_end_dialogue()
 	sgs_send_notification("Objective: Travel to Callisto Alpha.")
 	
 	sgs_waypoint_set(-5000.0, 200.0)
+
+	sgs_set_variable("mission2_jericho_whereabouts_known", "y")
 	
 	--nothing else to do, CA side of the script takes care of the rest
 end
