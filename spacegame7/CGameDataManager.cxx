@@ -278,12 +278,13 @@ void CGameDataManager::load_settings_data(void)
 	settings->set_setting<unsigned int>("fullscreen", CGameDataManager::read_ini_uint(".\\settings.ini", "Game", "fullscreen", "0"));
 
 	//load sound volume
-	float flSoundVolume = CGameDataManager::read_ini_uint(".\\settings.ini", "Game", "sound_volume", "80.0");
+	float flSoundVolume = (float)CGameDataManager::read_ini_uint(".\\settings.ini", "Game", "sound_volume", "80");
 	sf::Listener::setGlobalVolume(flSoundVolume);
 	settings->set_setting<float>("sound_volume", flSoundVolume);
 
-	settings->set_setting<float>("music_volume", CGameDataManager::read_ini_uint(".\\settings.ini", "Game", "music_volume", "0.0"));
-	//TODO: music volume still doesn't do anything
+	float flMusicVolume = (float)CGameDataManager::read_ini_uint(".\\settings.ini", "Game", "music_volume", "80");
+	settings->set_setting<float>("music_volume", flMusicVolume);
+	SG::get_audio_manager()->set_music_global_volume(flMusicVolume);
 
 	uiValueBufferLen = LOADER_MAX_VALUE_BUFFER_SIZE;
 	strcpy_s(szValueBuffer, LOADER_MAX_VALUE_BUFFER_SIZE, "");

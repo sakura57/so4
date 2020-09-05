@@ -54,7 +54,7 @@ void SettingsPanel::render_panel(float const flDelta)
 		{
 			settings->set_setting<float>("music_volume", musicVolume);
 
-			//TODO: make music volume do something
+			SG::get_audio_manager()->set_music_global_volume(musicVolume);
 		}
 	}
 
