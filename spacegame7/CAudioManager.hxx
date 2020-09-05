@@ -51,6 +51,8 @@ public:
 	void entered_battle(void);
 	void exited_battle(void);
 
+	void tick_music(float const);
+
 private:
 	std::mutex m_mFieldAccess;
 	std::vector<sf::SoundBuffer> m_vSoundBuffers;
@@ -62,11 +64,16 @@ private:
 	MusicId m_uiBattleMusic;
 
 	sf::Music* m_currentMusicTrack;
+	sf::Music* m_nextMusicTrack;
 	std::vector<std::string> m_vMusicTracks;
 
 	bool m_bInBattle;
 
 	sf::Listener m_soundListener;
 
+	void enqueue_music(std::string const&);
+
 	float m_flMusicVolume;
+	bool m_bFading;
+	float m_flFadeTime;
 };

@@ -233,6 +233,9 @@ void CGame::enter_render_loop(void)
 		//play queued sounds
 		this->m_pAudioManager->do_sounds();
 
+		//audio manager's music tick (drives crossfades)
+		this->m_pAudioManager->tick_music(flDelta);
+
 		//LOCK the window access mutex. This mutex should remain
 		//locked for the entire render operation.
 		this->m_mWindowAccess.lock();

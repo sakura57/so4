@@ -482,12 +482,13 @@ void CInSpaceState::state_postrender_tick(sf::RenderWindow &sfWindow, float cons
 		}
 		else
 		{
-			if(flTimeSincePlayerTargetLost > 10.0f)
+			if(flTimeSincePlayerTargetLost > 5.0f)
 			{
 				this->m_pAudioManager->exited_battle();
 			}
 		}
 	}
+
 	if(bPlayerIsAcquired)
 	{
 		if(!bPlayerWasAcquired)
