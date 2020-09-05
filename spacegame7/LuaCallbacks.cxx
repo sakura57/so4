@@ -1979,6 +1979,102 @@ extern "C"
 
 		return 0;
 	}
+
+	/*
+	* Callback for audio_set_ambient_music
+	*/
+	static int sgs::audio_set_ambient_music(lua_State* L)
+	{
+		int n = lua_gettop(L);
+
+		if(n != 1)
+		{
+			lua_pushstring(L, "incorrect number of arguments");
+			lua_error(L);
+		}
+
+		if(!lua_isnumber(L, 1))
+		{
+			lua_pushstring(L, "incorrect arg types");
+			lua_error(L);
+		}
+
+		MusicId uiMusicId = (MusicId const)lua_tointeger(L, 1);
+
+		SG::get_audio_manager()->set_ambient_music(uiMusicId);
+
+		return 0;
+	}
+
+	/*
+	* Callback for audio_set_battle_music
+	*/
+	static int sgs::audio_set_battle_music(lua_State* L)
+	{
+		int n = lua_gettop(L);
+
+		if(n != 1)
+		{
+			lua_pushstring(L, "incorrect number of arguments");
+			lua_error(L);
+		}
+
+		if(!lua_isnumber(L, 1))
+		{
+			lua_pushstring(L, "incorrect arg types");
+			lua_error(L);
+		}
+
+		MusicId uiMusicId = (MusicId const)lua_tointeger(L, 1);
+
+		SG::get_audio_manager()->set_battle_music(uiMusicId);
+
+		return 0;
+	}
+
+	/*
+	* Callback for audio_play_music
+	*/
+	static int sgs::audio_play_music(lua_State* L)
+	{
+		int n = lua_gettop(L);
+
+		if(n != 1)
+		{
+			lua_pushstring(L, "incorrect number of arguments");
+			lua_error(L);
+		}
+
+		if(!lua_isnumber(L, 1))
+		{
+			lua_pushstring(L, "incorrect arg types");
+			lua_error(L);
+		}
+
+		MusicId uiMusicId = (MusicId const)lua_tointeger(L, 1);
+
+		SG::get_audio_manager()->play_music(uiMusicId, 1.0f, true);
+
+		return 0;
+	}
+
+	/*
+	* Callback for audio_stop_music
+	*/
+	static int sgs::audio_stop_music(lua_State* L)
+	{
+		int n = lua_gettop(L);
+
+		if(n != 0)
+		{
+			lua_pushstring(L, "incorrect number of arguments");
+			lua_error(L);
+		}
+
+		SG::get_audio_manager()->stop_music();
+
+		return 0;
+	}
 }
 
 /*
@@ -2042,6 +2138,11 @@ void sgs::register_callbacks(void)
 	pScriptEngine->register_callback("sgs_get_asset_path", &sgs::get_asset_path);
 	pScriptEngine->register_callback("sgs_get_sector", &sgs::get_sector);
 	pScriptEngine->register_callback("sgs_fail_mission", &sgs::fail_mission);
+
+	pScriptEngine->register_callback("sgs_audio_play_music", &sgs::audio_play_music);
+	pScriptEngine->register_callback("sgs_audio_stop_music", &sgs::audio_stop_music);
+	pScriptEngine->register_callback("sgs_audio_set_battle_music", &sgs::audio_set_battle_music);
+	pScriptEngine->register_callback("sgs_audio_set_ambient_music", &sgs::audio_set_ambient_music);
 }
 
 /*

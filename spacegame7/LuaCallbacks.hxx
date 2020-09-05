@@ -74,6 +74,11 @@ extern "C"
 
 		static int get_sector(lua_State*);
 		static int fail_mission(lua_State*);
+
+		static int audio_set_ambient_music(lua_State*);
+		static int audio_set_battle_music(lua_State*);
+		static int audio_play_music(lua_State*);
+		static int audio_stop_music(lua_State*);
 	}
 }
 

@@ -1,3 +1,7 @@
+--Music
+sgs_audio_set_ambient_music(1)
+sgs_audio_set_battle_music(2)
+
 --Sector map section
 sgs_map_init(50000, 50000)
 sgs_map_add_circle(-19000.0, 500.0, 0, 0, 255) --Callisto Beta buoy

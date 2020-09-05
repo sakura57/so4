@@ -1,3 +1,7 @@
+--Music
+sgs_audio_set_ambient_music(1)
+sgs_audio_set_battle_music(2)
+
 sgs_map_init(50000, 50000)
 sgs_map_add_circle(0.0, 0.0, 0, 0, 255) --Ceres Beta buoy
 sgs_map_add_zone_circular(12500.0, 12500.0, 5000.0, 128, 128, 128)

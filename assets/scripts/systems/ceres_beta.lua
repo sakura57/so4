@@ -1,3 +1,7 @@
+--Music
+sgs_audio_set_ambient_music(1)
+sgs_audio_set_battle_music(2)
+
 sgs_map_init(50000, 50000)
 sgs_map_add_square(0.0, 0.0, 255, 255, 0) --Freeport
 sgs_map_add_circle(-15000.0, -15000.0, 0, 0, 255) --Ceres Alpha buoy
