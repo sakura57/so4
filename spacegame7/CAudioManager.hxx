@@ -43,6 +43,8 @@ public:
 
 	virtual void shifting_out(void) final;
 
+	void set_music_global_volume(float const);
+
 	void set_ambient_music(MusicId const);
 	void set_battle_music(MusicId const);
 
@@ -65,4 +67,6 @@ private:
 	bool m_bInBattle;
 
 	sf::Listener m_soundListener;
+
+	float m_flMusicVolume;
 };

@@ -2,7 +2,7 @@
 #include "SGLib.hxx"
 
 CAudioManager::CAudioManager()
-	: m_uiAmbientMusic(0), m_uiBattleMusic(0), m_bInBattle(false), m_currentMusicTrack(new sf::Music)
+	: m_uiAmbientMusic(0), m_uiBattleMusic(0), m_bInBattle(false), m_currentMusicTrack(new sf::Music), m_flMusicVolume(100.0f)
 {
 
 }
@@ -207,10 +207,13 @@ void CAudioManager::set_ambient_music(MusicId const uiMusicId)
 
 		if(uiMusicId > 0)
 		{
-			this->m_currentMusicTrack->openFromFile(this->m_vMusicTracks[uiMusicId]);
+			if(!this->m_currentMusicTrack->openFromFile(this->m_vMusicTracks[uiMusicId]))
+			{
+				throw SGException("Failed to open music file");
+			}
 
 			this->m_currentMusicTrack->setLoop(true);
-			this->m_currentMusicTrack->setVolume(1.0f);
+			this->m_currentMusicTrack->setVolume(this->m_flMusicVolume);
 			this->m_currentMusicTrack->play();
 		}
 	}
@@ -236,10 +239,13 @@ void CAudioManager::set_battle_music(MusicId const uiMusicId)
 
 		if(uiMusicId > 0)
 		{
-			this->m_currentMusicTrack->openFromFile(this->m_vMusicTracks[uiMusicId]);
+			if(!this->m_currentMusicTrack->openFromFile(this->m_vMusicTracks[uiMusicId]))
+			{
+				throw SGException("Failed to open music file");
+			}
 
 			this->m_currentMusicTrack->setLoop(true);
-			this->m_currentMusicTrack->setVolume(1.0f);
+			this->m_currentMusicTrack->setVolume(this->m_flMusicVolume);
 			this->m_currentMusicTrack->play();
 		}
 	}
@@ -260,10 +266,13 @@ void CAudioManager::entered_battle(void)
 
 		if(this->m_uiBattleMusic > 0)
 		{
-			this->m_currentMusicTrack->openFromFile(this->m_vMusicTracks[this->m_uiBattleMusic]);
+			if(!this->m_currentMusicTrack->openFromFile(this->m_vMusicTracks[this->m_uiBattleMusic]))
+			{
+				throw SGException("Failed to open music file");
+			}
 
 			this->m_currentMusicTrack->setLoop(true);
-			this->m_currentMusicTrack->setVolume(1.0f);
+			this->m_currentMusicTrack->setVolume(this->m_flMusicVolume);
 			this->m_currentMusicTrack->play();
 		}
 	}
@@ -284,11 +293,21 @@ void CAudioManager::exited_battle(void)
 
 		if(this->m_uiAmbientMusic > 0)
 		{
-			this->m_currentMusicTrack->openFromFile(this->m_vMusicTracks[this->m_uiAmbientMusic]);
+			if(!this->m_currentMusicTrack->openFromFile(this->m_vMusicTracks[this->m_uiAmbientMusic]))
+			{
+				throw SGException("Failed to open music file");
+			}
 
 			this->m_currentMusicTrack->setLoop(true);
-			this->m_currentMusicTrack->setVolume(1.0f);
+			this->m_currentMusicTrack->setVolume(this->m_flMusicVolume);
 			this->m_currentMusicTrack->play();
 		}
 	}
+}
+
+void CAudioManager::set_music_global_volume(float const flMusicVolume)
+{
+	std::lock_guard<std::mutex> lock(this->m_mFieldAccess);
+
+	this->m_flMusicVolume = flMusicVolume;
 }
