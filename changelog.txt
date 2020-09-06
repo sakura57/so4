@@ -1,3 +1,9 @@
+Pre-alpha Build 5 (v0.0.5-prealpha)
+- Add music support
+- Add several new music tracks
+- Fixes to the mission 2 campaign script
+- Various dialogue changes
+
 Pre-alpha Build 4 (v0.0.4-prealpha)
 - Variation in background shader tint color
 - Fixes to dialogue UI
