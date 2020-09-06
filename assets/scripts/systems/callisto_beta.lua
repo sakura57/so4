@@ -1,6 +1,6 @@
 --Music
-sgs_audio_set_ambient_music(1)
-sgs_audio_set_battle_music(2)
+sgs_audio_set_ambient_music(3)
+sgs_audio_set_battle_music(4)
 
 --Sector map section
 sgs_map_init(50000, 50000)
