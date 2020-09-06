@@ -46,4 +46,4 @@ private:
 #define DEFAULT_WINDOW_HEIGHT CGameDataManager::get_setting_intransient<unsigned int>("screen_height")
 #define DEFAULT_WINDOW_WIDTH CGameDataManager::get_setting_intransient<unsigned int>("screen_width")
 #define DEFAULT_WINDOW_FULLSCREEN (CGameDataManager::get_setting_intransient<unsigned int>("fullscreen") != 0)
-#define DEFAULT_WINDOW_NAME "PROJECT SG7"
+#define DEFAULT_WINDOW_NAME "Spaced Out 4"
