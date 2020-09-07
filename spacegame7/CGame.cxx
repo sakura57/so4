@@ -183,7 +183,10 @@ void CGame::enter_render_loop(void)
 	sf::View mainView(sf::Vector2f(0.0f, 0.0f), sf::Vector2f((float)resX, -(float)resY));
 	sf::Event sfEvent;
 
+	bool bPreviousPauseState = false;
 	bool bContinue = true;
+	bool bNoFocus = false;
+
 	auto lastTime = std::chrono::high_resolution_clock::now();
 
 	sf::Clock imDeltaClock;
@@ -214,13 +217,16 @@ void CGame::enter_render_loop(void)
 			break;
 		}
 
-		if(pGameState->state_game_paused() && this->m_bGamePaused.load() == false)
+		if(!bNoFocus)
 		{
-			this->m_bGamePaused.store(true);
-		}
-		else if(!pGameState->state_game_paused() && this->m_bGamePaused.load() == true)
-		{
-			this->m_bGamePaused.store(false);
+			if(pGameState->state_game_paused() && this->m_bGamePaused.load() == false)
+			{
+				this->m_bGamePaused.store(true);
+			}
+			else if(!pGameState->state_game_paused() && this->m_bGamePaused.load() == true)
+			{
+				this->m_bGamePaused.store(false);
+			}
 		}
 
 		if(this->m_bGamePaused.load() == false)
@@ -248,6 +254,22 @@ void CGame::enter_render_loop(void)
 			if (sfEvent.type == sf::Event::Closed)
 			{
 				this->m_bMainLoopContinue.store(false);
+			}
+			else if(sfEvent.type == sf::Event::LostFocus)
+			{
+				bNoFocus = true;
+
+				bPreviousPauseState = this->m_bGamePaused.load();
+
+				this->m_bGamePaused.store(true);
+			}
+			else if(sfEvent.type == sf::Event::GainedFocus)
+			{
+				bNoFocus = false;
+
+				this->m_bGamePaused.store(bPreviousPauseState);
+
+				bPreviousPauseState = false;
 			}
 
 			//DO STATE EVENT CALL HERE
