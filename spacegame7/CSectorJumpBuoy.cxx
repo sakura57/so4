@@ -59,11 +59,11 @@ void CSectorJumpBuoy::alive_tick(float const flDelta)
 
 		if(pInteractorShip)
 		{
-			CAIController::aim_at_point(pInteractorShip, Vector2f(100000.0f, 100000.0f));
+			CAIController::aim_at_point(pInteractorShip, Vector2f(0.0f, 100000.0f));
 
 			if(this->m_flAccelCountdown < 0.0f)
 			{
-				pInteractorShip->set_velocity(Vector2f(20000.0f, 20000.0f));
+				pInteractorShip->set_velocity(Vector2f(0.0f, 20000.0f));
 			}
 			else
 			{
