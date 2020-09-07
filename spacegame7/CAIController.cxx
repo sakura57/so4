@@ -4,6 +4,10 @@
 #include <algorithm>
 #include "Spells.hxx"
 
+#define TARGET_REACQUISITION_TIME_DEVIATION 0.25f
+
+#define PERSONAL_THROTTLE_DEVIATION 0.1f
+
 Spinlock CAIController::sSharedAccess;
 int CAIController::iNumControllersTargetingPlayer = 0;
 
@@ -41,6 +45,13 @@ void CAIController::initialize(CreationParameters & creationParms)
 	if(this->m_pParentEntity != nullptr)
 	{
 		this->m_vAvailableSpells = this->m_pParentEntity->get_mapped_spells();
+	}
+
+	//find an amount (unique to each character) to be subtracted from the throttle percent
+	{
+		std::uniform_real_distribution<float> throttleDist(0.0f, PERSONAL_THROTTLE_DEVIATION);
+
+		this->m_fPersonalThrottlePercent = throttleDist(SG::get_random());
 	}
 }
 
@@ -118,7 +129,9 @@ void CAIController::alive_tick(float const flDelta)
 	{
 		this->acquire_next_target(pParentShip);
 
-		this->m_fTimeToAcquireNextTarget = this->m_pPilot->flTargetReacquisitionTime;
+		std::uniform_real_distribution<float> deviationDist(-TARGET_REACQUISITION_TIME_DEVIATION / 2, TARGET_REACQUISITION_TIME_DEVIATION / 2);
+
+		this->m_fTimeToAcquireNextTarget = this->m_pPilot->flTargetReacquisitionTime + deviationDist(SG::get_random());
 	}
 
 	//our parent must be a CEquippedObject, there is no other possibility.
@@ -393,16 +406,22 @@ void CAIController::do_engage(CShip *pParentShip, CEquippedObject *pTargetShip, 
 	}
 	else if (this->m_fBreakoffTimer < this->m_pPilot->flBreakoffDuration)
 	{
-		this->m_state = State::Stabilize;
+		Vector2f vNormalizedDelta = (vTargetPos - vParentPos).normalize();
+		Vector2f vNormalizedVelocity = pParentShip->get_velocity().normalize();
+
+		//only stabilize if we are not heading towards our target
+		if(vNormalizedVelocity.dot(vNormalizedDelta) < 0.01f)
+		{
+			this->m_state = State::Stabilize;
+		}
+
 		this->m_fBreakoffTimer = -1.0f;
-		//pParentShip->set_strafe_throttle(clamp(flDeltaAngle, -1.0f, 1.0f));
-		//pParentShip->set_throttle(1.0f);
 	}
 	else
 	{
 		if (flDeltaAngle < this->m_pPilot->flApproachCone)
 		{
-			float threshold = (flTargetDistance - this->m_pPilot->flPreferredEnemyDistance) / 50.0f;
+			float threshold = (flTargetDistance - this->m_pPilot->flPreferredEnemyDistance) / 50.0f * (1.0f - this->m_fPersonalThrottlePercent);
 
 			Vector2f vParentVelocity = pParentShip->get_velocity();
 

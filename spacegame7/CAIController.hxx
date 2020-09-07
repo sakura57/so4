@@ -116,6 +116,7 @@ protected:
 	float m_fTimeToAcquireNextTarget;
 	float m_fBurstTimer;
 	float m_fBreakoffTimer;
+	float m_fPersonalThrottlePercent;
 
 	Vector2f m_vGotoPoint;
 
