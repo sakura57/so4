@@ -12,6 +12,7 @@
 #include "CMatManager.hxx"
 #include "CGameClock.hxx"
 #include "CDebugConsole.hxx"
+#include "CUniverseMarket.hxx"
 
 IEngine *SG::get_engine(void)
 {
@@ -137,4 +138,10 @@ CDialogueManager* SG::get_dialogue_manager(void)
 {
 	static CDialogueManager dialogueManager;
 	return &dialogueManager;
+}
+
+IMarketManager *SG::get_market_manager(void)
+{
+	static CUniverseMarket marketManager;
+	return &marketManager;
 }

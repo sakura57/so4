@@ -56,6 +56,8 @@ void MaterialBankPanel::do_mat_list(MaterialQuantityMap& itemList)
 {
 	std::stringstream ss;
 
+	unsigned int totalMaterials = 0;
+
 	for(MaterialQuantityMap::value_type& item : itemList)
 	{
 		if(item.first.size() && item.second > 0)
@@ -91,11 +93,14 @@ void MaterialBankPanel::do_mat_list(MaterialQuantityMap& itemList)
 				{
 					//TODO: make tooltip
 				}
+
+				totalMaterials += item.second;
 			}
 		}
-		else
-		{
-			ImGui::TextColored(ImVec4(0.8f, 0.0f, 0.0f, 1.0f), "Nothing.");
-		}
+	}
+
+	if(totalMaterials = 0)
+	{
+		ImGui::TextColored(ImVec4(0.8f, 0.0f, 0.0f, 1.0f), "Nothing.");
 	}
 }

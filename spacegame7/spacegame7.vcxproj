@@ -262,8 +262,10 @@
     <ClCompile Include="CSpellSignatureSpoof.cxx" />
     <ClCompile Include="CStatBlock.cxx" />
     <ClCompile Include="CStaticCamera.cxx" />
+    <ClCompile Include="CStaticMarketData.cxx" />
     <ClCompile Include="CStaticObject.cxx" />
     <ClCompile Include="CUniverse.cxx" />
+    <ClCompile Include="CUniverseMarket.cxx" />
     <ClCompile Include="CVignetteCamera.cxx" />
     <ClCompile Include="CWorldTransaction.cxx" />
     <ClCompile Include="DebugCommands.cxx" />
@@ -279,6 +281,7 @@
     <ClCompile Include="MainMenuPanel.cxx" />
     <ClCompile Include="MaterialBankPanel.cxx" />
     <ClCompile Include="MaterialExaminePanel.cxx" />
+    <ClCompile Include="MaterialTraderPanel.cxx" />
     <ClCompile Include="MissionFailedPanel.cxx" />
     <ClCompile Include="NotificationPanel.cxx" />
     <ClCompile Include="PlayerDiedPanel.cxx" />
@@ -387,6 +390,7 @@
     <ClInclude Include="CSpellPerfectDefense.hxx" />
     <ClInclude Include="CSpellSignatureSpoof.hxx" />
     <ClInclude Include="CStatBlock.hxx" />
+    <ClInclude Include="CStaticMarketData.hxx" />
     <ClInclude Include="CStaticObject.hxx" />
     <ClInclude Include="CSector.hxx" />
     <ClInclude Include="CStatusCoolantLeak.hxx" />
@@ -397,6 +401,7 @@
     <ClInclude Include="CStatusPerfectDefense.hxx" />
     <ClInclude Include="CTransientStatusEffect.hxx" />
     <ClInclude Include="CUniverse.hxx" />
+    <ClInclude Include="CUniverseMarket.hxx" />
     <ClInclude Include="CVignetteCamera.hxx" />
     <ClInclude Include="CWorldTransaction.hxx" />
     <ClInclude Include="DebugCommands.hxx" />
@@ -417,6 +422,8 @@
     <ClInclude Include="IInteractable.hxx" />
     <ClInclude Include="IIntransientDataManager.hxx" />
     <ClInclude Include="ILootTableManager.hxx" />
+    <ClInclude Include="IMarketData.hxx" />
+    <ClInclude Include="IMarketManager.hxx" />
     <ClInclude Include="IMaterial.hxx" />
     <ClInclude Include="IMaterialBank.hxx" />
     <ClInclude Include="IMaterialClass.hxx" />
@@ -471,6 +478,7 @@
     <ClInclude Include="MaterialAttribute.hxx" />
     <ClInclude Include="MaterialBankPanel.hxx" />
     <ClInclude Include="MaterialExaminePanel.hxx" />
+    <ClInclude Include="MaterialTraderPanel.hxx" />
     <ClInclude Include="MaterialType.hxx" />
     <ClInclude Include="MissionFailedPanel.hxx" />
     <ClInclude Include="NotificationPanel.hxx" />

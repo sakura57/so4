@@ -24,6 +24,7 @@
 #include "IGameClock.hxx"
 #include "IDebugConsole.hxx"
 #include "CDialogueManager.hxx"
+#include "IMarketManager.hxx"
 
 namespace SG
 {
@@ -47,6 +48,7 @@ namespace SG
 	IGameClock* get_game_clock(void);
 	IDebugConsole* get_debug_console(void);
 	CDialogueManager* get_dialogue_manager(void);
+	IMarketManager* get_market_manager(void);
 
 	std::mt19937 &get_random(void);
 }

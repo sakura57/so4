@@ -472,6 +472,15 @@
     <ClCompile Include="MissionFailedPanel.cxx">
       <Filter>Engine\Interface</Filter>
     </ClCompile>
+    <ClCompile Include="CUniverseMarket.cxx">
+      <Filter>Engine\Market</Filter>
+    </ClCompile>
+    <ClCompile Include="CStaticMarketData.cxx">
+      <Filter>Engine\Market</Filter>
+    </ClCompile>
+    <ClCompile Include="MaterialTraderPanel.cxx">
+      <Filter>Engine\Interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IEngine.hxx">
@@ -1033,6 +1042,21 @@
       <Filter>Engine\Interface</Filter>
     </ClInclude>
     <ClInclude Include="MissionFailedPanel.hxx">
+      <Filter>Engine\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="IMarketManager.hxx">
+      <Filter>Engine\Market</Filter>
+    </ClInclude>
+    <ClInclude Include="IMarketData.hxx">
+      <Filter>Engine\Market</Filter>
+    </ClInclude>
+    <ClInclude Include="CUniverseMarket.hxx">
+      <Filter>Engine\Market</Filter>
+    </ClInclude>
+    <ClInclude Include="CStaticMarketData.hxx">
+      <Filter>Engine\Market</Filter>
+    </ClInclude>
+    <ClInclude Include="MaterialTraderPanel.hxx">
       <Filter>Engine\Interface</Filter>
     </ClInclude>
   </ItemGroup>

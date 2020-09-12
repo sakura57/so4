@@ -12,6 +12,7 @@
 #include <set>
 #include <cstdio>
 #include <thread>
+#include "CStaticMarketData.hxx"
 
 //TODO: included for filesystem functions,
 //make them more portable instead
@@ -1608,6 +1609,19 @@ void CGameDataManager::load_all_resource_classes(IMatManager* pMatManager)
 		if(matType == MaterialType::INVALID)
 		{
 			throw SGException("Invalid material type");
+		}
+
+		float flPPU = CGameDataManager::read_ini_float(CGameDataManager::get_full_data_file_path("mat_categories.ini").c_str(), szSection, "price_per_unit", "1");
+		float flPQM = CGameDataManager::read_ini_float(CGameDataManager::get_full_data_file_path("mat_categories.ini").c_str(), szSection, "price_quality_modifier", "1");
+
+		IMarketData *pGlobalMarketData = SG::get_market_manager()->get_market_data(-1);
+
+		if(pGlobalMarketData != nullptr)
+		{
+			CStaticMarketData* pAsStaticMarketData = static_cast<CStaticMarketData*>(pGlobalMarketData);
+
+			pAsStaticMarketData->set_material_ppu(matClassId, flPPU);
+			pAsStaticMarketData->set_material_pqm(matClassId, flPQM);
 		}
 
 		unsigned int uiWeight = CGameDataManager::read_ini_uint(CGameDataManager::get_full_data_file_path("mat_categories.ini").c_str(), szSection, "asteroid_distribution_weight", "0");
