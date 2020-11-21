@@ -1,8 +1,17 @@
+Spaced Out 4 v0.0.6-prealpha
+Copyright (C) Jacob Farnsworth
+
+For news, updates and more, check out
+https://github.com/sakura57/so4
+
+Changelog:
+
 Pre-alpha Build 6 (v0.0.6-prealpha)
 - Add a new music track
-- Added a new encounter to Callisto Gamma
+- Add a new encounter to Callisto Gamma
 - Small improvements to the combat AI
 - Add baseside materials trader
+- The game now pauses automatically when the window loses focus
 
 Pre-alpha Build 5 (v0.0.5-prealpha)
 - Add music support
