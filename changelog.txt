@@ -1,3 +1,9 @@
+Pre-alpha Build 6 (v0.0.6-prealpha)
+- Add a new music track
+- Added a new encounter to Callisto Gamma
+- Small improvements to the combat AI
+- Add baseside materials trader
+
 Pre-alpha Build 5 (v0.0.5-prealpha)
 - Add music support
 - Add several new music tracks
